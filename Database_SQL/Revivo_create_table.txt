@@ -1,0 +1,144 @@
+create table Basic_user
+	(User_id NUMBER GENERATED ALWAYS AS IDENTITY ,
+	First_Name VARCHAR2(50),
+	Last_Name VARCHAR2(50),
+	E_mail VARCHAR2(75),
+	Address VARCHAR2(100),
+	Password VARCHAR2(1000),
+	Phone NUMBER,
+	CONSTRAINT user_key PRIMARY KEY(User_id),
+	CONSTRAINT mail_key UNIQUE(E_mail)
+	);
+	
+	create table buyer
+	(Buyer_id NUMBER GENERATED ALWAYS AS IDENTITY,
+	User_id NUMBER,
+	CONSTRAINT buyer_key PRIMARY KEY(Buyer_id),
+	CONSTRAINT user_b_fk FOREIGN KEY(User_id) REFERENCES Basic_user(User_id)
+	);
+
+	create table seller
+	(seller_id NUMBER  GENERATED ALWAYS AS IDENTITY,
+	User_id NUMBER,
+	CONSTRAINT seller_key PRIMARY KEY(seller_id),
+	CONSTRAINT user_s_fk FOREIGN KEY(User_id) REFERENCES Basic_user(User_id)
+	);
+
+	create table Cart(
+	cart_id NUMBER GENERATED ALWAYS AS IDENTITY,
+	Buyer_id NUMBER,
+	CONSTRAINT c_key PRIMARY KEY(cart_id),
+  CONSTRAINT buyer_c_fk FOREIGN KEY(Buyer_id) REFERENCES buyer(Buyer_id)
+
+);
+
+create table shop
+	(Shop_id NUMBER GENERATED ALWAYS AS IDENTITY,
+	shop_name VARCHAR2(50),
+	e_mail VARCHAR2(75),
+	password VARCHAR2(1000),
+	phone NUMBER,
+	stars NUMBER,
+	CONSTRAINT shop_key PRIMARY KEY(Shop_id),
+	CONSTRAINT shop_mail_key UNIQUE(E_mail)
+	);
+
+create table product
+	(Product_id NUMBER GENERATED ALWAYS AS IDENTITY,
+	Name VARCHAR2(100),
+	Gender_Category VARCHAR2(7),
+	Type_of VARCHAR2(25),
+	Material VARCHAR2(25),
+	Price NUMBER,
+	Quantity NUMBER,
+	Image VARCHAR2(200),
+	Size_of NUMBER,
+	Seller_type VARCHAR2(10),
+	Used_Status VARCHAR(20),
+	CONSTRAINT product_key PRIMARY KEY(Product_id)
+	);
+
+create table orders(
+	order_id NUMBER GENERATED ALWAYS AS IDENTITY,
+	Cart_id NUMBER,
+	order_status VARCHAR2(20),
+	order_date DATE,
+	CONSTRAINT o_key PRIMARY KEY(order_id),
+	CONSTRAINT order_cc_fk FOREIGN KEY(Cart_id) REFERENCES Cart(cart_id)
+);
+
+create table payment(
+	payment_id NUMBER GENERATED ALWAYS AS IDENTITY,
+	order_id NUMBER,
+	Method VARCHAR2(20),
+	Pay_date DATE,
+	Total_price NUMBER, 
+	CONSTRAINT payment_key PRIMARY KEY(payment_id),
+	CONSTRAINT order_op_fk FOREIGN KEY(order_id) REFERENCES orders(order_id)
+);
+
+create table shipping(
+	shipping_id NUMBER GENERATED ALWAYS AS IDENTITY,
+	order_id NUMBER,
+	address VARCHAR2(100),
+	shipping_status VARCHAR2(20),
+	ship_date DATE, 
+	CONSTRAINT shipping_key PRIMARY KEY(shipping_id),
+	CONSTRAINT order_sp_fk FOREIGN KEY(order_id) REFERENCES orders(order_id)
+);
+
+create table shop_owns(
+  Product_id NUMBER,
+  Shop_id NUMBER,
+  CONSTRAINT p_key PRIMARY KEY(Product_id),
+  CONSTRAINT product_s_fk FOREIGN KEY(Product_id) REFERENCES product(Product_id),
+  CONSTRAINT product_shop_fk FOREIGN KEY(Shop_id) REFERENCES shop(Shop_id)
+
+);
+
+create table seller_owns(
+	Product_id NUMBER,
+	seller_id NUMBER,
+	CONSTRAINT pp_key PRIMARY KEY(Product_id),
+	CONSTRAINT product_selsp_fk FOREIGN KEY(Product_id) REFERENCES product(Product_id),
+	CONSTRAINT product_sssp_fk FOREIGN KEY(seller_id) REFERENCES seller(seller_id)
+
+);
+create table Cart_has(
+	Product_id NUMBER,
+	cart_id NUMBER,
+	status VARCHAR2(20),
+	amount NUMBER,
+	CONSTRAINT cp_key PRIMARY KEY(cart_id,Product_id),
+  CONSTRAINT product_c_fk FOREIGN KEY(Product_id) REFERENCES product(Product_id),
+	CONSTRAINT cart_c_fk FOREIGN KEY(cart_id) REFERENCES Cart(cart_id)
+);
+
+create table product_orders(
+	Product_id NUMBER,
+	order_id NUMBER,
+	CONSTRAINT pop_key PRIMARY KEY(order_id,Product_id),
+  CONSTRAINT product_pop_fk FOREIGN KEY(Product_id) REFERENCES product(Product_id),
+	CONSTRAINT order_pop_fk FOREIGN KEY(order_id) REFERENCES orders(order_id)
+
+);
+
+create table final_orders(
+	order_id NUMBER ,
+	cart_id NUMBER,
+	CONSTRAINT fo_key PRIMARY KEY(order_id),
+	CONSTRAINT order_fo_fk FOREIGN KEY(order_id) REFERENCES orders(order_id),
+	CONSTRAINT cart_fo_fk FOREIGN KEY(cart_id) REFERENCES Cart(cart_id)
+
+);
+
+create table reviews(
+	buyer_id NUMBER ,
+	shop_id NUMBER,
+	star NUMBER,
+	comments VARCHAR2(1024),
+	CONSTRAINT r_key PRIMARY KEY(buyer_id,shop_id),
+	CONSTRAINT review_b_fk FOREIGN KEY(buyer_id) REFERENCES buyer(buyer_id),
+	CONSTRAINT review_s_fk FOREIGN KEY(shop_id) REFERENCES shop(shop_id)
+
+);
