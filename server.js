@@ -28,7 +28,7 @@ app.use('/route',router);
 app.get('/',(req,res)=>
 {
     
-    res.render('login',{title:"Login"});
+    res.render('login',{message:" "});
 })
 
 app.get(api+'/product',(req,res)=>{
@@ -39,7 +39,7 @@ app.get(api+'/product',(req,res)=>{
         material: ' Jamdani '
         
     }
-    //run();
+    run();
     res.send(product);
 })
 
@@ -52,9 +52,9 @@ async function run() {
 
     
 
-    const result = await connection.execute('SELECT COUNT(*) FROM Basic_user');
+    const result = await connection.execute('SELECT * FROM Basic_user');
     console.log("hi");
-    console.log(result.rows[0][0]);
+    console.log(result.rows[0]);
 
     await connection.close();   // Always close connections
 }

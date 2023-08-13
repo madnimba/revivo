@@ -1,7 +1,21 @@
 
 
 .center-div{
-    padding-top: 15%;
+    padding-top: 10%;
+}
+
+.errorM{
+    padding-top: 5%;
+    font-size: xx-large;
+    font-weight: 400;
+    color: brown;
+}
+
+.success{
+    padding-top: 5%;
+    font-size: xx-large;
+    font-weight: 400;
+    color: green;
 }
 
 .btn.btn-success{
@@ -13,5 +27,12 @@ form{
     padding: 0 3em;
 }
 
+.form-control{
+    margin: 5%;
+}
+
+userinfo{
+    text-align: left;
+}
 
 
