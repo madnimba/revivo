@@ -8,7 +8,9 @@ app.get(api+'/product',(req,res)=>{
     const product =
     {
         id:1,
-        name:'shoe'
+        name:'Jamdani Shari',
+        material: ' Jamdani '
+        
     }
     res.send(product);
 })
