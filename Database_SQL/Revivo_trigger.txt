@@ -1,0 +1,23 @@
+CREATE OR REPLACE TRIGGER buyerseller_trigger
+AFTER INSERT ON Basic_user 
+FOR EACH ROW
+DECLARE
+   id NUMBER;
+BEGIN
+   id := :NEW.User_id;
+   INSERT INTO buyer(User_id) VALUES(id);
+	 INSERT INTO seller(User_id) VALUES(id);
+END;
+/
+
+CREATE OR REPLACE TRIGGER cart_trigger
+AFTER INSERT ON buyer 
+FOR EACH ROW
+DECLARE
+    ID NUMBER;
+BEGIN
+    ID := :NEW.Buyer_id;
+    INSERT INTO Cart(Buyer_id) VALUES(ID);
+END;
+
+
