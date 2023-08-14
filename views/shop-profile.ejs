@@ -18,23 +18,20 @@
         <div class="container w-25 border py-5">
             <div class="title pb-5">
             <h2 class="font-weight-bold">
-                User Profile
+                <%=name%>
             </h2>
         </div>
             <div class="form-group userinfo">
-                <h3 class="form-control" name="fname"><%=fname%></h3>
-                <h3 class="form-control" name = "lname"><%=lname%></h3>
-                <h3 class="form-control" name="email"><%=email%></h3>
-                <h3 class="form-control" name="phone"><%=phone%></h3>
-                <h3 class="form-control" name="address"><%=address%></h3>
+                
                 
 
             </div>
+
+            <form action="/route/addProduct" method="GET">
             
-            <button type="submit" class="btn btn-success rounded-5 ">Buy a product</button>
-            <button type="submit" class="btn btn-success rounded-5 ">Sell a product</button>
+            <button type="submit" class="btn btn-success rounded-5 ">Add a product</button>
             
-        
+            </form>
         </div>
     </div>
 
