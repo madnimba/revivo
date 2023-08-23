@@ -1,31 +1,20 @@
-const express = require('express');
-const oracledb = require('oracledb');
-const path = require('path');
-const bodyparser = require('body-parser');
+require ('dotenv/config');
+const app = require('./app');
+const database = require('./Database/main_db');
 
-const router=require("./router");
+const port = process.env.PORT;
+console.log(port);
+app.listen(port, async () => {
+    try{
+        // create database connection pool, log startup message
+        await database.startup();
+        console.log(`listening on http://localhost:${port}`);
+    } catch(err) {
+        console.log("Error starting up database: " + err);
+        process.exit(1);
+    }
+});
 
-
-const app = express();
-require('dotenv/config');
-
-const api = process.env.API_URL;
-
-app.set('view engine','ejs');
-app.use('/static',express.static(path.join(__dirname,'public')))
-app.use(bodyparser.json());
-app.use(bodyparser.urlencoded({extended:true}))
-app.use('/route',router);
-
-
-app.get('/',(req,res)=>
-{
-    
-    res.render('login',{message:" "});
-})
-
-
-app.listen(3000,()=>
-{
-    console.log('server is running');
-})
+process
+    .once('SIGTERM', database.shutdown)
+    .once('SIGINT',  database.shutdown);
