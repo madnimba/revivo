@@ -10,7 +10,7 @@ async function readEmail(mail,role){
         FROM 
             Basic_user
         WHERE 
-            E_mail = :mail
+            E_mail = :mail 
         `;
         
     }
