@@ -5,13 +5,6 @@ const router=express.Router();
 router.get('/',async(req,res)=>{
     res.render('login.ejs',{error:"",message:""});
 })
-router.get('/user',async(req,res)=>{
-    res.render('userProfile.ejs',{fname:"",lname:"",email:"",phone:"",address:""});
-})
-
-router.post('/user',async(req,res)=>{
-    res.render('userProfile.ejs',{fname:"",lname:"",email:"",phone:"",address:""});
-})
 
 
 router.post('/',async(req,res)=>{
@@ -25,7 +18,7 @@ router.post('/',async(req,res)=>{
     }
         if(req.body.option==='user')
         {
-           res.redirect('/app/login/user');
+           res.redirect('/app/user');
         }
         else if(req.body.option=='shop'){
            // res.redirect('/shop');

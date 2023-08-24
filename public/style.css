@@ -1,5 +1,4 @@
 
-
 .center-div{
     padding-top: 10%;
 }
@@ -19,7 +18,7 @@
 }
 
 .btn.btn-success{
-    margin-top: 5%;
+    margin-top: 2%;
     padding: .4em 2em;
 }
 
@@ -49,3 +48,53 @@ form{
     padding: 5%;
     margin: 8%;
 }
+
+div.container.userProfile{
+    position: absolute;
+    top: 100px;
+    height:1300px;
+    width:1200px;
+    transform: translateX(-50%);
+    left: 50%;
+    width: 100%;
+   /* display: flex;*/
+    bottom: 0;
+    flex-direction: column; /* Stack elements vertically */
+   /* align-items: center;
+    justify-content: center;*/
+    background-color: lightgreen;
+    border: 2px solid greenyellow;
+
+}
+
+h2.font-weight-bold{
+    font-style: italic;
+    text-align: center; /* Center align horizontally */
+    margin: 0;
+}
+
+div.logo{
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index:100;
+    
+}
+div.logo img{
+    width: 200px; /* Adjust the width as needed */
+    height: 100px;
+}
+.btn.btn-success.op_place{
+    width: 300px; /* Adjust the width as needed */
+    height: 300px; /* Adjust the height as needed */
+    font-size: 32px;
+    margin-top: 3%;
+    padding: .4em 2em;
+}
+
+
+/* Increase row height */
+.custom-table tbody  tr td {
+    padding: 75px 100px; 
+}
+

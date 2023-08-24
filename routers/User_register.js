@@ -7,6 +7,7 @@ router.get('/',async(req,res)=>{
     res.render('reg.ejs',{error:"",message:""});
 })
 
+
 // ROUTE: sign up (post)
 router.post('/', async (req, res) => {
     let results=[];
@@ -19,7 +20,6 @@ router.post('/', async (req, res) => {
         }
 
         if(errors.length==0){
-            console.log('ekhane2');
             let user = {
                 fname: req.body.fname,
                 lname: req.body.lname,
