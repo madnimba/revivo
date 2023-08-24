@@ -34,7 +34,8 @@ async function execute(sql, binds, options){
     try {
         // Get a connection from the default pool
         connection = await oracledb.getConnection();
-        results = await connection.execute(sql, binds, options);
+        results = (await connection.execute(sql, binds, options)).rows;
+
     } catch (err) {
         console.log("ERROR executing sql: " + err.message);
     } finally {

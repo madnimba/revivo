@@ -29,7 +29,7 @@ async function readEmail(mail,role){
         mail: mail
     }
     const resul= (await database.execute(sql, binds, database.options));
-    return resul.rows;
+    return resul;     // can access each info by resul[0].PHONE / result[0].PASSWORD
 }
 
 
