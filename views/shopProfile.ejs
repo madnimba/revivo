@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+   
+
+    <link href="/style.css"  rel="stylesheet" >
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <style>
+ 
+
+        .additional-container {
+            width: 400px;
+            height: 400px;
+            background-color: #f0f0f0;
+           margin-top: 100px;
+            margin-left: 400px;
+        }
+    </style>
+</head>
+<body>
+    <div class="logo">
+        <img src="/images/logo.jpg" alt="logo">
+    </div>
+
+    <form action="/app/login" method="GET">
+        <button type="submit"  class="btn btn-success logout">Log out</button>
+        </form>
+   
+  <div class="container userProfile">
+            <h2 class="font-weight-bold">
+                Welcome <%= userData[0].SHOP_NAME %>
+         </h2>
+         <div class="row mt-4">
+            <div class="col-md-12">
+                <form action="/app/search_result_shop" method="GET" class="form-inline">
+                    <input type="text" name="search" class="form-control" placeholder="Search a product" style="height:50px;width:100%; max-width:800px;">
+                    <button type="submit" class="btn btn-primary ml-2">Search</button>
+                </form>
+            </div>
+        </div>
+         <div class="buttons-container">
+            <form action="/changeProduct/showProductlist" method="GET">
+                <button type="submit" class="btn btn-success">Show All products</button>
+            </form>
+            <form action="/changeProduct/addProduct" method="GET">
+                <button type="submit" class="btn btn-success">add a product</button>
+            </form>
+
+        </div>
+
+        <div class="additional-container">
+            <!-- Content for the additional container -->
+        </div>
+    </div>
+ 
+
+
+</body>
+</html>

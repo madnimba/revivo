@@ -6,13 +6,8 @@ const bcrypt=require('bcrypt');
 router.get('/',async(req,res)=>{
     res.render('login.ejs',{error:"",message:""});
 })
-router.get('/user',async(req,res)=>{
-    res.render('userProfile.ejs',{fname:"",lname:"",email:"",phone:"",address:""});
-})
 
-router.post('/user',async(req,res)=>{
-    res.render('userProfile.ejs',{fname:"",lname:"",email:"",phone:"",address:""});
-})
+
 
 
 router.post('/',async(req,res)=>{
@@ -30,6 +25,7 @@ router.post('/',async(req,res)=>{
         errors.push('No such user found');
         res.render('login.ejs',{error:"",message:"User not found! Please enter correct credentials!"});
     }
+
     else if(!(await bcrypt.compare(req.body.password, results[0].PASSWORD)))
     {
         errors.push('Wrong Password');
@@ -37,12 +33,14 @@ router.post('/',async(req,res)=>{
     }
     
     else if(req.body.option==='user')
+
         {
-           res.redirect('/app/login/user');
+           res.redirect('/app/user');
         }
         else if(req.body.option=='shop'){
-           // res.redirect('/shop');
+            res.redirect('/app/shop');
         }
+    
     
 })
 
