@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+   
+
+    <link href="/style.css"  rel="stylesheet" >
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <style>
+        /* Custom CSS for adjusting the table border */
+        .custom-table {
+            border-color:green; /* Set your desired border color */
+            border-width: 3px; 
+            border-collapse: separate; /* Separate borders between cells */
+            border-spacing: 0
+        }
+    </style>
+</head>
+<body>
+    <div class="logo">
+        <img src="/images/logo.jpg" alt="logo">
+    </div>
+
+    <form action="/app/login" method="GET">
+        <button type="submit"  class="btn btn-success logout">Log out</button>
+        </form>
+    
+  <div class="container userProfile">
+            <h2 class="font-weight-bold">
+                seller
+            </h2>
+ 
+            <button type="submit" class="btn btn-success rounded-5 ">Buy a product</button>
+            <button type="submit" class="btn btn-success rounded-5 ">Sell a product</button>
+            
+        </div>
+    </div>
+
+
+</body>
+</html>

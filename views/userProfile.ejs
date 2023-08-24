@@ -8,16 +8,6 @@
 
     <link href="/style.css"  rel="stylesheet" >
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-
-    <style>
-        /* Custom CSS for adjusting the table border */
-        .custom-table {
-            border-color:green; /* Set your desired border color */
-            border-width: 3px; 
-            border-collapse: separate; /* Separate borders between cells */
-            border-spacing: 0
-        }
-    </style>
 </head>
 <body>
     <div class="logo">
@@ -27,37 +17,82 @@
     <form action="/app/login" method="GET">
         <button type="submit"  class="btn btn-success logout">Log out</button>
         </form>
+        <form action="/app/seller" method="GET">
+            <button type="submit"  class="btn btn-success logout">switch to seller</button>
+            </form>
     
   <div class="container userProfile">
             <h2 class="font-weight-bold">
                 Welcome
-            </h2>
- <form action="/app/openplace" method="GET">
-    <button type="submit"  class="btn btn-success op_place" id="op_place">Go to open market place</button>
- </form>
-
- <div class="container mt-5">
-    <table class="table table-bordered custom-table" style="max-width: 250px; background-color: lightgreen; margin-left: 35px; ">
-        <thead>
-            <tr>
-                <th>Category</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td><a href="/app/category/male">Male</a></td>
-            </tr>
-            <tr>
-                <td><a href="/app/category/female">Female</a></td>
-            </tr>
-            <tr>
-                <td><a href="/app/category/kids">Kids</a></td>
-            </tr>
-        </tbody>
-    </table>
-</div>
-            
+         </h2>
+ 
+         <div class="row">
+            <div class="col-md-4">
+                <form action="/app/openplace" method="GET">
+                    <button type="submit" class="btn btn-success op_place" id="op_place">Go to open market place</button>
+                </form>
+            </div>
+            <div class="col-md-6">
+                <div class="box" style="margin-left:10px">
+                    Trending Now!!.
+                </div>
+            </div>
         </div>
+
+        <div class="row mt-4">
+            <div class="col-md-12">
+                <form action="/app/search_result_shop" method="GET" class="form-inline">
+                    <input type="text" name="search" class="form-control" placeholder="Search" style="height:50px;width:100%; max-width:800px;">
+                    <button type="submit" class="btn btn-primary ml-2">Search</button>
+                </form>
+            </div>
+        </div>
+ 
+
+ <div class="shop-user">
+
+    <p>
+        <a href="/app/shopUser" >
+        <img src="/images/shop1.jpg" alt="shop1" style="margin-top: 100px;margin-left: 50px;">
+        </a>
+        <a href="/app/product" >
+        <img src="/images/dress2.jpg" alt="shop1" style="margin-top: 100px;margin-left: 100px; border: 2px solid grey; border-radius: 5px;width:150px; height:300px;">
+        </a>
+        <a href="/app/product" >
+        <img src="/images/dress3.jpg" alt="shop1" style="margin-top: 100px;margin-left: 50px; border: 2px solid grey; border-radius: 5px;width:150px; height:300px;">
+        </a>
+        <a href="/app/product" >
+        <img src="/images/dress1.png" alt="shop1" style="margin-top: 100px;margin-left: 100px; border: 2px solid grey; border-radius: 5px;width:150px; height:300px;">
+        </a>
+    </p> 
+    <p>
+  <a href="/app/shopUser" >    
+    <img src="/images/shop2.jpg" alt="shop1" style="margin-top: 100px;margin-left: 50px; "> 
+    </a>
+    <a href="/app/product">
+    <img src="/images/dress4.jpg" alt="shop1" style="margin-top: 100px;margin-left: 100px; border: 2px solid grey; border-radius: 5px;width:150px; height:300px;">
+    </a>
+    <a href="/app/product">
+    <img src="/images/dress3.jpg" alt="shop1" style="margin-top: 100px;margin-left: 50px; border: 2px solid grey; border-radius: 5px;width:150px; height:300px;">
+    </a>
+    <a href="/app/product">
+    <img src="/images/dress1.png" alt="shop1" style="margin-top: 100px;margin-left: 100px; border: 2px solid grey; border-radius: 5px;width:150px; height:300px;">
+    </a>
+    </p>
+    <p>  
+    <a href="/app/shopUser" >   
+    <img src="/images/shop2.jpg" alt="shop1" style="margin-top: 100px;margin-left: 50px;">
+    </a>
+    <a href="/app/product">
+    <img src="/images/dress3.jpg" alt="shop1" style="margin-top: 100px;margin-left: 100px; border: 2px solid grey; border-radius: 5px;width:150px; height:300px;">
+    </a>
+    <a href="/app/product">
+    <img src="/images/dress4.jpg" alt="shop1" style="margin-top: 100px;margin-left: 50px; border: 2px solid grey; border-radius: 5px;width:150px; height:300px;">
+    </a>
+    <a href="/app/product">
+    <img src="/images/dress2.jpg" alt="shop1" style="margin-top: 100px;margin-left: 100px; border: 2px solid grey; border-radius: 5px;width:150px; height:300px;">
+    </a>
+    </p>
     </div>
 
 
