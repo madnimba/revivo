@@ -5,9 +5,8 @@ const morgan=require('morgan');
 
 
 //constant routers
-const loginRouter=require('./routers/login');
-const User_regRouter=require('./routers/User_register');
-const User_shopRouter=require('./routers/shop_register');
+const indexRouter=require('./routers/indexRouters');
+
 
 
 
@@ -20,9 +19,8 @@ app.use(express.static('public'))
 app.use(body_parser.urlencoded({ extended: false }));
 app.use(body_parser.json());
 app.use(morgan('tiny'));
-app.use('/app/login',loginRouter);
-app.use('/app/User_register',User_regRouter);
-app.use('/app/shopRegister',User_shopRouter);
+app.use('/app',indexRouter);
+
 
 
 
