@@ -14,6 +14,8 @@ const shopUser_Router=require('./shopUser');
 const productUser_Router=require('./productUser');
 const searchShop_Router=require('./search_shop');
 
+// use verifyAuth middleware in the routers that can be only accessable after login.
+// if you use verifyAuth, in each router you can access the id by req.user.id
 
 router.use('/login',loginRouter);
 router.use('/User_register', User_regRouter);

@@ -1,9 +1,11 @@
 const jwt = require('jsonwebtoken');
+const session = require('express-session');
 
 
 
 const verifyAuth = (req,res,next)=>
 {
+    req.user = {};
     const token = req.cookies.jwt;
 
     if(token)
@@ -15,7 +17,7 @@ const verifyAuth = (req,res,next)=>
             }
             else
             {
-                console.log(decodedToken);
+                req.user.id = (decodedToken.id);
                 next();
             }
         })
