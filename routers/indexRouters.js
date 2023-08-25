@@ -1,4 +1,5 @@
 const express = require('express');
+const {verifyAuth} = require('../middleware/authMiddleware');
 
 const router = express.Router({mergeParams : true});
 
@@ -16,8 +17,8 @@ const searchShop_Router=require('./search_shop');
 
 router.use('/login',loginRouter);
 router.use('/User_register', User_regRouter);
-router.use('/shop_register', User_shopRouter);
-router.use('/user',Basic_userRouter);
+router.use('/shopRegister', User_shopRouter);
+router.use('/user',verifyAuth, Basic_userRouter);
 router.use('/shop',Basic_shopRouter);
 router.use('/openplace',open_placeRouter);
 router.use('/seller',seller_Router);
