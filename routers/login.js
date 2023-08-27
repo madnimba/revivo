@@ -30,8 +30,13 @@ router.post('/',async(req,res)=>{
 
     results=await DB_user.readEmail(req.body.email,req.body.option);
     console.log(results[0].PASSWORD)
+    let token = '';
 
-    const token = createToken(results[0].USER_ID);
+    if(req.body.option==='user')
+        { token = createToken(results[0].USER_ID);
+        }
+    else
+    { token=createToken(results[0].SHOP_ID);}
     res.cookie('jwt',token,{maxAge: maxAge*1000});
    
     
@@ -49,10 +54,11 @@ router.post('/',async(req,res)=>{
     else if(req.body.option==='user')
 
         {
-            console.log(this);
+           
            res.redirect('/app/user');
         }
         else if(req.body.option=='shop'){
+           
             res.redirect('/app/shop');
         }
     

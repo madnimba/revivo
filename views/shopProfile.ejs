@@ -32,7 +32,7 @@
    
   <div class="container userProfile">
             <h2 class="font-weight-bold">
-                Welcome <%= userData[0].SHOP_NAME %>
+                 <%= userData[0].NAME %>
          </h2>
          <div class="row mt-4">
             <div class="col-md-12">
@@ -46,8 +46,8 @@
             <form action="/changeProduct/showProductlist" method="GET">
                 <button type="submit" class="btn btn-success">Show All products</button>
             </form>
-            <form action="/changeProduct/addProduct" method="GET">
-                <button type="submit" class="btn btn-success">add a product</button>
+            <form action="/app/addProductinShop" method="GET">
+                <button type="submit" class="btn btn-success">Add a product</button>
             </form>
 
         </div>
