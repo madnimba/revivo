@@ -6,9 +6,9 @@ const router=express.Router();
 
 router.get('/',async(req,res)=>{
   console.log(req.user.id);
-  const allShops = await getAllShops();
-  const allProduct = await getAllProductsOf('shop');
-  console.log(allProduct);
+  //const allShops = await getAllShops();
+  //const allProduct = await getAllProductsOf('shop');
+  //console.log(allProduct);
 
     const shops = [
         {
@@ -21,6 +21,12 @@ router.get('/',async(req,res)=>{
           name: "Shop 2",
           shopImage: '../images/shop2.jpg', // Assuming the image is named "shop2.jpg" in your "/images" directory
           dressImages:  ['../images/dress1.png', '../images/dress2.jpg', '../images/dress2.jpg'] // Dress images associated with Shop 2
+          ,role: ["Men","Women","Child"]
+        },
+        {
+          name: "Shop 3",
+          shopImage: '../images/shop3.jpg', // Assuming the image is named "shop3.jpg" in your "/images" directory
+          dressImages: ['../images/dress1.png', '../images/dress2.jpg', '../images/dress2.jpg'] // Dress images associated with Shop 3
           ,role: ["Men","Women","Child"]
         },
         {
