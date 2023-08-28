@@ -62,6 +62,33 @@ WHERE
     }
     const resul= (await database.execute(sql,binds,database.options));
    
+    return resul;     
+}
+
+
+async function addShopProduct(name, gender, type, material, price, quantity, img, size, shopid){
+    let sql="";
+
+         sql = `
+         BEGIN
+         ADD_A_PRODUCT(:name, :gender, :type, :material, :price, :quantity, :img, :size,'shop','',:shopid);
+         END;
+        `;
+        
+
+    const binds = {
+        name: name,
+        gender: gender,
+        type: type,
+        material: material,
+        price: price,
+        quantity: quantity,
+        img: img,
+        size: size,
+        shopid: shopid
+    }
+    const resul= (await database.execute(sql,binds,database.options));
+   
     return resul;     // can access each info by resul[0].PHONE / result[0].PASSWORD
 }
 
@@ -92,6 +119,10 @@ async function addShopProduct(name, gender, type, material, price, quantity, img
     return resul;     // can access each info by resul[0].PHONE / result[0].PASSWORD
 }
 
+
+
+
+ 
 
 
 module.exports={
