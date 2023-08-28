@@ -1,9 +1,15 @@
 const express=require('express');
 const DB_user=require('../Database/register') ;
+const {getAllProductsOf} = require('../Database/product');
 const router=express.Router();
 
 router.get('/',async(req,res)=>{
   
+    let id = req.user.id;
+
+    let product_list = await getAllProductsOf(id,'shop');
+    console.log(product_list);
+    
     const products = [
         {
           name: "Accessory 1",
@@ -79,7 +85,7 @@ router.get('/',async(req,res)=>{
       
       
       
-    res.render('shopview.ejs', { products: products });
+    res.render('shopview.ejs', { products: product_list });
 })
 
 

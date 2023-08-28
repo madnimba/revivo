@@ -39,29 +39,26 @@ async function getAllProductsOf(id,role){
     let sql="";
     if(role=='user'){
          sql = `
-        SELECT 
-            *
-        FROM 
-            PRODUCT
-        WHERE 
-            SELLER_TYPE = :role AND PRODUCT_ID=:id
+         SELECT *
+         FROM 
+             PRODUCT P JOIN SELLER_OWNS S ON (P.PRODUCT_ID = S.PRODUCT_ID)
+         WHERE 
+             S.SELLER_ID=:id
         `;
         
     }
     else if(role=='shop'){
          sql = `
-        SELECT 
-            *
-        FROM 
-            PRODUCT
-        WHERE 
-            SELLER_TYPE = :role AND PRODUCT_ID=:id
+SELECT *
+FROM 
+    PRODUCT P JOIN SHOP_OWNS S ON (P.PRODUCT_ID = S.PRODUCT_ID)
+WHERE 
+    S.SHOP_ID=:id
         `;
     }
  
     const binds = {
-        id: id,
-        role: role
+        id: id
     }
     const resul= (await database.execute(sql,binds,database.options));
    
@@ -130,5 +127,6 @@ async function addShopProduct(name, gender, type, material, price, quantity, img
 
 module.exports={
     getAllProductsOfAll,
-    addShopProduct
+    addShopProduct,
+    getAllProductsOf
 }
