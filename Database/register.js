@@ -27,10 +27,10 @@ async function createNewShopUser(shop){
             (:name,:email,:pass,:phone)`
             
     const binds = {
-        name: user.name,
-        email :user.email,
-        pass: user.pass,
-        phone: user.phone,
+        name: shop.name,
+        email :shop.email,
+        pass: shop.pass,
+        phone: shop.phone,
     }
     return await database.execute(sql, binds, {});
 }

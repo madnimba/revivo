@@ -52,7 +52,7 @@ form{
 div.container.userProfile {
     position: absolute;
     top: 100px;
-    height: 1300px;
+    height: 400px;
     width: 1300px;
     transform: translateX(-50%);
     left: 50%;
@@ -61,6 +61,8 @@ div.container.userProfile {
     background-color: white;
     border: 2px solid white;
 }
+
+
 
 h2.font-weight-bold {
     font-size:50px ;
@@ -91,13 +93,19 @@ div.logo img {
     padding: 75px 100px; /* Adjust the padding values as needed */
 }
 div.shop-user img {
-    width: 300px;
-    height: 350px;
+    width: 220px;
+    height: 300px;
 }
-div.dress-user img {
+.card-img-top {
     width: 150px;
     height: 200px;
 }
+
+.img-fluid{
+    width: 250px;
+    height: 200px;
+}
+
 
 .box {
     width: 900px; /* Set the width of the box */

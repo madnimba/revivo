@@ -14,7 +14,7 @@
         <img src="/images/logo.jpg" alt="logo">
     </div>
 
-    <form action="/app/login" method="GET">
+    <form action="/app/logout" method="GET">
         <button type="submit"  class="btn btn-success logout">Log out</button>
         </form>
         <form action="/app/seller" method="GET">
@@ -51,48 +51,51 @@
 
  <div class="shop-user">
 
-    <p>
-        <a href="/app/shopUser" >
-        <img src="/images/shop1.jpg" alt="shop1" style="margin-top: 100px;margin-left: 50px;">
+
+
+
+
+
+    <!-- Start of the dynamic section -->
+<div>&nbsp;</div>
+<div>&nbsp;</div>
+
+<% for (let i = 0; i < shops.length; i++) { %>
+<div class="row mb-4">
+    <!-- Shop Image -->
+    <div class="col-md-4">
+        <a href="/app/shopUser">
+            <img src="<%= shops[i].shopImage %>" alt="Shop <%= i + 1 %>" class="img-fluid">
+            <div class="card-body">
+                <h5 class="card-title"> <%= shops[i].name%></h5>
+            </div>
         </a>
-        <a href="/app/product" >
-        <img src="/images/dress2.jpg" alt="shop1" style="margin-top: 100px;margin-left: 100px; border: 2px solid grey; border-radius: 5px;width:150px; height:300px;">
-        </a>
-        <a href="/app/product" >
-        <img src="/images/dress3.jpg" alt="shop1" style="margin-top: 100px;margin-left: 50px; border: 2px solid grey; border-radius: 5px;width:150px; height:300px;">
-        </a>
-        <a href="/app/product" >
-        <img src="/images/dress1.png" alt="shop1" style="margin-top: 100px;margin-left: 100px; border: 2px solid grey; border-radius: 5px;width:150px; height:300px;">
-        </a>
-    </p> 
-    <p>
-  <a href="/app/shopUser" >    
-    <img src="/images/shop2.jpg" alt="shop1" style="margin-top: 100px;margin-left: 50px; "> 
-    </a>
-    <a href="/app/product">
-    <img src="/images/dress4.jpg" alt="shop1" style="margin-top: 100px;margin-left: 100px; border: 2px solid grey; border-radius: 5px;width:150px; height:300px;">
-    </a>
-    <a href="/app/product">
-    <img src="/images/dress3.jpg" alt="shop1" style="margin-top: 100px;margin-left: 50px; border: 2px solid grey; border-radius: 5px;width:150px; height:300px;">
-    </a>
-    <a href="/app/product">
-    <img src="/images/dress1.png" alt="shop1" style="margin-top: 100px;margin-left: 100px; border: 2px solid grey; border-radius: 5px;width:150px; height:300px;">
-    </a>
-    </p>
-    <p>  
-    <a href="/app/shopUser" >   
-    <img src="/images/shop2.jpg" alt="shop1" style="margin-top: 100px;margin-left: 50px;">
-    </a>
-    <a href="/app/product">
-    <img src="/images/dress3.jpg" alt="shop1" style="margin-top: 100px;margin-left: 100px; border: 2px solid grey; border-radius: 5px;width:150px; height:300px;">
-    </a>
-    <a href="/app/product">
-    <img src="/images/dress4.jpg" alt="shop1" style="margin-top: 100px;margin-left: 50px; border: 2px solid grey; border-radius: 5px;width:150px; height:300px;">
-    </a>
-    <a href="/app/product">
-    <img src="/images/dress2.jpg" alt="shop1" style="margin-top: 100px;margin-left: 100px; border: 2px solid grey; border-radius: 5px;width:150px; height:300px;">
-    </a>
-    </p>
+    </div>
+
+    <!-- Dress Images -->
+    <div class="col-md-8">
+        <div class="row">
+            <% for (let j = 1; j <= 3; j++) { %>
+            <div class="col-sm-4">
+                <a href="/app/product">
+                    <div class="card">
+                        <img src="<%=shops[i].dressImages[j-1] %>" alt=" <%= shops[i].role %>" class="card-img-top">
+                        <div class="card-body">
+                            <h5 class="card-title"><%= shops[i].role[j-1]%></h5>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <% } %>
+        </div>
+    </div>
+</div>
+<hr>
+&nbsp;
+&nbsp;
+<% } %>
+
+<!-- End of the dynamic section -->
     </div>
 
 

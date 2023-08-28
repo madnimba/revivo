@@ -2,6 +2,17 @@ const express=require('express');
 const DB_user=require('../Database/login') ;
 const router=express.Router();
 const bcrypt=require('bcrypt');
+const jwt=require('jsonwebtoken');
+const cookieParser=require('cookie-parser');
+
+
+const maxAge = 3*24*60*60;
+const createToken = (id) =>{
+    return jwt.sign({ id }, 'torkibhai',
+    {
+        expiresIn: maxAge
+    });
+}
 
 router.get('/',async(req,res)=>{
     res.render('login.ejs',{error:"",message:""});
@@ -19,6 +30,14 @@ router.post('/',async(req,res)=>{
 
     results=await DB_user.readEmail(req.body.email,req.body.option);
     console.log(results[0].PASSWORD)
+    let token = '';
+
+    if(req.body.option==='user')
+        { token = createToken(results[0].USER_ID);
+        }
+    else
+    { token=createToken(results[0].SHOP_ID);}
+    res.cookie('jwt',token,{maxAge: maxAge*1000});
    
     
     if(results.length==0){
@@ -35,9 +54,11 @@ router.post('/',async(req,res)=>{
     else if(req.body.option==='user')
 
         {
+           
            res.redirect('/app/user');
         }
         else if(req.body.option=='shop'){
+           
             res.redirect('/app/shop');
         }
     

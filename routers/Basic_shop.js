@@ -9,7 +9,10 @@ const router=express.Router();
 
 router.get('/',async(req,res)=>{
     try{
-    const userData = await DB_user1.readEmail('gburrill1@opera.com', 'shop');
+        console.log(req.user.id);
+        
+    const userData = await DB_user1.readID(req.user.id, 'shop');
+    console.log(userData);
     res.render('shopProfile.ejs', { userData: userData });
     }
     catch (error) {

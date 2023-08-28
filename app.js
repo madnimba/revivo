@@ -2,6 +2,7 @@ const express=require('express');
 const app=express();
 const body_parser=require('body-parser');
 const morgan=require('morgan');
+const cookieParser = require('cookie-parser');
 
 
 //constant routers
@@ -19,7 +20,11 @@ app.use(express.static('public'))
 app.use(body_parser.urlencoded({ extended: false }));
 app.use(body_parser.json());
 app.use(morgan('tiny'));
+app.use(cookieParser());
 app.use('/app',indexRouter);
+
+
+
 
 
 
