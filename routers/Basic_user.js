@@ -7,8 +7,8 @@ const router=express.Router();
 router.get('/',async(req,res)=>{
   console.log(req.user.id);
   const allShops = await getAllShops();
-  const allProduct = await getAllProductsOf('shop');
-  console.log(allProduct);
+  //const allProduct = await getAllProductsOf('shop');
+  //console.log(allProduct);
 
     const shops = [
         {

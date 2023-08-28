@@ -65,8 +65,11 @@ async function getAllProductsOf(id,role){
     }
     const resul= (await database.execute(sql,binds,database.options));
    
-    return resul;     // can access each info by resul[0].PHONE / result[0].PASSWORD
+    return resul;     
 }
+
+
+ 
 
 
 module.exports={
