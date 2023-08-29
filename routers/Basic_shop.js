@@ -13,7 +13,7 @@ router.get('/',async(req,res)=>{
         
     const userData = await DB_user1.readID(req.user.id, 'shop');
     console.log(userData);
-    res.render('shopProfile.ejs', { userData: userData });
+    res.render('shopProfile.ejs', { userData: userData,messag:"" });
     }
     catch (error) {
         // Handle any errors that might occur during async operations

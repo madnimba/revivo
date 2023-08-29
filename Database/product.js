@@ -119,6 +119,60 @@ async function addShopProduct(name, gender, type, material, price, quantity, img
     return resul;     // can access each info by resul[0].PHONE / result[0].PASSWORD
 }
 
+async function getProductbyName(name,idshop){
+    let sql="";
+    
+        sql = `
+         SELECT *
+         FROM 
+             PRODUCT P JOIN SHOP_OWNS S
+             ON(P.PRODUCT_ID=S.PRODUCT_ID)
+         WHERE 
+             LOWER(P.NAME)=LOWER(:name) AND 
+             S.SHOP_ID=:idshop
+
+
+        `;
+        
+    
+    //console.log(sql);
+    const binds = {
+        name: name,
+        idshop:idshop
+    }
+    const resul= (await database.execute(sql,binds,database.options));
+   
+   
+    return resul;     
+}
+
+async function getProductbyCategory(category,idshop){
+    let sql="";
+    
+        sql = `
+         SELECT *
+         FROM 
+             PRODUCT P JOIN SHOP_OWNS S
+             ON(P.PRODUCT_ID=S.PRODUCT_ID)
+         WHERE 
+             LOWER(P.TYPE_OF)=LOWER(:category) AND 
+             S.SHOP_ID=:idshop
+
+
+        `;
+        
+    
+    //console.log(sql);
+    const binds = {
+        category: category,
+        idshop:idshop
+    }
+    const resul= (await database.execute(sql,binds,database.options));
+   
+   
+    return resul;     
+}
+
 
 
 
@@ -128,5 +182,7 @@ async function addShopProduct(name, gender, type, material, price, quantity, img
 module.exports={
     getAllProductsOfAll,
     addShopProduct,
-    getAllProductsOf
+    getAllProductsOf,
+    getProductbyName,
+    getProductbyCategory
 }

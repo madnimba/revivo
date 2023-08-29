@@ -1,3 +1,8 @@
+<!-----view of a shop owner after log in-->
+<!---necessary parameter userData,messag-->
+<!--for userData:const DB_user1=require('../Database/login') ;
+    const userData = await DB_user1.readID(req.user.id, 'shop');-->
+    
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -37,9 +42,10 @@
          <div class="row mt-4">
             <div class="col-md-12">
                 <form action="/app/search_result_shop" method="GET" class="form-inline">
-                    <input type="text" name="search" class="form-control" placeholder="Search a product" style="height:50px;width:100%; max-width:800px;">
+                    <input type="text" name="product_search" class="form-control" placeholder="Write a product name or category" style="height:50px;width:100%; max-width:800px;">
                     <button type="submit" class="btn btn-primary ml-2">Search</button>
                 </form>
+                <h3><%=messag%></h3>
             </div>
         </div>
          <div class="buttons-container">
