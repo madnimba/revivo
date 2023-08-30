@@ -208,6 +208,7 @@ module.exports={
     getAllProductsOfAll,
     addShopProduct,
     getAllProductsOf,
+    getMenTrending,
     getProductbyName,
     getProductbyCategory
 }
