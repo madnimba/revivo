@@ -1,12 +1,24 @@
 const express=require('express');
 const {getAllShops} = require('../Database/shop')
 const {getAllProductsOf} = require('../Database/product');
+const {getMenTrending} = require('../Database/product')
 const DB_user=require('../Database/register') ;
 const router=express.Router();
 
 router.get('/',async(req,res)=>{
   console.log(req.user.id);
-  //const allShops = await getAllShops();
+  const allShops = await getAllShops();
+  const roles = ['Men','Women','Child'];
+  
+  let productArr = [];
+  for(let l=0;l<allShops.length;l++)
+  {
+    let menz = await getMenTrending();
+    productArr.push()
+  }
+  let menz = await getMenTrending();
+  console.log(menz);
+  
   //const allProduct = await getAllProductsOf('shop');
   //console.log(allProduct);
 
@@ -40,7 +52,7 @@ router.get('/',async(req,res)=>{
       
 
       
-    res.render('userProfile.ejs',{error:"",message:"",shops:shops});
+    res.render('userProfile.ejs',{error:"",message:"",shops:allShops,role:roles});
 })
 
 module.exports=router;
