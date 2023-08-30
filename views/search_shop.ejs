@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,6 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.js"></script>
 </head>
 <body>
     <div>&nbsp;</div>
@@ -50,7 +52,7 @@
                                 <form action = "/app/UpdateProduct/<%= product_data[i].PRODUCT_ID %>" method="GET" id="UpdateForm">
                                 <button type="submit" class="btn">Update</button>
                                 </form>
-                                <button class="btn">Delete</button>
+                                    <button class="btn" onclick="confirmDelete('<%= product_data[i].PRODUCT_ID %>')">Delete</button>
                             </div>
                         </li>
                     </div>
@@ -167,7 +169,6 @@ body {
 }
 
 .product-detail ul li {
-    background: url(shoes_images/checked.png) left center no-repeat;
     background-size: 18px;
     padding-left: 1.7rem;
     margin-bottom: 0.2rem;
@@ -268,7 +269,7 @@ body {
 </style>
 
 <script>
-    const productData = JSON.parse(`<%= JSON.stringify(product_data) %>`);
+    //const productData = JSON.parse(`<%= JSON.stringify(product_data) %>`);
     const imgs = document.querySelectorAll('.img-select a');
 const imgBtns = [...imgs];
 let imgId = 1;
@@ -282,12 +283,65 @@ imgBtns.forEach((imgItem) => {
 });
 
 function slideImage(){
-    const displayWidth = document.querySelector('.img-showcase img:first-child').clientWidth;
+    const displayWidth = document.querySelector('.img-showcase img:first-child');
 
     document.querySelector('.img-showcase').style.transform = `translateX(${- (imgId - 1) * displayWidth}px)`;
 }
 
 window.addEventListener('resize', slideImage);
+
+
+function confirmDelete(productId) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: 'This action cannot be undone.',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Delete',
+                cancelButtonText: 'Cancel'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    deleteProduct(productId); // Call your JavaScript function to delete the product
+                }
+            });
+        }
+
+        function deleteProduct(productId) {
+            fetch(`/app/DeleteProduct/${productId}`, {
+                method: 'DELETE'
+            })
+            .then(response => response.json())
+            .then(data => {
+                /*if (data.success) {
+                    
+                    Swal.fire('Deleted!', 'The product has been deleted.', 'success');
+                    location.reload();
+                    
+                } */if (data.success) {
+    Swal.fire({
+        title: 'Deleted!',
+        text: 'The product has been deleted.',
+        icon: 'success',
+        timer: 5000, // Specify the time in milliseconds (e.g., 3000 ms = 3 seconds)
+        showConfirmButton: false // Hide the "OK" button
+    });
+
+    // Reload the page after the pop-up has been shown for a certain time
+    setTimeout(() => {
+        location.reload();
+    }, 2000); // Reload after 3 seconds (adjust as needed)
+}
+                else {
+                    Swal.fire('Error', 'Failed to delete the product.', 'error');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                Swal.fire('Error', 'An error occurred while deleting the product.', 'error');
+            });
+        }
+
+ 
 
     </script>
 </body>

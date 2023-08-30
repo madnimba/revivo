@@ -153,7 +153,7 @@ async function getProductbyName(name,idshop){
              PRODUCT P JOIN SHOP_OWNS S
              ON(P.PRODUCT_ID=S.PRODUCT_ID)
          WHERE 
-             LOWER(P.NAME)=LOWER(:name) AND 
+             LOWER(P.NAME) LIKE LOWER('%' || :name || '%') AND 
              S.SHOP_ID=:idshop
 
 
@@ -180,7 +180,7 @@ async function getProductbyCategory(category,idshop){
              PRODUCT P JOIN SHOP_OWNS S
              ON(P.PRODUCT_ID=S.PRODUCT_ID)
          WHERE 
-             LOWER(P.TYPE_OF)=LOWER(:category) AND 
+             LOWER(P.TYPE_OF) LIKE LOWER('%' || :category || '%') AND 
              S.SHOP_ID=:idshop
 
 
@@ -225,6 +225,43 @@ async function getProductbyID(id,idshop){
     return resul;     
 }
 
+//Sql for updating details of a product
+
+
+async function updateProduct(details){
+    const sql = `
+        UPDATE PRODUCT
+            SET NAME=:productName,TYPE_OF=:productCategory,MATERIAL= :productMaterial,PRICE= :productPrice, QUANTITY=:productQuantity,SIZE_OF=:productSize,USED_STATUS=:productUsedStatus
+        WHERE PRODUCT_ID=:productid
+        `
+    const binds = {
+        productid:details.productid,
+        productName:details.productName,
+        productPrice: details.productPrice,
+        productMaterial:details.productMaterial,
+        productCategory:details.productCategory,
+        productSize: details.productSize,
+        productQuantity:details.productQuantity,
+        productUsedStatus:details.productUsedStatus
+ 
+    }
+    return await database.execute(sql, binds,database.options);
+}
+
+async function deleteProduct(productId){
+    console.log('kaaj hoy na');
+    const sql = `
+    DELETE FROM PRODUCT WHERE PRODUCT_ID=:productId
+        `
+    const binds = {
+        productId:productId
+ 
+    }
+    return await database.execute(sql, binds,database.options);
+}
+
+
+
 
 
  
@@ -237,5 +274,7 @@ module.exports={
     getMenTrending,
     getProductbyName,
     getProductbyCategory,
-    getProductbyID
+    getProductbyID,
+    updateProduct,
+    deleteProduct
 }

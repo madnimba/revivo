@@ -28,7 +28,7 @@ router.get('/',async(req,res)=>{
         }
     
 
-    console.log(results[0]);
+    console.log(results);
 })
 
 module.exports=router;
