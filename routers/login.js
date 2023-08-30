@@ -29,7 +29,7 @@ router.post('/',async(req,res)=>{
     // const pw = await bcrypt.hash(req.body.password, salt);
 
     results=await DB_user.readEmail(req.body.email,req.body.option);
-    console.log(results[0].PASSWORD)
+    //console.log(results[0].PASSWORD)
     let token = '';
 
     if(req.body.option==='user')
