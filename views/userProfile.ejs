@@ -65,9 +65,9 @@
     <!-- Shop Image -->
     <div class="col-md-4">
         <a href="/app/shopUser">
-            <img src="<%= shops[i].shopImage %>" alt="Shop <%= i + 1 %>" class="img-fluid">
+            <img src="/images/shop1.jpg" alt="Shop <%= i + 1 %>" class="img-fluid">
             <div class="card-body">
-                <h5 class="card-title"> <%= shops[i].name%></h5>
+                <h5 class="card-title"> <%= shops[i].NAME%></h5>
             </div>
         </a>
     </div>
@@ -79,9 +79,9 @@
             <div class="col-sm-4">
                 <a href="/app/product">
                     <div class="card">
-                        <img src="<%=shops[i].dressImages[j-1] %>" alt=" <%= shops[i].role %>" class="card-img-top">
+                        <img src="/images/dress1.png"  class="card-img-top">
                         <div class="card-body">
-                            <h5 class="card-title"><%= shops[i].role[j-1]%></h5>
+                            <h5  class="card-title"><%= role[j-1] %></h5>
                         </div>
                     </div>
                 </a>
@@ -98,6 +98,9 @@
 <!-- End of the dynamic section -->
     </div>
 
+<script>
 
+
+</script>
 </body>
 </html>
