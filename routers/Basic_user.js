@@ -10,17 +10,18 @@ router.get('/',async(req,res)=>{
   const allShops = await getAllShops();
   const roles = ['Men','Women','Child'];
   
-  let productArr = [];
-  for(let l=0;l<allShops.length;l++)
-  {
-    let menz = await getMenTrending();
-    productArr.push()
-  }
-  let menz = await getMenTrending();
-  console.log(menz);
+
+  // let menProduct = [];
+  // for(let l=0;l<allShops.length;l++)
+  // {
+  //   let menz = await getMenTrending();
+  //   productArr.push()
+  // }
+  // let menz = await getMenTrending();
+  // console.log(menz);
   
-  //const allProduct = await getAllProductsOf('shop');
-  //console.log(allProduct);
+  // const allProduct = await getAllProductsOf('shop');
+  // console.log(allProduct);
 
     const shops = [
         {

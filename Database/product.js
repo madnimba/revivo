@@ -171,6 +171,37 @@ async function getProductbyName(name,idshop){
     return resul;     
 }
 
+async function getProductbyGender(gender,idshop)
+{
+   
+    let sql="";
+    
+    sql = `
+     SELECT *
+     FROM 
+         PRODUCT P JOIN SHOP_OWNS S
+         ON(P.PRODUCT_ID=S.PRODUCT_ID)
+     WHERE 
+         LOWER(P.GENDER_CATEGORY)=LOWER(:gender) AND 
+         S.SHOP_ID=:idshop
+
+
+    `;
+    
+
+//console.log(sql);
+const binds = {
+    gender: gender,
+    idshop:idshop
+}
+const resul= (await database.execute(sql,binds,database.options));
+
+
+return resul; 
+
+}
+
+
 async function getProductbyCategory(category,idshop){
     let sql="";
     
