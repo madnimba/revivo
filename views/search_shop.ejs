@@ -47,7 +47,9 @@
                         </ul>
                         <li>
                             <div class="buttons-container">
-                                <button class="btn">Update</button>
+                                <form action = "/app/UpdateProduct/<%= product_data[i].PRODUCT_ID %>" method="GET" id="UpdateForm">
+                                <button type="submit" class="btn">Update</button>
+                                </form>
                                 <button class="btn">Delete</button>
                             </div>
                         </li>
@@ -266,6 +268,7 @@ body {
 </style>
 
 <script>
+    const productData = JSON.parse(`<%= JSON.stringify(product_data) %>`);
     const imgs = document.querySelectorAll('.img-select a');
 const imgBtns = [...imgs];
 let imgId = 1;
@@ -285,6 +288,7 @@ function slideImage(){
 }
 
 window.addEventListener('resize', slideImage);
-</script>
+
+    </script>
 </body>
 </html>

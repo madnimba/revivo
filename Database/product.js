@@ -229,6 +229,32 @@ async function getProductbyCategory(category,idshop){
     return resul;     
 }
 
+async function getProductbyID(id,idshop){
+    let sql="";
+    
+        sql = `
+         SELECT *
+         FROM 
+             PRODUCT P JOIN SHOP_OWNS S
+             ON(P.PRODUCT_ID=S.PRODUCT_ID)
+         WHERE 
+             P.PRODUCT_ID=:id AND 
+             S.SHOP_ID=:idshop
+
+
+        `;
+        
+    
+    //console.log(sql);
+    const binds = {
+        id:id,
+        idshop:idshop
+    }
+    const resul= (await database.execute(sql,binds,database.options));
+   
+   
+    return resul;     
+}
 
 
 
@@ -241,5 +267,6 @@ module.exports={
     getAllProductsOf,
     getMenTrending,
     getProductbyName,
-    getProductbyCategory
+    getProductbyCategory,
+    getProductbyID
 }

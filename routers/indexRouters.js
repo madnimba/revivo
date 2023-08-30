@@ -16,7 +16,7 @@ const searchShop_Router=require('./search_shop');
 const logout_Router=require('./logout')
 const addShopProduct_Router=require('./addShopProduct');
 const showAllProduct_Router=require('./shopOwner');
-
+const Update_Shop_Product_Router=require('./UpdateShopProduct');
 // use verifyAuth middleware in the routers that can be only accessable after login.
 // if you only use verifyAuth, in each router you can access the id by req.user.id
 
@@ -33,6 +33,7 @@ router.use('/search_result_shop',verifyAuth,searchShop_Router);
 router.use('/logout',verifyAuth,logout_Router);
 router.use('/addProductinShop',verifyAuth,addShopProduct_Router);
 router.use('/showAllProducts',verifyAuth,showAllProduct_Router);
+router.use('/UpdateProduct',verifyAuth,Update_Shop_Product_Router);
 
 
 
