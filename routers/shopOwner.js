@@ -1,16 +1,15 @@
 const express=require('express');
-const DB_user=require('../Database/register') ;
-const {getAllProductsOf} = require('../Database/product');
+const DB_user = require('../Database/product');
 const router=express.Router();
 
 router.get('/',async(req,res)=>{
   
     let id = req.user.id;
 
-    let product_list = await getAllProductsOf(id,'shop');
+    let product_list = await DB_user.getAllProductsOf(id,'shop');
     console.log(product_list);
     
-    const products = [
+    /*const products = [
         {
           name: "Accessory 1",
           description: "With supporting text below as a natural lead-in to additional content.",
@@ -81,11 +80,38 @@ router.get('/',async(req,res)=>{
           image: '../images/dress1.png',
           addToCartLink: "https://example.com/cart/10"
         }
-      ];
+      ];*/
       
       
       
     res.render('shopview.ejs', { products: product_list });
+})
+
+router.get('/men',async(req,res)=>{
+  
+  let id = req.user.id;
+
+  let product_list = await DB_user.getProductbyGender('male',id,'shop');
+  console.log(product_list);   
+  res.render('shopview.ejs', { products: product_list });
+})
+
+router.get('/women',async(req,res)=>{
+  
+  let id = req.user.id;
+
+  let product_list = await DB_user.getProductbyGender('female',id,'shop');
+  console.log(product_list);   
+  res.render('shopview.ejs', { products: product_list });
+})
+
+router.get('/children',async(req,res)=>{
+  
+  let id = req.user.id;
+
+  let product_list = await DB_user.getProductbyGender('child',id,'shop');
+  console.log(product_list);   
+  res.render('shopview.ejs', { products: product_list });
 })
 
 

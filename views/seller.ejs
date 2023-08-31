@@ -1,44 +1,75 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Profile</title>
-   
-
-    <link href="/style.css"  rel="stylesheet" >
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-
-    <style>
-        /* Custom CSS for adjusting the table border */
-        .custom-table {
-            border-color:green; /* Set your desired border color */
-            border-width: 3px; 
-            border-collapse: separate; /* Separate borders between cells */
-            border-spacing: 0
-        }
-    </style>
-</head>
-<body>
-    <div class="logo">
-        <img src="/images/logo.jpg" alt="logo">
-    </div>
-
-    <form action="/app/login" method="GET">
-        <button type="submit"  class="btn btn-success logout">Log out</button>
-        </form>
+<!-----view of a shop owner after log in-->
+<!---necessary parameter userData,messag-->
+<!--for userData:const DB_user1=require('../Database/login') ;
+    const userData = await DB_user1.readID(req.user.id, 'shop');-->
     
-  <div class="container userProfile">
-            <h2 class="font-weight-bold">
-                seller
-            </h2>
- 
-            <button type="submit" class="btn btn-success rounded-5 ">Buy a product</button>
-            <button type="submit" class="btn btn-success rounded-5 ">Sell a product</button>
-            
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>User Profile</title>
+       
+    
+        <link href="/style.css"  rel="stylesheet" >
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    
+        <style>
+     
+    
+            .additional-container {
+                width: 400px;
+                height: 400px;
+                background-color: #f0f0f0;
+               margin-top: 100px;
+                margin-left: 400px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="logo">
+            <img src="/images/logo.jpg" alt="logo">
         </div>
-    </div>
+    
+        <form action="/app/login" method="GET">
+            <button type="submit"  class="btn btn-success logout">Log out</button>
+            </form>
 
+            <div>&nbsp;</div>
 
-</body>
-</html>
+            <form action="/app/user" method="GET">
+                <button type="submit"  class="btn btn-success logout">switch to buyer</button>
+                </form>
+       
+      <div class="container userProfile">
+                <h2 class="font-weight-bold">
+                     Welcome to your Seller Profile
+             </h2>
+             <div class="row mt-4">
+                <div class="col-md-12">
+                    <form action="/app/search_result/seller" method="GET" class="form-inline">
+                        <input type="text" name="product_search_seller" class="form-control" placeholder="Write a product name or category" style="height:50px;width:100%; max-width:800px;">
+                        <button type="submit" class="btn btn-primary ml-2">Search</button>
+                    </form>
+                    <h3><%=message%></h3>
+                </div>
+            </div>
+             <div class="buttons-container">
+                <form action="/app/showAllProductsSeller" method="GET">
+                    <button type="submit" class="btn btn-success">Show All products</button>
+                </form>
+                <form action="/app/addProductinSeller" method="GET">
+                    <button type="submit" class="btn btn-success">Add a product</button>
+                </form>
+    
+            </div>
+    
+            <div class="additional-container">
+                <!-- Content for the additional container -->
+            </div>
+        </div>
+     
+    
+    
+    </body>
+    </html>
