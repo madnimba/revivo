@@ -2,7 +2,7 @@ const express=require('express');
 const {getAllShops} = require('../Database/shop')
 const {getAllProductsOf, getBuyerID} = require('../Database/product');
 const {getMenTrending} = require('../Database/product')
-const DB_user=require('../Database/register') ;
+const DB_user=require('../Database/login') ;
 const router=express.Router();
 
 router.get('/',async(req,res)=>{
@@ -53,7 +53,7 @@ router.get('/',async(req,res)=>{
       
 
       
-    res.render('userProfile.ejs',{error:"",message:"",shops:allShops,role:roles});
+    res.render('userProfile.ejs',{error:"",message:"",shops:allShops,role:roles,userData:userData});
 })
 
 module.exports=router;

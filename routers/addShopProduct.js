@@ -8,7 +8,7 @@ router.get('/',async(req,res)=>{
 
 router.post('/', async(req,res)=>{
     let prod = req.body;
-    await addShopProduct(prod.name, prod.gender, prod.category, prod.material, prod.price, prod.quantity, '', prod.size, req.user.id)
+    await addShopProduct(prod.name, prod.gender, prod.category, prod.material, prod.price, prod.quantity,prod.productImage, prod.size,prod.Used_status, req.user.id)
     res.render('shopChangeProduct.ejs',{error:"",message:"New Product Added!"});
 });
 

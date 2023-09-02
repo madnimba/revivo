@@ -30,22 +30,22 @@
   </form>
 
   <div class="container userProfile">
-    <h2 class="font-weight-bold">
-      Welcome
-    </h2>
-
-    <div class="row">
-      <div class="col-md-4">
-        <form action="/app/openplace" method="GET">
-          <button type="submit" class="btn btn-success op_place" id="op_place">Go to open market place</button>
-        </form>
-      </div>
-      <div class="col-md-6">
-        <div class="box" style="margin-left:10px">
-          Trending Now!!.
+            <h2 class="font-weight-bold">
+                Welcome <%= userData[0].FIRST_NAME %>
+         </h2>
+ 
+         <div class="row">
+            <div class="col-md-4">
+                <form action="/app/openplace" method="GET">
+                    <button type="submit" class="btn btn-success op_place" id="op_place">Go to open market place</button>
+                </form>
+            </div>
+            <div class="col-md-6">
+                <div class="box" style="margin-left:10px">
+                    Trending Now!!.
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
 
     <div class="row mt-4">
       <div class="col-md-12">

@@ -3,53 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Update Product Information</title>
+  
 </head>
+
 <body>
-    <div class="container">
-        <h1>Update Product Information</h1>
-        <form action="/update-product" method="POST" enctype="multipart/form-data">
+    
+
+    <div class="text-center center-div" id="login">
+        <div class="container w-25 border py-5">
+            <div class="title pb-5">
+                <h2 class="font-weight-bold">
+                Product Update
+                </h2>
+            </div>
+            <form action="/app/UpdateProduct" method="POST" class="multipart/form-data">
             <div class="form-group">
                 <label for="productImage">Product Image:</label>
                 <input type="file" id="productImage" name="productImage" accept="image/*">
             </div>
-            <div class="form-group">
-                <label for="productName">Product Name:</label>
-                <input type="text" id="productName" name="productName" value=" <%= product_data[0].NAME %>" >
-            </div>
-            <div class="form-group">
-                <label for="productPrice">Product Price:</label>
-                <input type="number" id="productPrice" name="productPrice" step="0.01" value="<%= product_data[0].PRICE %>">
-            </div>
-            <div class="form-group">
-                <label for="productMaterial">Product Material:</label>
-                <input type="text" id="productMaterial" name="productMaterial" value=" <%= product_data[0].MATERIAL%>">
-            </div>
-            <div class="form-group">
-                <label for="Typeof">Category:</label>
-                <input type="text" id="productCategory" name="productCategory" value=" <%= product_data[0].TYPE_OF %>">
-            </div>
-            <div class="form-group">
-                <label for="size">Size:</label>
-                <input type="number" id="productSize" name="productSize" value="36" step="1" value=" <%= product_data[0].SIZE_OF %>">
-            </div>
-            <div class="form-group">
-                <label for="size">Quantity:</label>
-                <input type="number" id="productQuantity" name="productQuantity" step="1" value="<%=product_data[0].QUANTITY %>">
-            </div>
-            <div class="form-group">
-                <label for="Used status">Used Status:</label>
-                <input type="text" id="productUsedStatus" name="productUsedStatus" value=" <%= product_data[0].USED_STATUS %>">
-            </div>
-            
-            <!-- Add more input fields for other product information -->
+                <div class="form-group">
+                    <label for="productName">Product Name:</label>
+                    <input type="text" id="productName" name="productName" value="<%= product_data[0].NAME %>">
+                    </div>
+                <div class="form-group">
+                    <label for="productPrice">Product Price:</label>
+                    <input type="number" id="productPrice" name="productPrice" step="0.01" value="<%= product_data[0].PRICE %>">
+                </div>
+                <div class="form-group">
+                    <label for="productMaterial">Product Material:</label>
+                    <input type="text" id="productMaterial" name="productMaterial" value=" <%= product_data[0].MATERIAL%>">
+                </div>
+                <div class="form-group">
+                    <label for="Typeof">Category:</label>
+                    <input type="text" id="productCategory" name="productCategory" value=" <%= product_data[0].TYPE_OF %>">
+                </div>
+                <div class="form-group">
+                    <label for="Gender">Gender:</label>
+                    <input type="radio" class="rd" name="productGender" value="male" required >Male
+                    <input type="radio" class="rd" name="productGender" value="female">Female
+                    <input type="radio" class="rd" name="productGender" value="child">Children
+                </div>
+                <div class="form-group">
+                    <label for="size">Size:</label>
+                    <input type="number" id="productSize" name="productSize" value="36" step="1" value=" <%= product_data[0].SIZE_OF %>">
+                </div>
+                <div class="form-group">
+                    <label for="size">Quantity:</label>
+                    <input type="number" id="productQuantity" name="productQuantity" step="1" value="<%=product_data[0].QUANTITY %>">
+                </div>
+                <div class="form-group">
+                    <label for="Used status">Used Status:</label>
+                    <input type="text" id="productUsedStatus" name="productUsedStatus" value=" <%= product_data[0].USED_STATUS %>">
+                </div>
 
+            </div>
             <button type="submit" class="btn">Update Product</button>
-        </form>
+            
+            </form>
+            <h2><%=message%></h2>
+        </div>
     </div>
+
+
 </body>
-<style>
-    body {
+ <style>
+        body {
     font-family: Arial, sans-serif;
     background-color: #f0f0f0;
     margin: 0;
@@ -57,13 +75,15 @@
 }
 
 .container {
-    max-width: 600px;
-    margin: 0 auto;
+    width:50%;
+    margin-top:20px;
+    margin-left:650px;
     padding: 20px;
     background-color: #fff;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
+
 
 .form-group {
     margin-bottom: 20px;
@@ -89,6 +109,8 @@ input[type="file"] {
     background-color: #256eff;
     color: #fff;
     border: none;
+    margin-top:20px;
+    margin-left:700px;
     padding: 10px 20px;
     border-radius: 3px;
     font-size: 16px;
@@ -99,5 +121,5 @@ input[type="file"] {
 .btn:hover {
     background-color: #1e4caf;
 }
-</style>
+</style> 
 </html>

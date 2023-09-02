@@ -12,11 +12,15 @@ const open_placeRouter=require('./open_place');
 const seller_Router=require('./seller');
 const shopUser_Router=require('./shopUser');
 const productUser_Router=require('./productUser');
-const searchShop_Router=require('./search_shop');
+const searchShop_Router=require('./search_product_shopeller');
 const logout_Router=require('./logout')
 const addShopProduct_Router=require('./addShopProduct');
 const showAllProduct_Router=require('./shopOwner');
 const Update_Shop_Product_Router=require('./UpdateShopProduct');
+const Delete_Shop_Product_Router=require('./deleteProduct');
+const Add_Seller_Product_Router=require('./addSellerProduct');
+const showAllProduct_Seller_Router=require('./showAllProductSeller');
+
 const addToCart_Router=require('./addToCart');
 const removeFromCart_Router=require('./removeFromCart');
 const showCart_Router=require('./mycart');
@@ -31,14 +35,18 @@ router.use('/shopRegister', User_shopRouter);
 router.use('/user',verifyAuth, Basic_userRouter);
 router.use('/shop',verifyAuth, Basic_shopRouter);
 router.use('/openplace',open_placeRouter);
-router.use('/seller',seller_Router);
+router.use('/seller',verifyAuth,seller_Router);
 router.use('/shopUser',shopUser_Router);
 router.use('/product',verifyAuth,productUser_Router);
-router.use('/search_result_shop',verifyAuth,searchShop_Router);
+router.use('/search_result',verifyAuth,searchShop_Router);
 router.use('/logout',verifyAuth,logout_Router);
 router.use('/addProductinShop',verifyAuth,addShopProduct_Router);
 router.use('/showAllProducts',verifyAuth,showAllProduct_Router);
 router.use('/UpdateProduct',verifyAuth,Update_Shop_Product_Router);
+router.use('/DeleteProduct',verifyAuth,Delete_Shop_Product_Router);
+router.use('/addProductinSeller',verifyAuth,Add_Seller_Product_Router);
+router.use('/showAllProductsSeller',verifyAuth,showAllProduct_Seller_Router);
+
 router.use('/addToCart',addToCart_Router);
 router.use('/removeFromCart',removeFromCart_Router);
 router.use('/cart',verifyAuth,showCart_Router);
