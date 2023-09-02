@@ -35,7 +35,7 @@ async function getAllProductsOfAll(role){
 
 
 
-async function getAllProductsOf(id,role){
+async function getAllProductsOf(id,role){    // to get all products of a shop or seller by id
     let sql="";
     console.log(role);
     if(role=='user'){
@@ -280,6 +280,58 @@ async function getProductbyCategory(category,id,role){
     return resul;     
 }
 
+async function getBuyerID(id)          // Returns only the buyer id as number. not rows
+{
+    let sql="";
+    sql = `
+    SELECT 
+    B.BUYER_ID
+    FROM BUYER B JOIN BASIC_USER U ON ( B.USER_ID = U.USER_ID)
+    WHERE B.USER_ID = :id
+
+   `;
+   
+
+//console.log(sql);
+const binds = {
+   id:id,
+}
+const resul= (await database.execute(sql,binds,database.options));
+
+
+return resul[0].BUYER_ID;     
+
+}
+
+
+
+async function getCartID(id)          // Returns only the buyer id as number. not rows
+{
+    let sql="";
+    sql = `
+    SELECT 
+    CART_ID
+    FROM CART
+    WHERE BUYER_ID = :id
+
+   `;
+   
+
+//console.log(sql);
+const binds = {
+   id:id,
+}
+const resul= (await database.execute(sql,binds,database.options));
+
+
+return resul[0].CART_ID;     
+
+}
+
+// 
+
+
+
 async function getProductbyID(id){
     let sql="";
     
@@ -353,9 +405,11 @@ module.exports={
     getMenTrending,
     getProductbyName,
     getProductbyCategory,
+    getBuyerID,
     getProductbyID,
     updateProduct,
     deleteProduct,
     getProductbyGender,
-    addSellerProduct
+    addSellerProduct,
+    getCartID
 }

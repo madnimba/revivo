@@ -9,8 +9,6 @@ const cookieParser = require('cookie-parser');
 const indexRouter=require('./routers/indexRouters');
 
 
-
-
 //setting the view engine
 app.set('view engine','set');
 app.use(express.static('public'))
@@ -22,12 +20,6 @@ app.use(body_parser.json());
 app.use(morgan('tiny'));
 app.use(cookieParser());
 app.use('/app',indexRouter);
-
-
-
-
-
-
 
 
 

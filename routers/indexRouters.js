@@ -22,6 +22,11 @@ const Add_Seller_Product_Router=require('./addSellerProduct');
 const showAllProduct_Seller_Router=require('./showAllProductSeller');
 //const shopProfile_Router=require('./shopProfile');
 
+const addToCart_Router=require('./addToCart');
+const removeFromCart_Router=require('./removeFromCart');
+const showCart_Router=require('./mycart');
+const confirmOrder_Router= require('./confirmOrder');
+
 // use verifyAuth middleware in the routers that can be only accessable after login.
 // if you only use verifyAuth, in each router you can access the id by req.user.id
 
@@ -33,7 +38,7 @@ router.use('/shop',verifyAuth, Basic_shopRouter);
 router.use('/openplace',open_placeRouter);
 router.use('/seller',verifyAuth,seller_Router);
 router.use('/shopUser',shopUser_Router);
-router.use('/product',productUser_Router);
+router.use('/product',verifyAuth,productUser_Router);
 router.use('/search_result',verifyAuth,searchShop_Router);
 router.use('/logout',verifyAuth,logout_Router);
 router.use('/addProductinShop',verifyAuth,addShopProduct_Router);
@@ -44,6 +49,10 @@ router.use('/addProductinSeller',verifyAuth,Add_Seller_Product_Router);
 router.use('/showAllProductsSeller',verifyAuth,showAllProduct_Seller_Router);
 //router.use('/ShopProfile',verifyAuth,shopProfile_Router);
 
+router.use('/addToCart',addToCart_Router);
+router.use('/removeFromCart',removeFromCart_Router);
+router.use('/cart',verifyAuth,showCart_Router);
+router.use('/confirmOrder',confirmOrder_Router);
 
 
 

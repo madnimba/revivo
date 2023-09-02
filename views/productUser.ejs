@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>Product Card/Page</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="style.css">
+        <!-- <link rel="stylesheet" href="style.css"> -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
       </head>
       <body>
@@ -17,9 +17,9 @@
               <div class = "img-display">
                 <div class = "img-showcase">
                   <img src = "/images/dress2.jpg" alt = "shoe image">
-                  <img src = "shoes_images/shoe_2.jpg" alt = "shoe image">
+                  <!-- <img src = "shoes_images/shoe_2.jpg" alt = "shoe image">
                   <img src = "shoes_images/shoe_3.jpg" alt = "shoe image">
-                  <img src = "shoes_images/shoe_4.jpg" alt = "shoe image">
+                  <img src = "shoes_images/shoe_4.jpg" alt = "shoe image"> -->
                 </div>
               </div>
               <div class = "img-select">
@@ -45,64 +45,135 @@
             </div>
             <!-- card right -->
             <div class = "product-content">
-              <h2 class = "product-title">Women's Regular Dress</h2>
+              <h2 class = "product-title"><%= product[0].NAME %></h2>
               <div class = "product-rating">
                 <i class = "fas fa-star"></i>
                 <i class = "fas fa-star"></i>
                 <i class = "fas fa-star"></i>
                 <i class = "fas fa-star"></i>
                 <i class = "fas fa-star-half-alt"></i>
-                <span>4.7(21)</span>
+                <!-- <span>4.7(21)</span> -->
               </div>
     
               <div class = "product-price">
                 <p> </p>
-                <p class = "new-price">Price: <span>2490.00 tk</span></p>
+                <p class = "new-price">Price: <span><%= product[0].PRICE%></span></p>
               </div>
     
               <div class = "product-detail">
                 <h2>About this item: </h2>
-                <p>Shop name: Green Thrift</p>
-                <p>Category:Women's Top</p>
-                <p>Material: Silk</p>
-                <p>Size:36</p>
-                <p>Used status:Unused</p>
+                <!-- <p>Shop name: Green Thrift</p> -->
+                <p>Category:<%= product[0].TYPE_OF %></p>
+                <p>Material:<%= product[0].MATERIAL  %></p>
+                <p>Size:<%= product[0].SIZE_OF %></p>
+                <!-- <p>Used status:Unused</p> -->
                 <ul>
-                  <li>Available: <span>in stock</span></li>
+                  <li>Available: <span><%= product[0].QUANTITY %></span></li>
                   <li>Shipping Area: <span>All over the country</span></li>
                   <li>Shipping Fee: <span>Free</span></li>
                 </ul>
               </div>
     
+
               <div class = "purchase-info">
                 <input type = "number" min = "0" value = "1">
-                <button type = "button" class = "btn">
-                  Add to Cart <i class = "fas fa-shopping-cart"></i>
+                <button type = "button" class = "btn" id="addToCartBtn">
+                  <%=btnText%>
                 </button>
-              </div>
-    
-              <div class = "social-links">
-              <!-- <p>Share At: </p>
-                <a href = "#">
-                  <i class = "fab fa-facebook-f"></i>
-                </a>
-                <a href = "#">
-                  <i class = "fab fa-twitter"></i>
-                </a>
-                <a href = "#">
-                  <i class = "fab fa-instagram"></i>
-                </a>
-                <a href = "#">
-                  <i class = "fab fa-whatsapp"></i>
-                </a>
-                <a href = "#">
-                  <i class = "fab fa-pinterest"></i>
-                </a>-->
-              </div>
+              </div>   
             </div>
           </div>
         </div>
+
+
     
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  
+  document.getElementById('addToCartBtn').addEventListener('click', async () => {
+   const text = document.getElementById('addToCartBtn').textContent;
+    var cid = '<%=cartID%>';
+      var productId = '<%= product[0].PRODUCT_ID %>'; // Replace with the actual ID variable
+      var quantity = parseInt($('input[type="number"]').val());
+      var status = 'check';
+
+      
+    if(text==='Remove from Cart' || '<%=btnText%>'==='Remove from Cart')
+    {
+      const response = await fetch('/app/removeFromCart', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ cid, productId}),
+    });
+
+    if (response.ok) {
+      // Successfully added to the cart, update the button state
+      document.getElementById('addToCartBtn').textContent = 'Add to Cart';
+      
+    } else {
+      console.error('Error adding product to cart:', response.statusText);
+    }
+
+
+    }
+
+    else{
+    const response = await fetch('/app/addToCart', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ cid, productId, quantity, status }),
+    });
+
+    if (response.ok) {
+      // Successfully added to the cart, update the button state
+      document.getElementById('addToCartBtn').textContent = 'Remove from Cart';
+      
+    } else {
+      console.error('Error adding product to cart:', response.statusText);
+    }
+  }
+  });
+
+
+
+
+
+  // $(document).ready(function() {
+  //   // Add a click event listener to the "Add to Cart" button
+  //   $('#addToCartBtn').on('click', async function() {
+
+  //     console.log("button clicked");
+  //     const {addToCart} = require('../Database/cartOrder')
+  //     var button = $(this);
+
+  //     var cid = cartID;
+  //     var productId = '<%= product[0].PRODUCT_ID %>'; // Replace with the actual ID variable
+  //     var quantity = parseInt($('input[type="number"]').val());
+  //     var status = 'check';
+
+
+  //     await addToCart(productId, cid, status, quantity);
+
+  //     // Change the button text to "Added to Cart"
+  //     button.text('Added to Cart');
+  //     button.prop('disabled', true); 
+  //   });
+
+
+  // });
+</script>
+
+
+
+
+    
+
 
     <style>
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap');
@@ -223,7 +294,7 @@ img{
 .product-detail ul li{
     margin: 0;
     list-style: none;
-    background: url(shoes_images/checked.png) left center no-repeat;
+    /* background: url(shoes_images/checked.png) left center no-repeat; */
     background-size: 18px;
     padding-left: 1.7rem;
     margin: 0.4rem 0;

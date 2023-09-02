@@ -1,0 +1,71 @@
+<nav class="navbar">
+    <div class="navbar-left">
+      <a href="/" class="navbar-brand">Homepage</a>
+    </div>
+    <div class="navbar-right">
+      <ul class="navbar-nav">
+        
+        <li class="nav-item"><a href="/switch-to-seller" class="nav-link">Switch to Seller</a></li>
+        <li class="nav-item"><a href="/app/cart" class="nav-link">Cart</a></li>
+        <li class="nav-item"><a href="/my-account" class="nav-link">My Account</a></li>
+        <li class="nav-item"><a href="/logout" class="nav-link">Logout</a></li>
+      </ul>
+    </div>
+  </nav>
+  
+
+<style>
+    /* Navbar container */
+.navbar {
+  background-color: #fff; /* Whitish background */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Shadow effect */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+}
+
+/* Navbar brand (Homepage link) */
+.navbar-brand {
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 20px;
+  color: #333; /* Link color */
+}
+
+/* Navbar navigation items */
+/* Updated CSS for horizontal alignment */
+.navbar-right {
+  display: flex; /* Use flexbox to horizontally align items */
+  flex-direction: row;
+  align-items: center; /* Vertically center items */
+  gap: 20px; /* Add some spacing between the items */
+}
+
+.navbar-nav {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex; /* Use flexbox for horizontal alignment */
+  gap: 20px;
+}
+
+.nav-item {
+  display: inline;
+}
+
+
+/* Navbar links */
+.nav-link {
+  text-decoration: none;
+  color: #333; /* Link color */
+  font-weight: 500;
+}
+
+/* Navbar links on hover */
+.nav-link:hover {
+  color: #007bff; /* Hover color */
+}
+
+</style>
