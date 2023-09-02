@@ -21,8 +21,11 @@
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.11.0/mdb.min.css">
+
 	<!-- Custom CSS -->
-	<link href="css/style.css" rel="stylesheet">
+	<link href="/style.css" rel="stylesheet">
 
 </head>
 <body id="page-top">
@@ -89,7 +92,7 @@
 				<div class="col-lg-9" style="padding-left: 30px;">
 					<div class="row">
 						<div class="col">
-							Showing all 9 results
+							Showing all <%= products.length %> results
 						</div>
 
 						<div class="col">
@@ -119,7 +122,7 @@
         <div class="col-sm-3 col-md-6 col-lg-4">
             <div class="card">
                 <div class="card-body text-center">
-                    <img src="/images/dress3.jpg" class="product-image">
+                    <a href="/app/product/?shopID=<%=products[i].SHOP_ID%>&prodID=<%= products[i].PRODUCT_ID %>"><img src="/images/dress3.jpg" class="product-image"></a>
                     <h5 class="card-title"><b><%= products[i].NAME %></b></h5>
                     <p class="card-text small"><%= products[i].TYPE_OF %></p>
                     <p class="tags">Price :<%= products[i].PRICE %></p>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Registration</title>
+   
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+    <div class="text-center py-1 success"><%=message%></div>
+
+    <div class="text-center center-div" id="login">
+
+
+        <div class="container w-25 border py-5">
+            <div class="title pb-5">
+            <h2 class="font-weight-bold">
+                Product Information
+            </h2>
+        </div>
+        <form action="/route/addnewProduct" method="POST" class="pt-3">
+            <div class="form-group">
+                
+                <input placeholder="Product Name" class="form-control" name = "name">
+                <input class="form-control" placeholder="Category" name="category">
+                <div class="role">
+                    <input type="radio" class="rd" name="gender" value="male" >Male
+                    <input type="radio" class="rd" name="gender" value="female">Female
+                    <input type="radio" class="rd" name="gender" value="children" >Children
+                       
+                        
+                    </div>
+                <input type="number" class="form-control" placeholder="Price" name="price">
+                <input class="form-control" placeholder="Material" name="material">
+                <input type="number" class="form-control" placeholder="Quantity" name="quantity">
+                <input class="form-control" placeholder="Size" name="size">
+            
+
+            </div>
+            
+            <button type="submit" class="btn btn-success rounded-5 ">Add</button>
+            
+        </form>
+        </div>
+    </div>
+
+
+</body>
+</html>

@@ -86,5 +86,6 @@ module.exports = {
     shutdown,
     execute,
     executeMany,
-    options
+    options,
+    oracledb
 };

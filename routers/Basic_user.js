@@ -1,12 +1,12 @@
 const express=require('express');
 const {getAllShops} = require('../Database/shop')
-const {getAllProductsOf} = require('../Database/product');
+const {getAllProductsOf, getBuyerID} = require('../Database/product');
 const {getMenTrending} = require('../Database/product')
 const DB_user=require('../Database/register') ;
 const router=express.Router();
 
 router.get('/',async(req,res)=>{
-  console.log(req.user.id);
+ 
   const allShops = await getAllShops();
   const roles = ['Men','Women','Child'];
   
