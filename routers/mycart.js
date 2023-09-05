@@ -1,6 +1,7 @@
 const express=require('express');
-const {allinCart} = require('../Database/cartOrder');
-const {getBuyerID,getCartID} = require('../Database/product')
+const {allinCart, removeFromCart} = require('../Database/cartOrder');
+const {getBuyerID,getCartID} = require('../Database/product');
+const { redirect } = require('react-router-dom');
 const router=express.Router();
 
 router.get('/',async(req,res)=>{
@@ -14,6 +15,19 @@ router.get('/',async(req,res)=>{
     
       
     res.render('cart.ejs', { products: allProductinCart,cartID: cartID });
+})
+
+router.post('/cancelProduct', async(req,res)=>{
+
+  const cancelledProducts = req.body.cancelledProducts;
+  const cid = req.body.cid;
+
+  for(const product of cancelledProducts)
+  {
+      
+      await removeFromCart(product,cid);
+  }
+  
 })
 
 

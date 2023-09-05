@@ -1,5 +1,5 @@
 const express=require('express');
-const {createNewOrder,addToOrder} = require('../Database/cartOrder')
+const {createNewOrder,addToOrder,removeFromCart,createPayment} = require('../Database/cartOrder')
 const router=express.Router();
 
 router.post('/',async(req,res)=>{
@@ -9,12 +9,16 @@ router.post('/',async(req,res)=>{
 
     const id =await createNewOrder(cid);
 
+    await createPayment(id,'COD',totalPrice);
+
     for(const product of products)
     {
         await addToOrder(product.ID,id,product.amount);
+        await removeFromCart(product.ID,cid);
+        
     }
     
-    
+    res.status(200).json({ message: 'Products cancelled successfully' });
 
 })
 
