@@ -1,0 +1,356 @@
+<!--This is the view of shop user after searching-->
+<!--parameters: product_data-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Product Card/Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.js"></script>
+</head>
+<body>
+    <div>&nbsp;</div>
+    <div>&nbsp;</div>
+    
+    
+    <div class="row">
+        <% for (let i = 0; i < order_details.length; i++) { %>
+        <div class="col-sm-3 col-md-6 col-lg-4">
+            <div class="card">
+                <div class="product-details">
+                    <h1 class="product-title">Product Details:</h1>
+                    <div>&nbsp;</div>
+                    <p>Order Time: <%= order_details[i].product[0].ORDER_DATE %></p>
+                    <div>&nbsp;</div>
+                    <div>&nbsp;</div>
+                   <div class="single-product">
+                    <% for (let j = 0; j < order_details[i].product.length; j++) { %>
+                        <p>Product Name: <%= order_details[i].product[j].NAME %></p>
+                        <p>Amount: <%= order_details[i].product[j].AMOUNT %></p>
+                        <p>Product Category: <%= order_details[i].product[j].TYPE_OF %></p>
+                        <p>Product For: <%= order_details[i].product[j].GENDER_CATEGORY %></p>
+                        <p>Price per Product: <%= order_details[i].product[j].PRICE %></p>
+                        <div>&nbsp;</div>
+                        <div>&nbsp;</div>
+                        <% } %>
+                   </div>
+                </div>
+                <div class="product-details">
+                    <h1 class="product-title">Other Information:</h1>
+                    <p> </p>
+                    <p></p>
+                    <div class="product-rating">
+                       <!-- <i class="fas fa-star"></i>
+                         Add more stars here 
+                        <span>4.7(21)</span>-->
+                    </div>
+                    <div class="product-price">
+                    </div>
+                    <div class="product-detail">
+                        <h2>Buyer Information : </h2>
+                        <p>Name : <%= order_details[i].buyer[0].NAME %></p>
+                        <p>Phone: <%= order_details[i].buyer[0].PHONE %></p>
+                        <p>E-mail: <%= order_details[i].buyer[0].E_MAIL %></p>
+                        <p>Address: <%= order_details[i].buyer[0].ADDRESS %></p>
+
+                        
+                        
+                        <li>
+                            <div class="buttons-container">
+                            </div>
+                        </li>
+                    </div>
+                </div>
+            
+
+            </div>
+        </div>
+        <% if ((i + 1) % 3 === 0 || (i + 1) === order_details.length) { %>
+     </div>
+    <div>&nbsp;</div>
+    <div class="row">
+        <% } %>
+        <% } %>
+    </div>
+    <!-- Sorting by <div class="row"> -->
+        
+
+					</>
+				<!--END  <div class="col-lg-9">-->
+
+			</div>
+		</div>
+	</section>
+
+
+	<div>&nbsp;</div>
+	<div>&nbsp;</div>
+	<div>&nbsp;</div>
+
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap');
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-family: 'Open Sans', sans-serif;
+}
+
+body {
+    line-height: 1.5;
+}
+
+.card-wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.card {
+    display: flex;
+    margin: 1rem 0;
+    border: 1px solid #ccc;
+    padding: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.product-img img {
+    max-width: 75%;
+    border: 2px solid #574f4f; 
+    padding: 20px;
+}
+
+.product-details {
+    padding-left: 32px;
+}
+
+.product-title {
+    font-size:50px;
+    font-weight: 700;
+    color: #12263a;
+    margin-top:20px;
+    margin-bottom: 32px;
+    margin-left:20px;
+}
+
+.product-rating {
+    color: #ffc107;
+}
+
+.product-rating span {
+    font-weight: 600;
+    color: #252525;
+}
+
+.product-price {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.product-price span {
+    font-weight: 400;
+    color: #256eff;
+}
+
+.product-detail h2 {
+    font-size: 1rem;
+    color: #12263a;
+    margin-bottom: 0.5rem;
+}
+
+.product-detail p {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    margin-bottom: 0.3rem;
+}
+
+.product-detail ul {
+    font-size: 0.9rem;
+    list-style: none;
+    margin-bottom: 0.5rem;
+}
+
+.product-detail ul li {
+    background-size: 18px;
+    padding-left: 1.7rem;
+    margin-bottom: 0.2rem;
+    font-weight: 600;
+    opacity: 0.9;
+}
+
+.product-detail ul li span {
+    font-weight: 400;
+}
+
+.social-links {
+    display: flex;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.social-links a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    color: #000;
+    border: 1px solid #000;
+    margin-right: 0.2rem;
+    border-radius: 50%;
+    text-decoration: none;
+    font-size: 0.8rem;
+    transition: all 0.5s ease;
+}
+
+.social-links a:hover {
+    background: #000;
+    border-color: transparent;
+    color: #fff;
+}
+
+@media screen and (min-width: 992px) {
+    .card {
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 1.5rem;
+    }
+    .card-wrapper {
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .product-imgs {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    .product-content {
+        padding-top: 0;
+    }
+    .card-title{
+	color: #c0aa83;
+	font-family: 'Kanit',sans-serif;
+	font-size: 25px;
+	font-weight: 900;
+}
+
+.card-text{
+	font-family: 'Kanit',sans-serif;
+	font-size: 13px;
+}
+.product-image{
+	width: 200px;
+	height: 200px;
+}
+
+}
+.buttons-container {
+    display: flex;
+    margin-top: 0.5rem;
+}
+
+.buttons-container .btn {
+    margin-right: 0.5rem;
+    padding: 0.3rem 0.6rem;
+    background-color: #256eff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.buttons-container .btn:last-child {
+    margin-right: 0;
+    background-color: #f64749;
+}
+
+.buttons-container .btn:hover {
+    background-color: #1e4caf;
+}
+</style>
+
+<script>
+    
+    const imgs = document.querySelectorAll('.img-select a');
+const imgBtns = [...imgs];
+let imgId = 1;
+
+imgBtns.forEach((imgItem) => {
+    imgItem.addEventListener('click', (event) => {
+        event.preventDefault();
+        imgId = imgItem.dataset.id;
+        slideImage();
+    });
+});
+
+function slideImage(){
+    const displayWidth = document.querySelector('.img-showcase img:first-child');
+
+    document.querySelector('.img-showcase').style.transform = `translateX(${- (imgId - 1) * displayWidth}px)`;
+}
+
+window.addEventListener('resize', slideImage);
+
+
+/*function confirmDelete(productId) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: 'This action cannot be undone.',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Delete',
+                cancelButtonText: 'Cancel'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    deleteProduct(productId); // Call your JavaScript function to delete the product
+                }
+            });
+        }
+
+        function deleteProduct(productId) {
+            fetch(`/app/DeleteProduct/${productId}`, {
+                method: 'DELETE'
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    
+                    Swal.fire('Deleted!', 'The product has been deleted.', 'success');
+                    location.reload();
+                    
+                } if (data.success) {
+    Swal.fire({
+        title: 'Deleted!',
+        text: 'The product has been deleted.',
+        icon: 'success',
+        timer: 5000, // Specify the time in milliseconds (e.g., 3000 ms = 3 seconds)
+        showConfirmButton: false // Hide the "OK" button
+    });
+
+    // Reload the page after the pop-up has been shown for a certain time
+    setTimeout(() => {
+        location.reload();
+    }, 2000); 
+}
+                else {
+                    Swal.fire('Error', 'Failed to delete the product.', 'error');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                Swal.fire('Error', 'An error occurred while deleting the product.', 'error');
+            });
+        }*/
+
+ 
+
+    </script>
+</body>
+</html>
