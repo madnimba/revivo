@@ -59,5 +59,11 @@ router.get('/seller',async(req,res)=>{
     console.log(results);
 })
 
+router.get('/single/:productID', async(req, res) => {
+    const productID = req.params.productID;
+    let results=[];
+    results=await DB_product.getProductbyID(productID);
+    res.render('search_shop.ejs',{product_data:results});
+});
 
 module.exports=router;

@@ -3,14 +3,14 @@
 <html lang="en">
 <head>
 
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, intial-scale=1, shrink-to-fit=no">
-	<meta name="description" content="">
-	<meta name="author" content="">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, intial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
 
-	<title> Products</title>
+  <title> Products</title>
 
-	    <!-- Font Awesome -->
+      <!-- Font Awesome -->
 <link
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
 rel="stylesheet"
@@ -26,235 +26,233 @@ href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.1/mdb.min.css"
 rel="stylesheet"
 />
 
-	<!-- Site Icon -->
-	<link rel="shortcut Icon" type="image/png" href="img/favicon.png">
+  <!-- Site Icon -->
+  <link rel="shortcut Icon" type="image/png" href="img/favicon.png">
 
-	<!-- Font Awesome Icons -->
-	<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <!-- Font Awesome Icons -->
+  <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
-	<!-- Google Fonts -->
-	<link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet">
 
-	<!-- Bootstrap CSS -->
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.11.0/mdb.min.css">
 
-	<!-- Custom CSS -->
-	<link href="/style.css" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link href="/style.css" rel="stylesheet">
 
 </head>
 <body id="page-top">
-	<%- include('userNav.ejs') %>
-	
+  <%- include('userNav.ejs') %>
+  
 
-	<header class="page-section masthead2">
-		<div class="container h-50">
-			<h1 class="section-header text-white font-weight-bold">Products</h1>
-			<p class="main-menu text-white-75 font-weight-light mb-5"><a class="link-menu" href="home.html">Revivo > <span style="color:white;">Products</span></a></p>
-			
-		</div>
-		
-	</header>
-
-	<section class="page-section">
-		<div class="container">
-			<div class="row">
-
-				<div class="col-lg-3 blog-form">
-					<hr />
-					<div>&nbsp;</div>
-
-					<h2 class="blog-sidebar-title"><b>Categories</b></h2>
-					<div>&nbsp;</div>
-					<hr />
-
-					<p class="blog-sidebar-list"><b><span class="list-icon">  </span> <a href="/app/showAllProducts/men">Men</a></b></p>
-					<p class="blog-sidebar-list"><b><span class="list-icon">  </span> <a href="/app/showAllProducts/women">Women</a></b></p>
-					<p class="blog-sidebar-list"><b><span class="list-icon">  </span><a href="/app/showAllProducts/children"> Children</a></b></p>
-					
-
-					<div>&nbsp;</div>
-					<div>&nbsp;</div>
-
-					<h2 class="blog-sidebar-title"><b>Filter by price</b></h2>
-					<hr />
-
-					<div class="input-group mb-3">
-						<input type="text" class="form-control" placeholder="Search" aria-label="Receipient's username" aria-describely="basic-addon2">
-						<div class="input-group-append">
-							<span class="input-group-text" id="basic-addon2"><i class="fa fa-search"></i></span>
-						</div>
-						
-					</div>
-					<div>&nbsp;</div>
-					<button type="button" class="btn btn-dark btn-lg">Filter</button>
-					
-
-					<div>&nbsp;</div>
-					<div>&nbsp;</div>
-					<h2 class="blog-sidebar-title"><b></b></h2>
-					<p class="product-sidebar-list"><b></b></p>
-					<p class="product-sidebar-list"><b></b></p>
-					<p class="product-sidebar-list"><b></b></p>
-
-
-				</div>
-				<!--END  <div class="col-lg-3 blog-form">-->
-
-				<div class="col-lg-9" style="padding-left: 30px;">
-					<div class="row">
-						<div class="col">
-							Showing all <%= products.length %> results
-						</div>
-
-						<div class="col">
-							<select class="form-control">
-								<option value="">Default Sorting</option>
-								<option value="popularity">Sorting by popularity</option>
-								<option value="average">Sorting by average</option>
-								<option value="latest">Sorting by latest</option>
-								<option value="low">Sorting by low</option>
-								<option value="high">Sorting by high</option>
-							</select>
-						</div>
-
-						<div class="col">
-						</div>
-
-					</div>
-					<!-- Sorting by <div class="row"> -->
-					<div>&nbsp;</div>
-					<div>&nbsp;</div>
-
-
-    <!-- here starts the dynamic -->
-    <div>&nbsp;</div>
-    <div>&nbsp;</div>
+  <header class="page-section masthead2">
+    <div class="container h-50">
+      <h1 class="section-header text-white font-weight-bold">Products</h1>
+      <p class="main-menu text-white-75 font-weight-light mb-5"><a class="link-menu" href="home.html">Revivo > <span style="color:white;">Products</span></a></p>
+      
+    </div>
     
-    
-    <div class="row">
-        <% for (let i = 0; i < products.length; i++) { %>
-        <div class="col-sm-3 col-md-6 col-lg-4">
-            <div class="card">
-                <div class="card-body text-center">
-                    <a href="/app/product/?shopID=<%=products[i].SHOP_ID%>&prodID=<%= products[i].PRODUCT_ID %>"><img src="/images/dress3.jpg" class="product-image"></a>
-                    <h5 class="card-title"><b><%= products[i].NAME %></b></h5>
-                    <p class="card-text small"><%= products[i].TYPE_OF %></p>
-                    <p class="tags">Price :<%= products[i].PRICE %></p>
-                    <a href="<%= products[i].addToCartLink %>" target="_blank" class="btn btn-success button-text"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Add to cart</a>
-                </div>
+  </header>
 
+  <section class="page-section">
+    <div class="container">
+      <div class="row">
+
+        <div class="col-lg-3 blog-form">
+          <hr />
+          <div>&nbsp;</div>
+
+          <h2 class="blog-sidebar-title"><b>Categories</b></h2>
+          <div>&nbsp;</div>
+          <hr />
+
+          <p class="blog-sidebar-list"><b><span class="list-icon">  </span> <a href="/app/showAllProducts/men">Men</a></b></p>
+          <p class="blog-sidebar-list"><b><span class="list-icon">  </span> <a href="/app/showAllProducts/women">Women</a></b></p>
+          <p class="blog-sidebar-list"><b><span class="list-icon">  </span><a href="/app/showAllProducts/children"> Children</a></b></p>
+          
+
+          <div>&nbsp;</div>
+          <div>&nbsp;</div>
+
+          <h2 class="blog-sidebar-title"><b>Filter by price</b></h2>
+          <hr />
+
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Search" aria-label="Receipient's username" aria-describely="basic-addon2">
+            <div class="input-group-append">
+              <span class="input-group-text" id="basic-addon2"><i class="fa fa-search"></i></span>
             </div>
+            
+          </div>
+          <div>&nbsp;</div>
+          <button type="button" class="btn btn-dark btn-lg">Filter</button>
+          
+
+          <div>&nbsp;</div>
+          <div>&nbsp;</div>
+          <h2 class="blog-sidebar-title"><b></b></h2>
+          <p class="product-sidebar-list"><b></b></p>
+          <p class="product-sidebar-list"><b></b></p>
+          <p class="product-sidebar-list"><b></b></p>
+
+
         </div>
-        <% if ((i + 1) % 3 === 0 || (i + 1) === products.length) { %>
-    </div>
-    <div>&nbsp;</div>
-    <div class="row">
-        <% } %>
-        <% } %>
-    </div>
-    <!-- Sorting by <div class="row"> -->
-        
+        <!--END  <div class="col-lg-3 blog-form">-->
 
-					</>
-				<!--END  <div class="col-lg-9">-->
-
+        <div class="col-lg-9" style="padding-left: 30px;">
+          <div class="row">
+            <div class="col">
+              Showing all <%= products.length %> results
+            </div>
+			<div class="col">
+				<select class="form-control">
+				  <option value="">Default Sorting</option>
+				  <option value="popularity">Sorting by popularity</option>
+				  <option value="average">Sorting by average</option>
+				  <option value="latest">Sorting by latest</option>
+				  <option value="low">Sorting by low</option>
+				  <option value="high">Sorting by high</option>
+				</select>
+			  </div>
+  
+			  <div class="col">
+			  </div>
+  
 			</div>
+			<!-- Sorting by <div class="row"> -->
+			<div>&nbsp;</div>
+			<div>&nbsp;</div>
+  
+  
+	  <!-- here starts the dynamic -->
+	  <div>&nbsp;</div>
+	  <div>&nbsp;</div>
+	  
+	  
+	  <div class="row">
+		  <% for (let i = 0; i < products.length; i++) { %>
+		  <div class="col-sm-3 col-md-6 col-lg-4">
+			  <div class="card">
+				  <div class="card-body text-center">
+					  <a href="/app/search_result/single/<%= products[i].PRODUCT_ID %>"><img src="/images/dress3.jpg" class="product-image"></a>
+					  <h5 class="card-title"><b><%= products[i].NAME %></b></h5>
+					  <p class="card-text small"><%= products[i].TYPE_OF %></p>
+					  <p class="tags">Price :<%= products[i].PRICE %></p>
+				  </div>
+  
+			  </div>
+		  </div>
+		  <% if ((i + 1) % 3 === 0 || (i + 1) === products.length) { %>
+	  </div>
+	  <div>&nbsp;</div>
+	  <div class="row">
+		  <% } %>
+		  <% } %>
+	  </div>
+	  <!-- Sorting by <div class="row"> -->
+		  
+  
+			</>
+		  <!--END  <div class="col-lg-9">-->
+  
 		</div>
+	  </div>
 	</section>
-
-
+  
+  
 	<div>&nbsp;</div>
 	<div>&nbsp;</div>
 	
- 
-
-<!-- ends the dynamic-->
-
-
+   
+  
+  <!-- ends the dynamic-->
+  
+  
 	<footer class="footer-info pt-5 py-4">
-		<div class="container">
-			<div class="small text-center text-muted">
-				<span class="footer-title"></span> <span class="copyright">&copy; </span>
-			</div>
-
-			<a class="scroll-to-top rounded" href="#page-top">
-				<span class="fa fa-angle-up"><br>TOP</span>
-			</a>
-
+	  <div class="container">
+		<div class="small text-center text-muted">
+		  <span class="footer-title"></span> <span class="copyright">&copy; </span>
 		</div>
+  
+		<a class="scroll-to-top rounded" href="#page-top">
+		  <span class="fa fa-angle-up"><br>TOP</span>
+		</a>
+  
+	  </div>
 	</footer>
-
+  
 	<script
 	type="text/javascript"
 	src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.1/mdb.min.js"
-  ></script>
-
+	></script>
+  
 	<!-- Bootstrap JavaScript -->
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 	
-
-
-
-    <style>
-        
-:root{
+  
+  
+  
+	  <style>
+		  
+  :root{
 	--input-padding-x: 1.5rem;
 	--input-padding-y: 0.75rem;
-}
-
-
-body,
-html{
+  }
+  
+  
+  body,
+  html{
 	width: 100%;
 	height: 100%;
-}
-
-.btn{
+  }
+  
+  .btn{
 	font-family: 'Kanit',sans-serif;
-}
-
-.btn-success{
+  }
+  
+  .btn-success{
 	background-color: #c0aa83;
 	border-color: #c0aa83;
 	color: #fff;
-}
-
-.btn-success:hover{
+  }
+  
+  .btn-success:hover{
 	background-color: #242424;
 	border-color: #242424;
 	color: #fff;
-}
-
-.masthead2{
-
+  }
+  
+  .masthead2{
+  
 	background-image: url("../img/backgroundimage.jpg");
 	background-position: 50% -26px;
 	background-color:#242424;
-
-}
-
-a.social-icon{
+  
+  }
+  
+  a.social-icon{
 	color:#242424;
-}
-
-a.social-icon:hover{
+  }
+  
+  a.social-icon:hover{
 	color:#c0aa83;
-}
-
-.social-icon{
+  }
+  
+  .social-icon{
 	background-color: #ECE4C3;
 	width: 80px;
 	height: 80px;
 	padding:20px;
 	margin: 10px;
-}
-
-.social-icon a{
+  }
+  
+  .social-icon a{
 	background-color: #B98C45;
 	width: 50px;
 	height: 50px;
@@ -262,114 +260,113 @@ a.social-icon:hover{
 	margin-right: 6px;
 	position: relative;
 	display: block;
-
-}
-
-.social-icon a:hover{
+  
+  }
+  
+  .social-icon a:hover{
 	color:#242424;
-
-}
-
-
-.page-section{
+  
+  }
+  
+  
+  .page-section{
 	padding: 8rem 0;
-}
-
-.main-menu{
+  }
+  
+  .main-menu{
 	color: #c0aa83;
 	font-family: 'Kanit',sans-serif;
 	font-size: 20px;
 	font-weight: 900;
-}
-
-a.link-menu{
+  }
+  
+  a.link-menu{
 	text-decoration: none;
 	color: #c0aa83;
-}
-
-.footer-info{
+  }
+  
+  .footer-info{
 	background-color: #000;
-}
-
-.scroll-to-top{
-	position: fixed;
-	right: 15px;
-	bottom: 15px;
-	width: 50px;
-	height: 50px;
-	text-align: center;
-	color:#242424;
-	background: #c0aa83;
-	line-height: 46px;
+  }
+  .scroll-to-top{
+  position: fixed;
+  right: 15px;
+  bottom: 15px;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  color:#242424;
+  background: #c0aa83;
+  line-height: 46px;
 } 
 
 .scroll-to-top:focus,.scroll-to-top:hover{
-	color:#242424;
+  color:#242424;
 }
 
 .scroll-to-top:hover{
-	color:#c0aa83;
+  color:#c0aa83;
 }
 
 .rounded {
-	border-radius: 0.25rem !important;
+  border-radius: 0.25rem !important;
 }
 
 .footer-title{
-	color: #fff;
-	font-family: 'Kanit',sans-serif;
-	font-size: 14px;
-	font-weight: 300;
-	line-height: 46px;
+  color: #fff;
+  font-family: 'Kanit',sans-serif;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 46px;
 }
 
 .copyright{
-	color:#c0aa83;
-	font-family: 'Kanit',sans-serif;
-	font-size: 14px;
-	font-weight: 300;
+  color:#c0aa83;
+  font-family: 'Kanit',sans-serif;
+  font-size: 14px;
+  font-weight: 300;
 }
 
 
 #mainNav{
-	-webkit-box-shadow: 0.05rem 1rem rgba(0, 0, 0, 0.15);
-	box-shadow: 0.05rem 1rem rgba(0, 0, 0, 0.15);
-	background-color: #fff;
-	-webkit-transition: background-color 0.2s ease; 
-	transition: background-color 0.2s ease; 
+  -webkit-box-shadow: 0.05rem 1rem rgba(0, 0, 0, 0.15);
+  box-shadow: 0.05rem 1rem rgba(0, 0, 0, 0.15);
+  background-color: #fff;
+  -webkit-transition: background-color 0.2s ease; 
+  transition: background-color 0.2s ease; 
 }
 
 #mainNav .navbar-brand {
 
-	font-family: 'Kanit',sans-serif;
-	font-weight: 700;
+  font-family: 'Kanit',sans-serif;
+  font-weight: 700;
 
 }
 
 #mainNav .navbar-nav .nav-item .nav-link {
-	color:#242424;
-	font-family: 'Kanit',sans-serif;
-	font-size: 0.9rem;
-	font-weight: 700;
-	padding:0.75rem 0;
+  color:#242424;
+  font-family: 'Kanit',sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  padding:0.75rem 0;
 }
 
 .navbar-nav{
-	display: -webkit-box;
-	display: -ms-box;
-	display: flex;
-	-webkit-box-orient:vertical;
-	-webkit-box-direction:normal;
-	-ms-flex-direction:column;
-	flex-direction:column;
-	padding-left: 0;
-	margin-bottom: 0;
-	list-style: none;
+  display: -webkit-box;
+  display: -ms-box;
+  display: flex;
+  -webkit-box-orient:vertical;
+  -webkit-box-direction:normal;
+  -ms-flex-direction:column;
+  flex-direction:column;
+  padding-left: 0;
+  margin-bottom: 0;
+  list-style: none;
 }
 
 .nav-item .nav-link{
-	padding-left: 0; 
-	padding-right: 0; 
+  padding-left: 0; 
+  padding-right: 0; 
 }
 
 #mainNav .navbar-nav .nav-item .nav-link:hover{
@@ -382,180 +379,180 @@ li.nav-item {
 }
 
 .btn-light{
-	background-color: #c0aa83;
-	border-color: #c0aa83;
-	color: #fff;
-	font-family: 'Kanit',sans-serif;
-	font-size: 16px;
-	font-weight: 900;
+  background-color: #c0aa83;
+  border-color: #c0aa83;
+  color: #fff;
+  font-family: 'Kanit',sans-serif;
+  font-size: 16px;
+  font-weight: 900;
 
 }
 
 .btn-light:hover{
-	background-color: #fff;
-	border-color: #c0aa83;
-	color: #c0aa83;
-	font-family: 'Kanit',sans-serif;
-	font-size: 16px;
-	font-weight: 900;
+  background-color: #fff;
+  border-color: #c0aa83;
+  color: #c0aa83;
+  font-family: 'Kanit',sans-serif;
+  font-size: 16px;
+  font-weight: 900;
 
 }
 
 .btn-dark{
-	background-color: #242424;
-	border-color: #242424;
-	color: #fff;
-	font-family: 'Kanit',sans-serif;
-	font-size: 16px;
-	font-weight: 900;
+  background-color: #242424;
+  border-color: #242424;
+  color: #fff;
+  font-family: 'Kanit',sans-serif;
+  font-size: 16px;
+  font-weight: 900;
 
 }
 
 .btn-dark:hover{
-	background-color: #fff;
-	border-color: #242424;
-	color: #242424;
-	font-family: 'Kanit',sans-serif;
-	font-size: 16px;
-	font-weight: 900;
+  background-color: #fff;
+  border-color: #242424;
+  color: #242424;
+  font-family: 'Kanit',sans-serif;
+  font-size: 16px;
+  font-weight: 900;
 
 }
 
 .boxed{
-	background-color: #c0aa83;
-	height: 150px;
-	margin-left: 80px;
-	margin-right: 80px;
-	padding-top: 15px;
-	padding-left: 20px;
+  background-color: #c0aa83;
+  height: 150px;
+  margin-left: 80px;
+  margin-right: 80px;
+  padding-top: 15px;
+  padding-left: 20px;
 }
 
 
 .subscribe-section{
-	background-image: url("../img/footer_map.png");
-	background-color:#242424;
+  background-image: url("../img/footer_map.png");
+  background-color:#242424;
 }
 
 .contact-heading{
-	color: #c0aa83;
-	font-family: 'Kanit',sans-serif;
-	font-size: 30px;
-	font-weight: 300;
+  color: #c0aa83;
+  font-family: 'Kanit',sans-serif;
+  font-size: 30px;
+  font-weight: 300;
 }
 
 .contact-info{
-	color: #fff;
-	font-family: 'Kanit',sans-serif;
-	font-size: 18px;
+  color: #fff;
+  font-family: 'Kanit',sans-serif;
+  font-size: 18px;
 }
 
 a.explore-link{
-	color: #fff;
-	font-family: 'Kanit',sans-serif;
-	font-size: 15px;
-	text-decoration: none;
+  color: #fff;
+  font-family: 'Kanit',sans-serif;
+  font-size: 15px;
+  text-decoration: none;
 }
 
 a.explore-link:hover{
-	color: #c0aa83;
-	font-family: 'Kanit',sans-serif;
-	font-size: 15px;
-	text-decoration: none;
+  color: #c0aa83;
+  font-family: 'Kanit',sans-serif;
+  font-size: 15px;
+  text-decoration: none;
 }
 
 .logo-text-white{
-	color: #fff;
-	font-family: 'Kanit',sans-serif;
-	font-size: 16px;
+  color: #fff;
+  font-family: 'Kanit',sans-serif;
+  font-size: 16px;
 }
 
 /*PRODUCT PAGE STYLING*/
 
 .blog-sidebar-title{
-	color: #242424;
-	font-family: 'Kanit',sans-serif;
-	font-size: 25px;
-	font-weight: 900;
+  color: #242424;
+  font-family: 'Kanit',sans-serif;
+  font-size: 25px;
+  font-weight: 900;
 }
 
 .blog-sidebar-list{
-	color: #242424;
-	font-family: 'Kanit',sans-serif;
-	font-size: 16px;
-	font-weight: 900;
+  color: #242424;
+  font-family: 'Kanit',sans-serif;
+  font-size: 16px;
+  font-weight: 900;
 }
 
 .blog-sidebar-text{
-	color: #242424;
-	font-family: 'Kanit',sans-serif;
-	font-size: 16px;
-	font-weight: 200;
+  color: #242424;
+  font-family: 'Kanit',sans-serif;
+  font-size: 16px;
+  font-weight: 200;
 }
 
 .blog-form{
-	background-color: #F4F4F4; 
-	padding: 50px;
-	height: 1000px;
+  background-color: #F4F4F4; 
+  padding: 50px;
+  height: 1000px;
 }
 
 .list-icon{
 
-	color: #c0aa83;
+  color: #c0aa83;
 
 }
 
 .tags{
-	color: #242424;
-	font-family: 'Kanit',sans-serif;
-	font-size: 20px;
-	font-weight: 200;
+  color: #242424;
+  font-family: 'Kanit',sans-serif;
+  font-size: 20px;
+  font-weight: 200;
 }
 
 .tags{
-	color: #242424;
-	font-family: 'Kanit',sans-serif;
-	font-size: 20px;
-	font-weight: 200;
+  color: #242424;
+  font-family: 'Kanit',sans-serif;
+  font-size: 20px;
+  font-weight: 200;
 }
 
 
 
 .product-sidebar-list{
-	color: #242424;
+  color: #242424;
 }
 
 .product-sidebar-list:hover{
-	color: #c0aa83;
+  color: #c0aa83;
 }
 
 .card-title{
-	color: #c0aa83;
-	font-family: 'Kanit',sans-serif;
-	font-size: 25px;
-	font-weight: 900;
+  color: #c0aa83;
+  font-family: 'Kanit',sans-serif;
+  font-size: 25px;
+  font-weight: 900;
 }
 
 .card-text{
-	font-family: 'Kanit',sans-serif;
-	font-size: 13px;
+  font-family: 'Kanit',sans-serif;
+  font-size: 13px;
 }
 
 .price-tag{
-	color: #c0aa83;
-	font-family: 'Kanit',sans-serif;
-	font-size: 25px;
-	font-weight: 900;
+  color: #c0aa83;
+  font-family: 'Kanit',sans-serif;
+  font-size: 25px;
+  font-weight: 900;
 }
 
 .button-text{
-	font-family: 'Kanit',sans-serif;
-	font-size: 14px;
-	font-weight: 900;
+  font-family: 'Kanit',sans-serif;
+  font-size: 14px;
+  font-weight: 900;
 }
 
 .product-image{
-	width: 200px;
-	height: 200px;
+  width: 200px;
+  height: 200px;
 }
 
     </style>
