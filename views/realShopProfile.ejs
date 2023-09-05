@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= shop[0].NAME %> - Shop Profile</title>
+</head>
+<body>
+    <header class="shop-header">
+        <div class="shop-logo">
+            <img src="<%= shop[0].IMAGES %>" alt="<%= shop[0].NAME %> Logo">
+        </div>
+        <div class="shop-info">
+            <h1><%= shop[0].name %></h1>
+            <div class="shop-rating">
+                <span class="star">&#9733;</span> <%= shop[0].STARS %> ( <%= shop[0].STARS %> ratings )
+            </div>
+        </div>
+    </header>
+    
+    <main>
+        <section class="shop-description">
+            <h2>About <%= shop[0].NAME %></h2>
+            <p>Phone: <%=shop[0].PHONE %></p>
+            <p>E-mail: <%=shop[0].E_MAIL%></p>
+        </section>
+
+        <section class="sale-history">
+            <h2>Sale History</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                        <tr>
+                            <td>sale.product</td>
+                            <td>$ sale.price.toFixed</td>
+                            <td>sale.date </td>
+                        </tr>
+                    
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; new Date().getFullYear() <%= shop[0].NAME %>. All rights reserved.</p>
+    </footer>
+</body>
+<style>
+    
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+.shop-header {
+    background-color: #007BFF;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+
+.shop-logo img {
+    max-width: 150px;
+    height: auto;
+    border-radius: 50%;
+}
+
+.shop-info h1 {
+    font-size: 28px;
+    margin: 10px 0;
+}
+
+.shop-rating {
+    font-size: 18px;
+    opacity: 0.8;
+}
+
+.shop-description {
+    background-color: #fff;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.sale-history {
+    background-color: #fff;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+table th, table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+table th {
+    background-color: #f2f2f2;
+}
+
+footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #333;
+    color: #fff;
+}
+</style>
+</html>

@@ -9,6 +9,7 @@ router.get('/',async(req,res)=>{
   console.log(req.user.id);
   const userData = await DB_user.readID(req.user.id, 'user');
   console.log(userData[0].FIRST_NAME);
+
   const allShops = await getAllShops();
   const roles = ['Men','Women','Child'];
   

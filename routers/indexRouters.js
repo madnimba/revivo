@@ -20,6 +20,7 @@ const Update_Shop_Product_Router=require('./UpdateShopProduct');
 const Delete_Shop_Product_Router=require('./deleteProduct');
 const Add_Seller_Product_Router=require('./addSellerProduct');
 const showAllProduct_Seller_Router=require('./showAllProductSeller');
+//const shopProfile_Router=require('./shopProfile');
 
 const addToCart_Router=require('./addToCart');
 const removeFromCart_Router=require('./removeFromCart');
@@ -46,6 +47,7 @@ router.use('/UpdateProduct',verifyAuth,Update_Shop_Product_Router);
 router.use('/DeleteProduct',verifyAuth,Delete_Shop_Product_Router);
 router.use('/addProductinSeller',verifyAuth,Add_Seller_Product_Router);
 router.use('/showAllProductsSeller',verifyAuth,showAllProduct_Seller_Router);
+//router.use('/ShopProfile',verifyAuth,shopProfile_Router);
 
 router.use('/addToCart',addToCart_Router);
 router.use('/removeFromCart',removeFromCart_Router);

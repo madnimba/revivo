@@ -115,11 +115,12 @@ create table Cart_has(
 );
 
 create table product_orders(
-	Product_id NUMBER,
-	order_id NUMBER,
-	CONSTRAINT pop_key PRIMARY KEY(order_id,Product_id),
+  Product_id NUMBER,
+  order_id NUMBER,
+  amount NUMBER,
+  CONSTRAINT pop_key PRIMARY KEY(order_id,Product_id),
   CONSTRAINT product_pop_fk FOREIGN KEY(Product_id) REFERENCES product(Product_id),
-	CONSTRAINT order_pop_fk FOREIGN KEY(order_id) REFERENCES orders(order_id)
+  CONSTRAINT order_pop_fk FOREIGN KEY(order_id) REFERENCES orders(order_id)
 
 );
 
