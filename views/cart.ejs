@@ -61,7 +61,7 @@ rel="stylesheet"
                         <button class="btn btn-link px-2" onclick="decrementQuantity(this)">
                           <i class="fas fa-minus"></i>
                         </button>
-                        <input id="quantity_<%= j %>" min="0" name="quantity" value="<%=products[j].AMOUNT%>" type="number" class="form-control form-control-sm" />
+                        <input id="quantity_<%= j %>" min="0" max="<%= products[j].QUANTITY%>" name="quantity" value="<%=products[j].AMOUNT%>" type="number" class="form-control form-control-sm" />
                         <button class="btn btn-link px-2" id="inc_amount" onclick="incrementQuantity(this)">
                           <i class="fas fa-plus"></i>
                         </button>
