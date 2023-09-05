@@ -1,4 +1,4 @@
-<nav class="navbar">
+<!-- <nav class="navbar">
     <div class="navbar-left">
       <a href="/" class="navbar-brand">Homepage</a>
     </div>
@@ -12,60 +12,125 @@
       </ul>
     </div>
   </nav>
-  
-
-<style>
-    /* Navbar container */
-.navbar {
-  background-color: #fff; /* Whitish background */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Shadow effect */
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 20px;
-}
-
-/* Navbar brand (Homepage link) */
-.navbar-brand {
-  text-decoration: none;
-  font-weight: bold;
-  font-size: 20px;
-  color: #333; /* Link color */
-}
-
-/* Navbar navigation items */
-/* Updated CSS for horizontal alignment */
-.navbar-right {
-  display: flex; /* Use flexbox to horizontally align items */
-  flex-direction: row;
-  align-items: center; /* Vertically center items */
-  gap: 20px; /* Add some spacing between the items */
-}
-
-.navbar-nav {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex; /* Use flexbox for horizontal alignment */
-  gap: 20px;
-}
-
-.nav-item {
-  display: inline;
-}
+   -->
 
 
-/* Navbar links */
-.nav-link {
-  text-decoration: none;
-  color: #333; /* Link color */
-  font-weight: 500;
-}
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top bg-light shadow-lg" style="background-color: rgba(255, 255, 255, 0.7);">
+  <!-- Container wrapper -->
+  <div class="container-fluid p-3">
+    <!-- Toggle button -->
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-mdb-toggle="collapse"
+      data-mdb-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <i class="fas fa-bars"></i>
+    </button>
 
-/* Navbar links on hover */
-.nav-link:hover {
-  color: #007bff; /* Hover color */
-}
+    <!-- Collapsible wrapper -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <!-- Navbar brand -->
+      <a class="navbar-brand mt-2 mt-lg-0" href="#">
+        <img
+          src="/images/logo.jpg"
+          height="20"
+          alt="MDB Logo"
+          loading="lazy"
+        />
+      </a>
+      <!-- Left links -->
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" href="/app/user">Home</a>
+        </li>
+        <!-- <li class="nav-item">
+          <a class="nav-link" href="#">Team</a>
+        </li> -->
+        <li class="nav-item">
+          <a class="nav-link" href="/app/openplace">Open Market Place</a>
+        </li>
+      </ul>
+      <!-- Left links -->
+    </div>
+    <!-- Collapsible wrapper -->
 
-</style>
+    <!-- Right elements -->
+    <div class="d-flex align-items-center">
+      <!-- Icon -->
+      <a class="text-reset me-3" href="/app/cart">
+        <i class="fas fa-shopping-cart fa-2x"></i>
+      </a>
+
+      <!-- Notifications -->
+      <!-- <div class="dropdown">
+        <a
+          class="text-reset me-3 dropdown-toggle hidden-arrow"
+          href="#"
+          id="navbarDropdownMenuLink"
+          role="button"
+          data-mdb-toggle="dropdown"
+          aria-expanded="false"
+        >
+          <i class="fas fa-bell fa-2x"></i>
+          <span class="badge rounded-pill badge-notification bg-danger">1</span>
+        </a>
+        <ul
+          class="dropdown-menu dropdown-menu-end"
+          aria-labelledby="navbarDropdownMenuLink"
+        >
+          <li>
+            <a class="dropdown-item" href="#">Some news</a>
+          </li>
+          <li>
+            <a class="dropdown-item" href="#">Another news</a>
+          </li>
+          <li>
+            <a class="dropdown-item" href="#">Something else here</a>
+          </li>
+        </ul>
+      </div> -->
+      <!-- Avatar -->
+      <div class="dropdown">
+        <a
+          class="dropdown-toggle d-flex align-items-center hidden-arrow"
+          href="#"
+          id="navbarDropdownMenuAvatar"
+          role="button"
+          data-mdb-toggle="dropdown"
+          aria-expanded="false"
+        >
+          <img
+            src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
+            class="rounded-circle"
+            height="40"
+            alt="Black and White Portrait of a Man"
+            loading="lazy"
+          />
+        </a>
+        <ul
+          class="dropdown-menu dropdown-menu-end"
+          aria-labelledby="navbarDropdownMenuAvatar"
+        >
+          <li>
+            <a class="dropdown-item" href="/app/cart/">My profile</a>
+          </li>
+          <li>
+            <a class="dropdown-item" href="/app/seller/">Switch to Seller</a>
+          </li>
+          <li>
+            <a class="dropdown-item" href="/app/logout">Logout</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!-- Right elements -->
+  </div>
+  <!-- Container wrapper -->
+</nav>
+<!-- Navbar -->
+

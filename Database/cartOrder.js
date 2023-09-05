@@ -77,41 +77,6 @@ async function allinCart(cid){
     return resul;     // can access each info by resul[0].PHONE / result[0].PASSWORD
 }
 
-/*async function createNewOrder(cid){
-    let sql="";
-    let Id;
-   
-        try{
-         sql = `
-         DECLARE
-            OrderId NUMBER;
-         BEGIN
-         INSERT INTO ORDERS(CART_ID, ORDER_STATUS, ORDER_DATE) VALUES(:cid, 'processing', SYSDATE)
-         RETURNING ORDER_ID INTO :OrderId;
-         END;
-        `;}
-        catch(err)
-        {
-            console.log(err);
-        }
-    
-        const binds = {
-            cid: cid,
-            OrderId: { type: database.NUMBER, dir: database.BIND_OUT }
-            //OrderId:OrderId
-        };
-    
-        const result = await database.execute(sql, binds, database.options);
-        console.log(result);
-        Id = binds.OrderId[0];
-
-        console.log(binds);
-        console.log(Id);
-    
-        // Use newOrderId to build and execute another SQL statement
-        
-        return Id;
-}*/
 
 async function createNewOrder(cid) {
     const sql = `
@@ -149,6 +114,28 @@ async function createNewOrder(cid) {
 
 
 
+async function createPayment(oid,method,price) {
+    const sql = `
+        DECLARE
+            PayId NUMBER;
+        BEGIN
+            INSERT INTO PAYMENT(ORDER_ID, METHOD, PAY_DATE, TOTAL_PRICE) VALUES(:oid, :method, SYSDATE, :price);
+           
+        END;
+    `;
+
+    const binds = {
+        oid:oid,
+        method:method,
+        price:price
+    };
+
+    const resul= (await database.execute(sql, binds, database.options));
+    return resul;
+}
+
+
+
 async function addToOrder(pid,oid,amount){
     let sql="";
    
@@ -175,6 +162,7 @@ module.exports={
     allinCart,
     inCart,
     createNewOrder,
-    addToOrder
+    addToOrder,
+    createPayment
 
 }

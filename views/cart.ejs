@@ -9,10 +9,25 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.11.0/mdb.min.css">
 
+    <!-- Font Awesome -->
+<link
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+rel="stylesheet"
+/>
+<!-- Google Fonts -->
+<link
+href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+rel="stylesheet"
+/>
+<!-- MDB -->
+<link
+href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.1/mdb.min.css"
+rel="stylesheet"
+/>
 </head>
 
 <body>
-
+  <%- include('userNav.ejs') %>
   <section class="h-100 h-custom" style="background-color: #d2c9ff;">
     <div class="container py-5 h-100">
       <div class="row d-flex justify-content-center align-items-center h-100">
@@ -55,7 +70,8 @@
                         <h6 class="mb-0" id="price_<%= j %>"><%= products[j].PRICE * products[j].AMOUNT %></h6>
                       </div>
                       <div class="col-md-1 col-lg-1 col-xl-1 text-end">
-                        <a href="#!" class="text-muted"><i class="fas fa-times"></i></a>
+                        <!-- <a href="/app/cart/cancelProduct" class="text-muted"><i class="fas fa-times"></i></a> -->
+                        <button class="cancel-product-btn" id="cancel" data-product-id="<%= products[j].PRODUCT_ID %>"><i class="fas fa-times"></i></button>
                       </div>
                     </div>
                     <% } %>
@@ -124,7 +140,10 @@
     </div>
   </section>
 
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script
+  type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.1/mdb.min.js"
+></script>
   <script>
 
 
@@ -204,13 +223,58 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
    
-
-      // // Construct the URL with query parameters
-      // const queryParams = `?products=${decodeHtml(JSON.stringify(checkedProducts))}&totalPrice=${totalPrice}&cartID=${cid}`;
-
-      // // Navigate to the confirmOrder route with query parameters
-      // window.location.href = `/confirmOrder${queryParams}`;
     });
+
+    
+    const cancelButtons = document.querySelectorAll('.cancel-product-btn');
+  cancelButtons.forEach(function (cancelButton) {
+    cancelButton.addEventListener("click", async function () {
+
+      const cancelledProducts = [];
+      const productId = cancelButton.getAttribute('data-product-id');
+      
+      cancelledProducts.push(productId);
+
+      console.log("Cancelled Products:", cancelledProducts);
+
+      const cid = '<%=cartID%>'
+
+
+      const dataToSend = {
+  cancelledProducts: cancelledProducts,
+  cid: cid
+};
+      location.reload();
+      await fetch('/app/cart/cancelProduct', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(dataToSend),
+    })
+    .then(response => {
+  if (!response.ok) {
+    throw new Error('Network response was not ok');
+  }
+  return response.json();
+})
+.then(data => {
+  console.log(data); // Handle the response data if needed
+  return fetch('/app/cart', {
+    method: 'GET',
+  });
+})
+.catch(error => {
+  console.error('Error:', error);
+});
+
+    console.log("hocche ki kichu?")
+    
+
+
+
+    });
+  });
 
 });
 
@@ -311,6 +375,20 @@ background-color: #eae8e8;
 border-top-right-radius: 16px;
 border-bottom-right-radius: 16px;
 }
+}
+
+#cancel {
+  background-color: #b6b6bd; /* Change this to your desired background color */
+  color: rgb(26, 24, 24); /* Text color */
+  border: none; /* Remove the border */
+  border-radius: 20px; /* Rounded corners */
+  padding: 7px 15px; /* Adjust padding as needed */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add a subtle shadow for the lifted effect */
+  cursor: pointer; /* Change cursor on hover */
+}
+
+#cancel:hover {
+  background-color: #bddbd2; /* Change this to the hover background color */
 }
 
 @media (max-width: 991px) {
