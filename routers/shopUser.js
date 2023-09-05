@@ -11,7 +11,7 @@ router.get('/:shopID',async(req,res)=>{
       
       
       
-    res.render('shopview.ejs', { products: allProducts });
+    res.render('shopUser.ejs', { products: allProducts });
 })
 
 

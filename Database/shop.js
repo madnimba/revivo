@@ -48,6 +48,7 @@ async function getAllOrders(){
     sql=`
     SELECT ORDER_ID
      FROM ORDERS
+     WHERE ORDER_STATUS='processing'
      ORDER BY ORDER_DATE ASC
     `;
     const binds={}
@@ -63,7 +64,7 @@ async function getOrderProductsByShop(id,orderId){
     let sql="";
 
     sql = `
-    SELECT P.NAME,P.GENDER_CATEGORY,P.PRICE,P.TYPE_OF,PO.AMOUNT,O.ORDER_DATE
+    SELECT P.NAME,P.GENDER_CATEGORY,P.PRICE,P.TYPE_OF,P.PRODUCT_ID,P.QUANTITY,PO.AMOUNT,O.ORDER_ID,O.ORDER_DATE
     FROM 
         ORDERS O JOIN PRODUCT_ORDERS PO
         ON(O.ORDER_ID=PO.ORDER_ID)
@@ -114,6 +115,32 @@ async function getPaymentByOrder(orderId){
 
     return resul; 
 }
+async function Decrease_Product(amount,product_id){
+    let sql="";
+    sql=`UPDATE PRODUCT
+    SET QUANTITY = :amount
+    WHERE PRODUCT_ID = :product_id
+    `;
+    const binds={
+        amount:amount,
+        product_id:product_id
+    }
+    await database.execute(sql,binds,database.options);
+}
+
+
+async function Set_OrderStatus(order_id,status){
+    let sql="";
+    sql=`UPDATE ORDERS
+    SET ORDER_STATUS= :status
+    WHERE ORDER_ID = :order_id
+    `;
+    const binds={
+        order_id:order_id,
+        status:status
+    }
+    await database.execute(sql,binds,database.options);
+}
 
 
 module.exports={
@@ -122,5 +149,7 @@ module.exports={
     getOrderProductsByShop,
     getAllOrders,
     getBuyerbyOrder,
-    getPaymentByOrder
+    getPaymentByOrder,
+    Decrease_Product,
+    Set_OrderStatus
 }

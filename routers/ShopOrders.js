@@ -13,13 +13,9 @@ router.get('/',async(req,res)=>{
     for(let i=0;i<orders.length;i++){
     let orderId=orders[i].ORDER_ID;
     let product=[];
-    console.log(orderId);
      product=await DB_shop.getOrderProductsByShop(req.user.id,orderId);
-    console.log(product);
     const buyer=await DB_shop.getBuyerbyOrder(orderId);
-    console.log(buyer);
     const payment=await DB_shop.getPaymentByOrder(orderId);
-    console.log(payment);
 
     if(product.length>0){
     const orderDetail = {
@@ -29,9 +25,25 @@ router.get('/',async(req,res)=>{
       };
 
       order_details.push(orderDetail);
+      
     }
     }
     res.render('ShopOrders.ejs',{order_details:order_details});
+})
+
+router.get('/confirm/:orderId',async(req,res)=>{
+    const orderId=req.params.orderId;
+    console.log(orderId);
+    let product=[];
+     product=await DB_shop.getOrderProductsByShop(req.user.id,orderId);
+     for(let i=0;i<product.length;i++){
+       let amount=product[i].QUANTITY-product[i].AMOUNT;
+       let product_id=product[i].PRODUCT_ID;
+       await DB_shop.Decrease_Product(amount,product_id);
+     }
+     await DB_shop.Set_OrderStatus(orderId,'shipping');
+
+     res.redirect('/app/shipping');
 })
 
 module.exports=router;

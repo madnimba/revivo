@@ -28,6 +28,7 @@
                     <div>&nbsp;</div>
                     <div>&nbsp;</div>
                    <div class="single-product">
+                    <% let totalPrice=0; %>
                     <% for (let j = 0; j < order_details[i].product.length; j++) { %>
                         <p>Product Name: <%= order_details[i].product[j].NAME %></p>
                         <p>Amount: <%= order_details[i].product[j].AMOUNT %></p>
@@ -36,6 +37,7 @@
                         <p>Price per Product: <%= order_details[i].product[j].PRICE %></p>
                         <div>&nbsp;</div>
                         <div>&nbsp;</div>
+                        <% totalPrice += (order_details[i].product[j].AMOUNT * order_details[i].product[j].PRICE); %>
                         <% } %>
                    </div>
                 </div>
@@ -52,15 +54,19 @@
                     </div>
                     <div class="product-detail">
                         <h2>Buyer Information : </h2>
-                        <p>Name : <%= order_details[i].buyer[0].NAME %></p>
-                        <p>Phone: <%= order_details[i].buyer[0].PHONE %></p>
-                        <p>E-mail: <%= order_details[i].buyer[0].E_MAIL %></p>
-                        <p>Address: <%= order_details[i].buyer[0].ADDRESS %></p>
-
-                        
+                        <p><span> </span>Name : <%= order_details[i].buyer[0].NAME %></p>
+                        <p><span> </span>Phone: <%= order_details[i].buyer[0].PHONE %></p>
+                        <p><span> </span>E-mail: <%= order_details[i].buyer[0].E_MAIL %></p>
+                        <p><span> </span>Address: <%= order_details[i].buyer[0].ADDRESS %></p>
+                        <p><span> </span>Payment status: PAID </p>
+                        <p><span> </span>Payment Method: <%= order_details[i].payment[0].METHOD %></p>
+                        <p><span> </span>Paid amount: <%= totalPrice%></p>
                         
                         <li>
                             <div class="buttons-container">
+                                <form action = "/app/ShopOrders/confirm/<%= order_details[i].product[0].ORDER_ID %>" method="GET" id="UpdateForm">
+                                    <button type="submit" class="btn">confirm order</button>
+                                    </form>    
                             </div>
                         </li>
                     </div>
