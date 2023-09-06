@@ -152,7 +152,12 @@ document.addEventListener("DOMContentLoaded", function () {
   const productArr = decodeHtml('<%= JSON.stringify(products) %>');
   const checkboxes = document.querySelectorAll('input[type="checkbox"]');
   checkboxes.forEach(function (checkbox, index) {
-    checkbox.addEventListener("change", function () {
+    checkbox.addEventListener("change", async function () {
+      
+      const productId = checkbox.id.split('_')[1];
+      const newStatus = checkbox.checked ? 'check' : 'uncheck';
+      
+      updateStatus(productId,newStatus);
       // Calculate the new total price
       updateTotalPrice();
     });
@@ -181,6 +186,22 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
+  async function updateStatus(productId, status)
+  {
+    const dataToSend = {
+    Product: productArr[productId].PRODUCT_ID,
+    status: status
+  };
+
+  await fetch('/app/cart/updateStatus', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(dataToSend),
+    });
+  }
+
 
 
 
@@ -195,9 +216,10 @@ document.addEventListener("DOMContentLoaded", function () {
         if (checkbox.checked) {
           const productId = checkbox.id.split('_')[1];
           const ID = parseFloat(productArr[productId].PRODUCT_ID);
+          const quantity = parseFloat(productArr[productId].QUANTITY);
           const amountElement = document.getElementById(`quantity_${productId}`);
           const amount = parseInt(amountElement.value);
-          checkedProducts.push({ ID, amount });
+          checkedProducts.push({ ID, quantity, amount });
         }
       });
 

@@ -392,6 +392,33 @@ async function deleteProduct(productId){
 }
 
 
+async function getCategories(genders){
+  
+    let gender = '';
+    let totalResult = [];
+    for(let i=0;i<genders.length;i++)
+    {
+        gender = genders[i];
+
+        const sql = `
+        SELECT DISTINCT TYPE_OF FROM PRODUCT WHERE GENDER_CATEGORY=:gender
+            `
+        const binds = {
+           gender: gender
+     
+        }
+        const result= await database.execute(sql, binds,database.options);
+
+        for(let j=0;j<result.length;j++)
+        {
+            totalResult.push(result[j]);
+        }
+        
+    }
+   
+
+    return totalResult;
+}
 
 
 
@@ -411,5 +438,6 @@ module.exports={
     deleteProduct,
     getProductbyGender,
     addSellerProduct,
-    getCartID
+    getCartID,
+    getCategories
 }
