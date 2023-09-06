@@ -117,7 +117,8 @@ async function getPaymentByOrder(orderId){
 }
 async function Decrease_Product(amount,product_id){
     let sql="";
-    sql=`UPDATE PRODUCT
+    sql=`
+    UPDATE PRODUCT
     SET QUANTITY = :amount
     WHERE PRODUCT_ID = :product_id
     `;

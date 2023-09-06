@@ -1,5 +1,6 @@
 const express=require('express');
 const {createNewOrder,addToOrder,removeFromCart,createPayment} = require('../Database/cartOrder')
+const {Decrease_Product} = require('../Database/shop')
 const router=express.Router();
 
 router.post('/',async(req,res)=>{
@@ -14,6 +15,7 @@ router.post('/',async(req,res)=>{
     for(const product of products)
     {
         await addToOrder(product.ID,id,product.amount);
+        await Decrease_Product(product.quantity-product.amount,product.ID)
         await removeFromCart(product.ID,cid);
         
     }

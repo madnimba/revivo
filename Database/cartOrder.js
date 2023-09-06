@@ -153,6 +153,23 @@ async function addToOrder(pid,oid,amount){
     return resul;     // can access each info by resul[0].PHONE / result[0].PASSWORD
 }
 
+async function updateProductStatus(pid,status){
+    let sql="";
+   
+         sql = `
+        UPDATE CART_HAS SET STATUS=:status WHERE PRODUCT_ID=:pid
+        `;
+    
+ 
+    const binds = {
+        pid:pid,
+        status:status
+    }
+    const resul= (await database.execute(sql, binds, database.options));
+    return resul;     // can access each info by resul[0].PHONE / result[0].PASSWORD
+}
+
+
 
 
 
@@ -163,6 +180,7 @@ module.exports={
     inCart,
     createNewOrder,
     addToOrder,
-    createPayment
+    createPayment,
+    updateProductStatus
 
 }
