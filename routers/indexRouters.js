@@ -27,6 +27,9 @@ const showCart_Router=require('./mycart');
 const confirmOrder_Router= require('./confirmOrder');
 const ShopOrders_Router=require('./ShopOrders');
 const Shipping_Router=require('./Shipping');
+const filter_Router=require('./filter')
+const filterShops_Router=require('./filterShops')
+
 
 
 // use verifyAuth middleware in the routers that can be only accessable after login.
@@ -56,6 +59,8 @@ router.use('/cart',verifyAuth,showCart_Router);
 router.use('/confirmOrder',confirmOrder_Router);
 router.use('/ShopOrders',verifyAuth,ShopOrders_Router);
 router.use('/shipping',verifyAuth,Shipping_Router);
+router.use('/filter',filter_Router);
+router.use('/filter_shops',verifyAuth,filterShops_Router);
 
 
 

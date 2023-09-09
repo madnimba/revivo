@@ -34,10 +34,26 @@ async function getAllProductsOfAll(role){
 }
 
 
+async function getAllProductsOfSeller(){    // to get all products of a shop or seller by id
+    let sql="";
+   
+    
+         sql = `
+         SELECT *
+         FROM 
+             PRODUCT P JOIN SELLER_OWNS S ON (P.PRODUCT_ID = S.PRODUCT_ID)
+         
+        `;
+       
+        
+    
+    const resul= (await database.execute(sql,{},database.options));
+    return resul;     
+}
 
 async function getAllProductsOf(id,role){    // to get all products of a shop or seller by id
     let sql="";
-    console.log(role);
+    
     if(role=='user'){
          sql = `
          SELECT *
@@ -46,8 +62,7 @@ async function getAllProductsOf(id,role){    // to get all products of a shop or
          WHERE 
              S.SELLER_ID=:id
         `;
-        console.log("hello");
-        console.log(role);
+        
         
     }
     else if(role=='shop'){
@@ -64,10 +79,7 @@ WHERE
         id: id
     }
     const resul= (await database.execute(sql,binds,database.options));
-    console.log(binds);
-    console.log(sql);
-    console.log(resul);
-   
+    
     return resul;     
 }
 
@@ -269,7 +281,7 @@ async function getProductbyCategory(category,id,role){
     }
         
     
-    //console.log(sql);
+   
     const binds = {
         category: category,
         id:id
@@ -292,7 +304,7 @@ async function getBuyerID(id)          // Returns only the buyer id as number. n
    `;
    
 
-//console.log(sql);
+
 const binds = {
    id:id,
 }
@@ -317,7 +329,7 @@ async function getCartID(id)          // Returns only the buyer id as number. no
    `;
    
 
-//console.log(sql);
+
 const binds = {
    id:id,
 }
@@ -421,6 +433,81 @@ async function getCategories(genders){
 }
 
 
+async function getMaterials(genders, categories){
+  
+    let gender = '';
+    let category = '';
+    let totalResult = [];
+    for(let i=0;i<genders.length;i++)
+    {
+        for(let k=0;k<categories.length;k++)
+        {
+        gender = genders[i];
+        category = categories[k];
+
+        const sql = `
+        SELECT DISTINCT MATERIAL FROM PRODUCT WHERE GENDER_CATEGORY=:gender AND TYPE_OF=:category
+            `
+        const binds = {
+           gender: gender,
+           category:category
+     
+        }
+        const result= await database.execute(sql, binds,database.options);
+
+        for(let j=0;j<result.length;j++)
+        {
+            totalResult.push(result[j]);
+        }
+        
+    }
+   
+    }
+    console.log(totalResult);
+    return totalResult;
+}
+
+
+
+async function getFilteredResult(genders, categories, materials) {
+
+    let gender = '';
+    let category = '';
+    let material = '';
+    let totalResult = [];
+    console.log("materials");
+    console.log(materials);
+    for (let i = 0; i < genders.length; i++) {
+        for (let k = 0; k < categories.length; k++) {
+            for (let m = 0; m < materials.length; m++) {
+                gender = genders[i];
+                category = categories[k];
+                material = materials[m];
+
+                const sql = `
+        SELECT * FROM PRODUCT WHERE GENDER_CATEGORY=:gender AND TYPE_OF=:category AND MATERIAL=:material
+            `
+                const binds = {
+                    gender: gender,
+                    category: category,
+                    material: material
+
+                }
+                const result = await database.execute(sql, binds, database.options);
+                console.log(result);
+
+                for (let j = 0; j < result.length; j++) {
+                    totalResult.push(result[j]);
+                }
+            }
+
+        }
+
+    }
+    console.log(totalResult);
+    return totalResult;
+}
+
 
  
 
@@ -439,5 +526,8 @@ module.exports={
     getProductbyGender,
     addSellerProduct,
     getCartID,
-    getCategories
+    getCategories,
+    getMaterials,
+    getFilteredResult,
+    getAllProductsOfSeller // for open marketplace
 }

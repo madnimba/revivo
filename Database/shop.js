@@ -1,5 +1,6 @@
 const database = require('./main_db');
 
+const Fuse = require('fuse.js');
 
 async function getAllShops(){
     let sql="";
@@ -130,6 +131,166 @@ async function Decrease_Product(amount,product_id){
 }
 
 
+
+async function getShopBySearchText(text){
+    let sql="";
+    let binds = {};
+    let totalresult =[];
+    let resul =[];
+
+
+let fuseOptions = {
+	 isCaseSensitive: false,
+	// includeScore: false,
+	 shouldSort: true,
+	// includeMatches: false,
+	// findAllMatches: false,
+	 minMatchCharLength: 3,
+	// location: 0,
+	// threshold: 0.6,
+	// distance: 100,
+	// useExtendedSearch: false,
+	// ignoreLocation: false,
+	// ignoreFieldNorm: false,
+	// fieldNormWeight: 1,
+	keys: [
+		"NAME",
+	]
+};
+
+
+
+
+    // almost exact search among shop names
+
+    let newtext = `%${text}%`;
+    sql = `
+    SELECT 
+        *
+    FROM 
+        SHOP
+    WHERE LOWER(NAME) like LOWER(:newtext)
+    `;
+
+    
+    binds = {
+        newtext:newtext
+    }
+
+    resul= (await database.execute(sql,binds,database.options));
+    for( let i=0;i<resul.length;i++)
+    {
+        totalresult.push(resul[i]);
+    }
+
+    // FUZZY SEARCH AMONG THE SHOP NAMES
+
+    sql = ` SELECT * FROM SHOP`;
+    resul = await database.execute(sql, {}, database.options);
+
+    let fuse = new Fuse(resul, fuseOptions);
+
+    // Change the pattern
+    let searchPattern = text;
+
+    resul = fuse.search(searchPattern)
+    for (let i = 0; i < resul.length; i++) {
+        totalresult.push(resul[i].item);
+    }
+
+
+    // ALMOST EXACT SEARCH AMONG THE CATEGORY_NAMES AND PRODUCT_NAMES 
+
+
+    sql=`SELECT * FROM SHOP
+    WHERE SHOP_ID IN (select s.SHOP_ID from product p join SHOP_OWNS s 
+        on s.PRODUCT_ID=p.PRODUCT_ID where Lower(p.TYPE_OF) LIKE LOWER(:newtext) OR LOWER(p.NAME) 
+        LIKE LOWER(:newtext))`
+
+        binds = {
+            newtext:newtext
+        }
+    
+        resul= (await database.execute(sql,binds,database.options));
+        for( let i=0;i<resul.length;i++)
+        {
+            totalresult.push(resul[i]);
+        }
+
+        
+        
+        
+    // fuzzy search on categories
+
+    fuseOptions = {
+        isCaseSensitive: false,
+       // includeScore: false,
+        shouldSort: true,
+       // includeMatches: false,
+       // findAllMatches: false,
+        minMatchCharLength: 3,
+       // location: 0,
+       // threshold: 0.6,
+       // distance: 100,
+       // useExtendedSearch: false,
+       // ignoreLocation: false,
+       // ignoreFieldNorm: false,
+       // fieldNormWeight: 1,
+       keys: [
+           "NAME",
+           "TYPE_OF",
+           "MATERIAL",
+       ]
+   };
+
+    sql = ` SELECT * FROM PRODUCT P JOIN SHOP_OWNS SO ON (P.PRODUCT_ID=SO.PRODUCT_ID)`
+    resul = await database.execute(sql, {}, database.options);
+
+    fuse = new Fuse(resul, fuseOptions);
+
+    
+    searchPattern = text;
+
+    resul = fuse.search(searchPattern)
+    
+    for (let i = 0; i < resul.length; i++) {
+
+        let shopid = resul[i].item.SHOP_ID
+
+        sql = ` SELECT * FROM SHOP WHERE SHOP_ID=:shopid`;
+
+        let fil = await database.execute(sql, {shopid:shopid}, database.options);
+        totalresult.push(fil[0]);
+    }
+        
+        
+     
+        
+        
+        const uniqueArray = removeDuplicatesByShopID(totalresult);
+        console.log(uniqueArray);
+        
+   
+    return uniqueArray;     // can access each info by resul[0].PHONE / result[0].PASSWORD
+}
+
+
+
+
+function removeDuplicatesByShopID(array) {
+    const uniqueShopIDs = [];
+    return array.filter((item) => {
+      if (!uniqueShopIDs.includes(item.shopID)) {
+        uniqueShopIDs.push(item.shopID);
+        return true;
+      }
+      return false;
+    });
+  }
+
+
+
+
 async function Set_OrderStatus(order_id,status){
     let sql="";
     sql=`UPDATE ORDERS
@@ -152,5 +313,6 @@ module.exports={
     getBuyerbyOrder,
     getPaymentByOrder,
     Decrease_Product,
-    Set_OrderStatus
+    Set_OrderStatus,
+    getShopBySearchText
 }

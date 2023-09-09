@@ -160,7 +160,7 @@ rel="stylesheet"
               </div>
 
 
-            <div class="accordion-item">
+            <!-- <div class="accordion-item">
               <h2 class="accordion-header" id="flush-headingThree">
                 <button
                   class="accordion-button collapsed"
@@ -190,7 +190,7 @@ rel="stylesheet"
                   heard of them accusamus labore sustainable VHS.
                 </div>
               </div>
-            </div>
+            </div> -->
           </div>
 
 
@@ -204,7 +204,8 @@ rel="stylesheet"
 
 
 
-          <button type="button" class="btn btn-dark btn-lg">Filter</button>
+          <a id="filterLink" class="btn btn-dark btn-lg" href="#">Filter</a>
+
           
 
           <div>&nbsp;</div>
@@ -274,7 +275,7 @@ rel="stylesheet"
     <!-- Sorting by <div class="row"> -->
         
 
-          </>
+          
         <!--END  <div class="col-lg-9">-->
 
       </div>
@@ -321,36 +322,28 @@ document.addEventListener("DOMContentLoaded", function () {
   const genderCheckboxes = document.querySelectorAll('.gender-check-input');
   let selectedGenders = [];
   let selectedCategories = [];
+  let selectedMaterials = [];
   genderCheckboxes.forEach(function (checkbox) {
     checkbox.addEventListener("change", function () {
       
+      selectedGenders=[];
       genderCheckboxes.forEach(function (checkbox) {
       if (checkbox.checked) {
         selectedGenders.push(checkbox.value);
       }
       
-      getCategory(selectedGenders);
+      
     });
+    console.log(selectedGenders);
+      getCategory(selectedGenders);
   });
   })
 
-  const categoryCheckboxes = document.querySelectorAll('.category-check-input');
-  categoryCheckboxes.forEach(function (checkbox) {
-    checkbox.addEventListener("change", function () {
 
-      categoryCheckboxes.forEach(function (checkbox) {
-      if (checkbox.checked) {
-        selectedCategories.push(checkbox.value);
-      }
-     
-      getMaterials(selectedGenders, selectedCategories); // Fetch materials based on selected genders and categories
-    });
-  });
  
 
   function getMaterials(selectedGenders, selectedCategories) {
-    // Make an AJAX request to your server to fetch material data based on selected genders and categories
-    // Replace the URL and data retrieval logic with your actual implementation
+   
     fetch('/app/shopUser/getMaterials', {
       method: 'POST',
       headers: {
@@ -367,7 +360,16 @@ document.addEventListener("DOMContentLoaded", function () {
       .catch(error => {
         console.error('Error fetching materials:', error);
       });
+
+
+
+    
+
+
   }
+
+
+
   function getCategory(selectedGender) {
 
     fetch('/app/shopUser/getCategories', {
@@ -404,7 +406,122 @@ document.addEventListener("DOMContentLoaded", function () {
       `;
       categoryAccordion.appendChild(categoryCheckbox);
     });
+
+  
+
+    let categoryCheckboxes = document.querySelectorAll('.category-check-input');
+  categoryCheckboxes.forEach(function (checkbox) {
+  
+    checkbox.addEventListener("change", function () {
+
+      
+      selectedCategories =[];
+      categoryCheckboxes.forEach(function (checkbox) {
+      if (checkbox.checked) {
+        selectedCategories.push(checkbox.value);
+      }
+      
+    });
+
+    
+      getMaterials(selectedGenders, selectedCategories); // Fetch materials based on selected genders and categories
+  });
+})
+
   }
+
+  function updateMaterialAccordion(materials) {
+    const materialAccordion = document.getElementById('materialAccordion');
+    
+    // Clear existing content
+    materialAccordion.innerHTML = '';
+
+    // Add material checkboxes based on the fetched data
+    materials.forEach(material => {
+      const materialCheckbox = document.createElement('div');
+      materialCheckbox.classList.add('material-check');
+      materialCheckbox.innerHTML = `
+        <input class="material-check-input" type="checkbox" value="${material}" id="${material}Checkbox" />
+        <label class="material-check-label" for="${material}Checkbox">${material}</label>
+      `;
+      materialAccordion.appendChild(materialCheckbox);
+    });
+
+
+
+    let materialCheckboxes = document.querySelectorAll('.material-check-input');
+  materialCheckboxes.forEach(function (checkbox) {
+  
+    checkbox.addEventListener("change", function () {
+
+      
+      selectedMaterials =[];
+      materialCheckboxes.forEach(function (checkbox) {
+      if (checkbox.checked) {
+        selectedMaterials.push(checkbox.value);
+      }
+      
+    });
+
+    
+     
+  });
+})
+  }
+
+
+  const filterButton = document.getElementById('filterLink'); 
+  
+
+filterButton.addEventListener('click', async function (event) {
+  event.preventDefault();
+  let filterResult =[];
+  const filterDataToSend = {
+    genders:selectedGenders,
+    categories:selectedCategories,
+    materials:selectedMaterials
+  }
+  await fetch('/app/shopUser/filter', {
+    method: 'POST', // or 'GET' depending on your server setup
+    headers: {
+      'Content-Type': 'application/json',
+    },
+   
+    body: JSON.stringify({ data: filterDataToSend }),
+  })
+    .then(response => response.json())
+    .then(data => {
+      
+
+      filterResult = data.products;
+
+    })
+    .catch(error => {
+      console.error('Error fetching filtered products:', error);
+    });
+
+
+
+   
+   
+    console.log('modified');
+    console.log(filterResult);
+
+    // Encode the JSON string
+    const encodedData = encodeURIComponent(JSON.stringify(filterResult));
+
+    // Create the URL with the encoded query parameter
+    const url = `/app/filter/?data=${encodedData}`;
+
+    // Navigate to the URL
+    window.location.href = url;
+
+
+
+
+});
+
+
 });
 
   </script>
@@ -442,7 +559,7 @@ html{
 
 .masthead2{
 
-  background-image: url("../img/backgroundimage.jpg");
+  /* background-image: url("../img/backgroundimage.jpg"); */
   background-position: 50% -26px;
   background-color:#242424;
 
