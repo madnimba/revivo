@@ -8,10 +8,11 @@ router.get('/all/:shopID',async(req,res)=>{
   const shopID = req.params.shopID;
 
   let allProducts = await getAllProductsOf(shopID, 'shop');
+  
       
       
       
-    res.render('shopUser.ejs', { products: allProducts });
+    res.render('shopUser.ejs', { products: allProducts, ownerID: shopID });
 })
 
 
@@ -34,7 +35,7 @@ router.get('/gender/',async(req,res)=>{
       
       
       
-    res.render('shopUser.ejs', { products: allProducts });
+    res.render('shopUser.ejs', { products: allProducts, ownerID: shopID });
 })
 
 router.post('/getCategories',async(req,res)=>
@@ -104,8 +105,11 @@ router.post('/filter',async(req,res)=>
    const genders = req.body.data.genders;
    const categories = req.body.data.categories;
    const materials = req.body.data.materials;
+   const ownerID = req.body.data.ownerID;
+
    
-   const result = await getFilteredResult(genders,categories,materials);
+   
+   const result = await getFilteredResult(genders,categories,materials,ownerID);
 
    
    res.status(200).json({products: result});
