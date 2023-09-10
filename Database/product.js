@@ -469,14 +469,14 @@ async function getMaterials(genders, categories){
 
 
 
-async function getFilteredResult(genders, categories, materials) {
+async function getFilteredResult(genders, categories, materials,ownerID) {
 
     let gender = '';
     let category = '';
     let material = '';
     let totalResult = [];
-    console.log("materials");
-    console.log(materials);
+    let sql ='';
+    
     for (let i = 0; i < genders.length; i++) {
         for (let k = 0; k < categories.length; k++) {
             for (let m = 0; m < materials.length; m++) {
@@ -484,13 +484,24 @@ async function getFilteredResult(genders, categories, materials) {
                 category = categories[k];
                 material = materials[m];
 
-                const sql = `
-        SELECT * FROM PRODUCT WHERE GENDER_CATEGORY=:gender AND TYPE_OF=:category AND MATERIAL=:material
+                if(ownerID===-1)
+                {
+                sql = `
+        SELECT * FROM PRODUCT WHERE GENDER_CATEGORY=:gender AND TYPE_OF=:category AND MATERIAL=:material AND SELLER_TYPE='seller'
             `
+                }
+                else
+                {
+                    sql = `
+                    SELECT * FROM PRODUCT P JOIN SHOP_OWNS S ON (P.PRODUCT_ID=S.PRODUCT_ID) WHERE P.GENDER_CATEGORY=:gender AND P.TYPE_OF=:category AND P.MATERIAL=:material
+                    AND S.SHOP_ID=:ownerID
+                        ` 
+                }
                 const binds = {
                     gender: gender,
                     category: category,
-                    material: material
+                    material: material,
+                    ownerID: ownerID
 
                 }
                 const result = await database.execute(sql, binds, database.options);

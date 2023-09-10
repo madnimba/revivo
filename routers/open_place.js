@@ -5,8 +5,9 @@ const router=express.Router();
 
 router.get('/',async(req,res)=>{
 
-    const products = getAllProductsOfSeller();
-    res.render('shopUser.ejs',{products: products});   // renders the open marketplace view
+    const products = await getAllProductsOfSeller();
+    
+    res.render('shopUser.ejs',{products: products,ownerID:-1});   // renders the open marketplace view
 })
 
 module.exports=router;

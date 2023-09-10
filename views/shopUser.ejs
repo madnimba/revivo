@@ -160,37 +160,6 @@ rel="stylesheet"
               </div>
 
 
-            <!-- <div class="accordion-item">
-              <h2 class="accordion-header" id="flush-headingThree">
-                <button
-                  class="accordion-button collapsed"
-                  type="button"
-                  data-mdb-toggle="collapse"
-                  data-mdb-target="#flush-collapseThree"
-                  aria-expanded="false"
-                  aria-controls="flush-collapseThree"
-                >
-                  Price
-                </button>
-              </h2>
-              <div
-                id="flush-collapseThree"
-                class="accordion-collapse collapse"
-                aria-labelledby="flush-headingThree"
-                data-mdb-parent="#accordionFlushExample"
-              >
-                <div class="accordion-body">
-                  Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry
-                  richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor
-                  brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor,
-                  sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch
-                  et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt
-                  sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat
-                  craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't
-                  heard of them accusamus labore sustainable VHS.
-                </div>
-              </div>
-            </div> -->
           </div>
 
 
@@ -223,6 +192,7 @@ rel="stylesheet"
           <div class="row">
             <div class="col">
               Showing all <%= products.length %> results
+              Of <%=ownerID%>
             </div>
 
 
@@ -256,11 +226,12 @@ rel="stylesheet"
         <div class="col-sm-3 col-md-6 col-lg-4">
             <div class="card">
                 <div class="card-body text-center">
-                    <a href="/app/product/?shopID=<%=products[i].SHOP_ID%>&prodID=<%= products[i].PRODUCT_ID %>"><img src="/images/dress3.jpg" class="product-image"></a>
+                    <a href="/app/product/?shopID=<%=products[i].SHOP_ID%>&prodID=<%= products[i].PRODUCT_ID %>" style="text-decoration: none;"><img src="/images/dress3.jpg" class="product-image">
                     <h5 class="card-title"><b><%= products[i].NAME %></b></h5>
                     <p class="card-text small"><%= products[i].TYPE_OF %></p>
                     <p class="tags">Price :<%= products[i].PRICE %></p>
-                    <a href="<%= products[i].addToCartLink %>" target="_blank" class="btn btn-success button-text"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Add to cart</a>
+                  </a>
+                    <!-- <a href="<%= products[i].addToCartLink %>" target="_blank" class="btn btn-success button-text"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Add to cart</a> -->
                 </div>
 
             </div>
@@ -476,10 +447,12 @@ document.addEventListener("DOMContentLoaded", function () {
 filterButton.addEventListener('click', async function (event) {
   event.preventDefault();
   let filterResult =[];
+  
   const filterDataToSend = {
     genders:selectedGenders,
     categories:selectedCategories,
-    materials:selectedMaterials
+    materials:selectedMaterials,
+    ownerID : '<%=ownerID%>'
   }
   await fetch('/app/shopUser/filter', {
     method: 'POST', // or 'GET' depending on your server setup
@@ -510,8 +483,13 @@ filterButton.addEventListener('click', async function (event) {
     // Encode the JSON string
     const encodedData = encodeURIComponent(JSON.stringify(filterResult));
 
+    let url='';
     // Create the URL with the encoded query parameter
-    const url = `/app/filter/?data=${encodedData}`;
+    if('<%=ownerID%>'===-1)
+    {url = `/app/filter/?data=${encodedData}&ownerID=-1`;}
+
+    else
+    {url = `/app/filter/?data=${encodedData}&ownerID='<%=ownerID%>'`;}
 
     // Navigate to the URL
     window.location.href = url;
