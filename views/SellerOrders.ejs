@@ -13,48 +13,71 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.js"></script>
 </head>
 <body>
+    <div class="logo">
+        <img src="/images/logo.jpg" alt="logo">
+    </div>
+
+    <form action="/app/login" method="GET">
+        <button type="submit"  class="btn btn-success logout">Log out</button>
+        </form>
+
     <div>&nbsp;</div>
     <div>&nbsp;</div>
+
+    <h1><%= warning%></h1>
     
     
     <div class="row">
-        <% for (let i = 0; i < product_data.length; i++) { %>
+        <% for (let i = 0; i < order_details.length; i++) { %>
         <div class="col-sm-3 col-md-6 col-lg-4">
             <div class="card">
-                <div class="product-img">
-                    <img src="/images/dress2.jpg" alt="product image">
+                <div class="product-details">
+                    <h1 class="product-title">Product Details:</h1>
+                    <div>&nbsp;</div>
+                    <p>Order Time: <%= order_details[i].product[0].ORDER_DATE %></p>
+                    <div>&nbsp;</div>
+                    <div>&nbsp;</div>
+                   <div class="single-product">
+                    <% let totalPrice=0; %>
+                    <% for (let j = 0; j < order_details[i].product.length; j++) { %>
+                        <p>Product Name: <%= order_details[i].product[j].NAME %></p>
+                        <p>Amount: <%= order_details[i].product[j].AMOUNT %></p>
+                        <p>Product Category: <%= order_details[i].product[j].TYPE_OF %></p>
+                        <p>Product For: <%= order_details[i].product[j].GENDER_CATEGORY %></p>
+                        <p>Price per Product: <%= order_details[i].product[j].PRICE %></p>
+                        <div>&nbsp;</div>
+                        <div>&nbsp;</div>
+                        <% totalPrice += (order_details[i].product[j].AMOUNT * order_details[i].product[j].PRICE); %>
+                        <% } %>
+                   </div>
                 </div>
                 <div class="product-details">
-                    <h1 class="product-title"><%= product_data[i].NAME %></h1>
+
+                    <h1 class="product-title">Other Information:</h1>
                     <p> </p>
                     <p></p>
                     <div class="product-rating">
-           
+                       <!-- <i class="fas fa-star"></i>
+                         Add more stars here 
+                        <span>4.7(21)</span>-->
                     </div>
                     <div class="product-price">
-                        <p class="new-price">Price: <span><%= product_data[i].PRICE %></span></p>
                     </div>
                     <div class="product-detail">
-                        <h2>About this item: </h2>
-                        <p>Category: <%= product_data[i].TYPE_OF %></p>
-                        <p>Material: <%= product_data[i].MATERIAL %></p>
-                        <p>Size: <%= product_data[i].SIZE_OF %></p>
-                        <p>Gender: <%= product_data[i].GENDER_CATEGORY%></p>
-                        <p>Used status: <%= product_data[i].USED_STATUS %></p>
-
+                        <h2>Buyer Information : </h2>
+                        <p><span> </span>Name : <%= order_details[i].buyer[0].NAME %></p>
+                        <p><span> </span>Phone: <%= order_details[i].buyer[0].PHONE %></p>
+                        <p><span> </span>E-mail: <%= order_details[i].buyer[0].E_MAIL %></p>
+                        <p><span> </span>Address: <%= order_details[i].buyer[0].ADDRESS %></p>
+                        <p><span> </span>Payment status: PAID </p>
+                        <p><span> </span>Payment Method: <%= order_details[i].payment[0].METHOD %></p>
+                        <p><span> </span>Paid amount: <%= totalPrice%></p>
                         
-                        <ul>
-                            <li>Available: <span>in stock: <%= product_data[i].QUANTITY %></span></li>
-                            <li>Shipping Area: <span>All over the country</span></li>
-                            <li>Shipping Fee: <span>Free</span></li>
-                        </ul>
                         <li>
                             <div class="buttons-container">
-                                <form action = "/app/UpdateProduct/<%= product_data[i].PRODUCT_ID %>" method="GET" id="UpdateForm">
-                                <button type="submit" class="btn">Update</button>
-                                </form>
-                                    <button class="btn" onclick="confirmDelete('<%= product_data[i].PRODUCT_ID %>')">Delete</button>
-                            </div>
+                                <form action = "/app/SellerOrders/confirm/<%= order_details[i].product[0].ORDER_ID %>" method="GET" id="UpdateForm">
+                                    <button type="submit" class="btn">Send for shipping</button>
+                                    </form> 
                         </li>
                     </div>
                 </div>
@@ -62,8 +85,8 @@
 
             </div>
         </div>
-        <% if ((i + 1) % 3 === 0 || (i + 1) === product_data.length) { %>
-    </div>
+        <% if ((i + 1) % 3 === 0 || (i + 1) === order_details.length) { %>
+     </div>
     <div>&nbsp;</div>
     <div class="row">
         <% } %>
@@ -79,6 +102,9 @@
 		</div>
 	</section>
 
+    <script>
+        console.log("showing orders");
+    </script>
 
 	<div>&nbsp;</div>
 	<div>&nbsp;</div>
@@ -245,8 +271,8 @@ body {
 
 }
 .buttons-container {
-    display: flex;
     margin-top: 0.5rem;
+    
 }
 
 .buttons-container .btn {
@@ -265,12 +291,35 @@ body {
 }
 
 .buttons-container .btn:hover {
-    background-color: #1e4caf;
+    background-color: #1e4caf
+
+}
+
+.success{
+    padding-top: 5%;
+    font-size: xx-large;
+    font-weight: 400;
+    color: green;
+}
+
+.btn.btn-success{
+    margin-top: 2%;
+    padding: .4em 2em;
+}
+
+.logout{
+    margin-left: 90%;
+}
+
+
+div.logo img {
+    width: 200px;
+    height: 100;
 }
 </style>
 
 <script>
-    //const productData = JSON.parse(`<%= JSON.stringify(product_data) %>`);
+    
     const imgs = document.querySelectorAll('.img-select a');
 const imgBtns = [...imgs];
 let imgId = 1;
@@ -292,7 +341,7 @@ function slideImage(){
 window.addEventListener('resize', slideImage);
 
 
-function confirmDelete(productId) {
+/*function confirmDelete(productId) {
             Swal.fire({
                 title: 'Are you sure?',
                 text: 'This action cannot be undone.',
@@ -313,12 +362,12 @@ function confirmDelete(productId) {
             })
             .then(response => response.json())
             .then(data => {
-                /*if (data.success) {
+                if (data.success) {
                     
                     Swal.fire('Deleted!', 'The product has been deleted.', 'success');
                     location.reload();
                     
-                } */if (data.success) {
+                } if (data.success) {
     Swal.fire({
         title: 'Deleted!',
         text: 'The product has been deleted.',
@@ -330,7 +379,7 @@ function confirmDelete(productId) {
     // Reload the page after the pop-up has been shown for a certain time
     setTimeout(() => {
         location.reload();
-    }, 2000); // Reload after 3 seconds (adjust as needed)
+    }, 2000); 
 }
                 else {
                     Swal.fire('Error', 'Failed to delete the product.', 'error');
@@ -340,7 +389,7 @@ function confirmDelete(productId) {
                 console.error('Error:', error);
                 Swal.fire('Error', 'An error occurred while deleting the product.', 'error');
             });
-        }
+        }*/
 
  
 

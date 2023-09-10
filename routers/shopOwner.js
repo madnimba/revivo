@@ -1,5 +1,6 @@
 const express=require('express');
 const DB_user = require('../Database/product');
+const {getAllProductsOf, getCategories, getMaterials, getFilteredResult,getProductbyGender} = require('../Database/product');
 const router=express.Router();
 
 router.get('/',async(req,res)=>{
@@ -8,111 +9,113 @@ router.get('/',async(req,res)=>{
 
     let product_list = await DB_user.getAllProductsOf(id,'shop');
     console.log(product_list);
-    
-    /*const products = [
-        {
-          name: "Accessory 1",
-          description: "With supporting text below as a natural lead-in to additional content.",
-          price: 25.16,
-          image: '../images/dress1.png',
-          addToCartLink: "https://example.com/cart/1"
-        },
-        {
-          name: "Coffee Bank 1",
-          description: "With supporting text below as a natural lead-in to additional content.",
-          price: 16,
-          image: '../images/dress1.png',
-          addToCartLink: "https://example.com/cart/2"
-        },
-        {
-          name: "Latte Accessory 1",
-          description: "With supporting text below as a natural lead-in to additional content.",
-          price: 20,
-          image: '../images/dress1.png',
-          addToCartLink: "https://example.com/cart/3"
-        },
-        {
-          name: "Accessory 2",
-          description: "With supporting text below as a natural lead-in to additional content.",
-          price: 25.16,
-          image: '../images/dress1.png',
-          addToCartLink: "https://example.com/cart/4"
-        },
-        {
-          name: "Coffee Bank 2",
-          description: "With supporting text below as a natural lead-in to additional content.",
-          price: 16,
-          image: '../images/dress1.png',
-          addToCartLink: "https://example.com/cart/5"
-        },
-        {
-          name: "Latte Accessory 2",
-          description: "With supporting text below as a natural lead-in to additional content.",
-          price: 20,
-          image: '../images/dress1.png',
-          addToCartLink: "https://example.com/cart/6"
-        },
-        {
-          name: "Accessory 3",
-          description: "With supporting text below as a natural lead-in to additional content.",
-          price: 25.16,
-          image: '../images/dress1.png',
-          addToCartLink: "https://example.com/cart/7"
-        },
-        {
-          name: "Coffee Bank 3",
-          description: "With supporting text below as a natural lead-in to additional content.",
-          price: 16,
-          image: '../images/dress1.png',
-          addToCartLink: "https://example.com/cart/8"
-        },
-        {
-          name: "Latte Accessory 3",
-          description: "With supporting text below as a natural lead-in to additional content.",
-          price: 20,
-          image: '../dress1.png',
-          addToCartLink: "https://example.com/cart/9"
-        },
-        {
-          name: "Accessory 4",
-          description: "With supporting text below as a natural lead-in to additional content.",
-          price: 25.16,
-          image: '../images/dress1.png',
-          addToCartLink: "https://example.com/cart/10"
-        }
-      ];*/
-      
-      
-      
+
     res.render('shopview.ejs', { products: product_list });
 })
 
-router.get('/men',async(req,res)=>{
-  
-  let id = req.user.id;
+router.get('/gender/',async(req,res)=>{
 
-  let product_list = await DB_user.getProductbyGender('male',id,'shop');
-  console.log(product_list);   
-  res.render('shopview.ejs', { products: product_list });
+  const shopID = req.query.id;
+  let gender = req.query.role;
+  if(gender==='Men')
+  {gender='male'};
+  
+  if(gender==='Women')
+  {gender='female'};
+
+  if(gender==='Child')
+  {gender='child'};
+
+
+  
+  let allProducts = await getProductbyGender(gender,shopID,'shop');
+      
+      
+      
+    res.render('shopview.ejs', { products: allProducts });
 })
 
-router.get('/women',async(req,res)=>{
-  
-  let id = req.user.id;
+router.post('/getCategories',async(req,res)=>
+{
+  try{
+   const gender = req.body.gender;
+   const result = await getCategories(gender);
+   let allCategories = [];
 
-  let product_list = await DB_user.getProductbyGender('female',id,'shop');
-  console.log(product_list);   
-  res.render('shopview.ejs', { products: product_list });
+   for(let i=0;i<result.length;i++)
+   {
+  
+    allCategories.push(result[i].TYPE_OF);
+   }
+  
+   res.status(200).json({ categories: allCategories });
+  }
+  catch (error) {
+    console.error('Error fetching categories:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
 })
 
-router.get('/children',async(req,res)=>{
-  
-  let id = req.user.id;
+router.post('/getMaterials',async(req,res)=>
+{
+  try{
+   const genders = req.body.genders;
+   const categories = req.body.categories;
+   const result = await getMaterials(genders,categories);
+   let allMaterials = [];
 
-  let product_list = await DB_user.getProductbyGender('child',id,'shop');
-  console.log(product_list);   
-  res.render('shopview.ejs', { products: product_list });
+   for(let i=0;i<result.length;i++)
+   {
+    
+    allMaterials.push(result[i].MATERIAL);
+   }
+   
+   res.status(200).json({ materials: allMaterials });
+  }
+
+  catch (error) {
+    console.error('Error fetching categories:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+})
+
+
+// router.get('/filter/', (req, res) => {
+//   // Retrieve and decode the data query parameter
+//   const encodedData = req.query.data;
+//   const decodedData = decodeURIComponent(encodedData);
+
+//   // Parse the JSON string back into an array of objects
+//   const dataArray = JSON.parse(decodedData);
+
+//   console.log("ready to render");
+//   console.log(dataArray);
+
+//   // Send a response (e.g., JSON response)
+//   res.json({ message: 'Data received successfully', data: dataArray });
+// });
+
+
+router.post('/filter',async(req,res)=>
+{
+  try{
+   const genders = req.body.data.genders;
+   const categories = req.body.data.categories;
+   const materials = req.body.data.materials;
+   const owner=req.user.id;
+   
+   const result = await getFilteredResult(genders,categories,materials,owner);
+
+   
+   res.status(200).json({products: result});
+  }
+
+  catch (error) {
+    console.error('Error fetching categories:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
 })
 
 
 module.exports=router;
+

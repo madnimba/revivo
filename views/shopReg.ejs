@@ -19,17 +19,18 @@
                     Shop Registration
                 </h2>
             </div>
-            <form action="/app/shopRegister" method="POST" class="pt-3">
+            <form action="/app/shopRegister" method="POST" class="pt-3"  enctype="multipart/form-data">
                 <div class="form-group">
+                   <input type="file" class="form-control" name="image" accept="image/*">
                     
-                    <input placeholder="Shop Name" class="form-control" name = "name">
-                    <input type="email" class="form-control" placeholder="email" name="email">
-                    <input type="number" class="form-control" placeholder="Phone Number" name="phone">
+                    <input placeholder="Shop Name" class="form-control" name = "name" required>
+                    <input type="email" class="form-control" placeholder="email" name="email" required>
+                    <input type="number" class="form-control" placeholder="Phone Number" name="phone"required>
                 
     
                 </div>
                 <div class="form-group">
-                    <input type="password" class="form-control" name="password" placeholder="password">
+                    <input type="password" class="form-control" name="password" placeholder="password" required>
             
                 </div>
                 <button type="submit" class="btn btn-success rounded-5 ">Submit</button>

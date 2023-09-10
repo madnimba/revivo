@@ -31,13 +31,15 @@ router.post('/',async(req,res)=>{
     results=await DB_user.readEmail(req.body.email,req.body.option);
     //console.log(results[0].PASSWORD)
     let token = '';
-
+    if(results.length>0){
     if(req.body.option==='user')
         { token = createToken(results[0].USER_ID);
         }
     else
     { token=createToken(results[0].SHOP_ID);}
     res.cookie('jwt',token,{maxAge: maxAge*1000});
+    }
+    
    
     
     if(results.length==0){
@@ -66,6 +68,4 @@ router.post('/',async(req,res)=>{
 })
 
 
-
-
-module.exports=router;
+module.exports = router;

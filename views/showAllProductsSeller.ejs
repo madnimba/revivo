@@ -1,109 +1,249 @@
-<!--seller view of seeing all products of a shop-->
+
+<!--shop view of seeing all products of a shop-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
 
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, intial-scale=1, shrink-to-fit=no">
-	<meta name="description" content="">
-	<meta name="author" content="">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, intial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
 
-	<title> Products</title>
+  <title> Products</title>
 
-	<!-- Site Icon -->
-	<link rel="shortcut Icon" type="image/png" href="img/favicon.png">
+      <!-- Font Awesome -->
+<link
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+rel="stylesheet"
+/>
+<!-- Google Fonts -->
+<link
+href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+rel="stylesheet"
+/>
+<!-- MDB -->
+<link
+href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.1/mdb.min.css"
+rel="stylesheet"
+/>
 
-	<!-- Font Awesome Icons -->
-	<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <!-- Site Icon -->
+  <link rel="shortcut Icon" type="image/png" href="img/favicon.png">
 
-	<!-- Google Fonts -->
-	<link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet">
+  <!-- Font Awesome Icons -->
+  <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
-	<!-- Bootstrap CSS -->
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet">
 
-	<!-- Custom CSS -->
-	<link href="css/style.css" rel="stylesheet">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.11.0/mdb.min.css">
+
+  <!-- Custom CSS -->
+  <link href="/style.css" rel="stylesheet">
 
 </head>
 <body id="page-top">
+  <%- include('userNav.ejs') %>
+  
 
-	
+  <header class="page-section masthead2">
+    <div class="container h-50">
+      <h1 class="section-header text-white font-weight-bold">Products</h1>
+      <p class="main-menu text-white-75 font-weight-light mb-5"><a class="link-menu" href="home.html">Revivo > <span style="color:white;">Products</span></a></p>
+      
+    </div>
+    
+  </header>
 
-	<header class="page-section masthead2">
-		<div class="container h-50">
-			<h1 class="section-header text-white font-weight-bold">Products</h1>
-			<p class="main-menu text-white-75 font-weight-light mb-5"><a class="link-menu" href="home.html">Revivo > <span style="color:white;">Products</span></a></p>
-			
-		</div>
-		
-	</header>
+  <section class="page-section">
+    <div class="container">
+      <div class="row">
 
-	<section class="page-section">
-		<div class="container">
-			<div class="row">
+        <div class="col-lg-3 blog-form">
+          <hr />
+          <div>&nbsp;</div>
 
-				<div class="col-lg-3 blog-form">
-					<hr />
-					<div>&nbsp;</div>
-
-					<h2 class="blog-sidebar-title"><b>Categories</b></h2>
-					<div>&nbsp;</div>
-					<hr />
-
-					<p class="blog-sidebar-list"><b><span class="list-icon">  </span> <a href="/app/showAllProductsSeller/men">Men</a></b></p>
-					<p class="blog-sidebar-list"><b><span class="list-icon">  </span> <a href="/app/showAllProductsSeller/women">Women</a></b></p>
-					<p class="blog-sidebar-list"><b><span class="list-icon">  </span><a href="/app/showAllProductsSeller/children"> Children</a></b></p>
-					
-
-					<div>&nbsp;</div>
-					<div>&nbsp;</div>
-
-					<h2 class="blog-sidebar-title"><b>Filter by price</b></h2>
-					<hr />
-
-					<div class="input-group mb-3">
-						<input type="text" class="form-control" placeholder="Search" aria-label="Receipient's username" aria-describely="basic-addon2">
-						<div class="input-group-append">
-							<span class="input-group-text" id="basic-addon2"><i class="fa fa-search"></i></span>
-						</div>
-						
-					</div>
-					<div>&nbsp;</div>
-					<button type="button" class="btn btn-dark btn-lg">Filter</button>
-					
-
-					<div>&nbsp;</div>
-					<div>&nbsp;</div>
-					<h2 class="blog-sidebar-title"><b></b></h2>
-					<p class="product-sidebar-list"><b></b></p>
-					<p class="product-sidebar-list"><b></b></p>
-					<p class="product-sidebar-list"><b></b></p>
+          <h2 class="blog-sidebar-title"><b>Categories</b></h2>
+          <div>&nbsp;</div>
+          <hr />
+        
+          <!-- Start of Accordion -->
 
 
-				</div>
-				<!--END  <div class="col-lg-3 blog-form">-->
 
-				<div class="col-lg-9" style="padding-left: 30px;">
-					<div class="row">
-						<div class="col">
-							<select class="form-control">
-								<option value="">Default Sorting</option>
-								<option value="popularity">Sorting by popularity</option>
-								<option value="average">Sorting by average</option>
-								<option value="latest">Sorting by latest</option>
-								<option value="low">Sorting by low</option>
-								<option value="high">Sorting by high</option>
-							</select>
-						</div>
+          <div class="accordion accordion-flush" id="accordionFlushExample">
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="flush-headingOne">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-mdb-toggle="collapse"
+                  data-mdb-target="#flush-collapseOne"
+                  aria-expanded="false"
+                  aria-controls="flush-collapseOne"
+                >
+                  Gender
+                </button>
+                </h2>
+                <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-mdb-parent="#accordionFlushExample">
+                  <!-- First Accordion -->
+                  <div class="accordion-body">
+                    <div class="gender-check">
+                      <input class="gender-check-input" type="checkbox" value="male" id="menCheckbox" />
+                      <label class="gender-check-label" for="menCheckbox">Men</label>
+                    </div>
 
-						<div class="col">
-						</div>
+                    <div class="gender-check">
+                      <input class="gender-check-input" type="checkbox" value="female" id="womenCheckbox" />
+                      <label class="gender-check-label" for="womenCheckbox">Women</label>
+                    </div>
 
-					</div>
-					<!-- Sorting by <div class="row"> -->
-					<div>&nbsp;</div>
-					<div>&nbsp;</div>
+                    <div class="gender-check">
+                      <input class="gender-check-input" type="checkbox" value="child" id="childCheckbox" />
+                      <label class="gender-check-label" for="childCheckbox">Children</label>
+                    </div>
+                  </div>
+
+
+                </div>
+                </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="flush-headingTwo">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-mdb-toggle="collapse"
+                  data-mdb-target="#flush-collapseTwo"
+                  aria-expanded="false"
+                  aria-controls="flush-collapseTwo"
+                >
+                  Category
+                </button>
+              </h2>
+              <div
+                id="flush-collapseTwo"
+                class="accordion-collapse collapse"
+                aria-labelledby="flush-headingTwo"
+                data-mdb-parent="#accordionFlushExample"
+              >
+                <!-- Second Accordion (Dynamically Generated) -->
+                <div class="accordion-body" id="categoryAccordion">
+                  <!-- Categories checkboxes will be dynamically inserted here -->
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="flush-headingThree">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-mdb-toggle="collapse"
+                  data-mdb-target="#flush-collapseThree"
+                  aria-expanded="false"
+                  aria-controls="flush-collapseThree"
+                >
+                  Material
+                </button>
+              </h2>
+              <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-mdb-parent="#accordionFlushExample">
+                
+                <!-- Third Accordion (Accordion Item 3 for Materials) -->
+                <div class="accordion-body" id="materialAccordion">
+                  <!-- Materials checkboxes will be dynamically inserted here -->
+                </div>
+
+              </div>
+              </div>
+
+
+            <!-- <div class="accordion-item">
+              <h2 class="accordion-header" id="flush-headingThree">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-mdb-toggle="collapse"
+                  data-mdb-target="#flush-collapseThree"
+                  aria-expanded="false"
+                  aria-controls="flush-collapseThree"
+                >
+                  Price
+                </button>
+              </h2>
+              <div
+                id="flush-collapseThree"
+                class="accordion-collapse collapse"
+                aria-labelledby="flush-headingThree"
+                data-mdb-parent="#accordionFlushExample"
+              >
+                <div class="accordion-body">
+                  Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry
+                  richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor
+                  brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor,
+                  sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch
+                  et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt
+                  sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat
+                  craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't
+                  heard of them accusamus labore sustainable VHS.
+                </div>
+              </div>
+            </div> -->
+          </div>
+
+
+
+
+
+
+          <!-- End of Accordion -->
+
+
+
+
+
+          <a id="filterLink" class="btn btn-dark btn-lg" href="#">Filter</a>
+
+          
+
+          <div>&nbsp;</div>
+          <div>&nbsp;</div>
+          <h2 class="blog-sidebar-title"><b></b></h2>
+          <p class="product-sidebar-list"><b></b></p>
+          <p class="product-sidebar-list"><b></b></p>
+          <p class="product-sidebar-list"><b></b></p>
+
+
+        </div>
+        <!--END  <div class="col-lg-3 blog-form">-->
+
+        <div class="col-lg-9" style="padding-left: 30px;">
+          <div class="row">
+            <div class="col">
+              Showing all <%= products.length %> results
+            </div>
+
+
+<div class="col">
+              <select class="form-control">
+                <option value="">Default Sorting</option>
+                <option value="popularity">Sorting by popularity</option>
+                <option value="average">Sorting by average</option>
+                <option value="latest">Sorting by latest</option>
+                <option value="low">Sorting by low</option>
+                <option value="high">Sorting by high</option>
+              </select>
+            </div>
+
+            <div class="col">
+            </div>
+
+          </div>
+          <!-- Sorting by <div class="row"> -->
+          <div>&nbsp;</div>
+          <div>&nbsp;</div>
 
 
     <!-- here starts the dynamic -->
@@ -116,11 +256,10 @@
         <div class="col-sm-3 col-md-6 col-lg-4">
             <div class="card">
                 <div class="card-body text-center">
-                    <img src="/images/dress3.jpg" class="product-image">
+                    <a href="/app/search_result/single/?productID=<%= products[i].PRODUCT_ID %>"><img src="/<%=products[i].IMAGE%>" class="product-image"></a>
                     <h5 class="card-title"><b><%= products[i].NAME %></b></h5>
                     <p class="card-text small"><%= products[i].TYPE_OF %></p>
                     <p class="tags">Price :<%= products[i].PRICE %></p>
-                    <a href="<%= products[i].addToCartLink %>" target="_blank" class="btn btn-success button-text"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Add to cart</a>
                 </div>
 
             </div>
@@ -135,214 +274,429 @@
     <!-- Sorting by <div class="row"> -->
         
 
-					</>
-				<!--END  <div class="col-lg-9">-->
+          
+        <!--END  <div class="col-lg-9">-->
 
-			</div>
-		</div>
-	</section>
+      </div>
+    </div>
+  </section>
 
 
-	<div>&nbsp;</div>
-	<div>&nbsp;</div>
-	
+  <div>&nbsp;</div>
+  <div>&nbsp;</div>
+  
  
 
 <!-- ends the dynamic-->
 
 
-	<footer class="footer-info pt-5 py-4">
-		<div class="container">
-			<div class="small text-center text-muted">
-				<span class="footer-title"></span> <span class="copyright">&copy; </span>
-			</div>
+  <footer class="footer-info pt-5 py-4">
+    <div class="container">
+      <div class="small text-center text-muted">
+        <span class="footer-title"></span> <span class="copyright">&copy; </span>
+      </div>
 
-			<a class="scroll-to-top rounded" href="#page-top">
-				<span class="fa fa-angle-up"><br>TOP</span>
-			</a>
+      <a class="scroll-to-top rounded" href="#page-top">
+        <span class="fa fa-angle-up"><br>TOP</span>
+      </a>
 
-		</div>
-	</footer>
+    </div>
+  </footer>
+
+  <script
+  type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.1/mdb.min.js"
+  ></script>
+
+  <!-- Bootstrap JavaScript -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+  
+  <script>
 
 
-	<!-- Bootstrap JavaScript -->
-	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-	
+document.addEventListener("DOMContentLoaded", function () {
+  // Attach event listeners to checkboxes in the first accordion
+  const genderCheckboxes = document.querySelectorAll('.gender-check-input');
+  let selectedGenders = [];
+  let selectedCategories = [];
+  let selectedMaterials = [];
+  genderCheckboxes.forEach(function (checkbox) {
+    checkbox.addEventListener("change", function () {
+      
+      selectedGenders=[];
+      genderCheckboxes.forEach(function (checkbox) {
+      if (checkbox.checked) {
+        selectedGenders.push(checkbox.value);
+      }
+      
+      
+    });
+    console.log(selectedGenders);
+      getCategory(selectedGenders);
+  });
+  })
 
+
+ 
+
+  function getMaterials(selectedGenders, selectedCategories) {
+   
+    fetch('/app/showAllProductsSeller/getMaterials', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ genders: selectedGenders, categories: selectedCategories }),
+    })
+      .then(response => response.json())
+      .then(data => {
+        // Generate and update the material checkboxes in the third accordion
+        console.log(data.materials);
+        updateMaterialAccordion(data.materials);
+      })
+      .catch(error => {
+        console.error('Error fetching materials:', error);
+      });
+
+
+
+    
+
+
+  }
+
+
+
+  function getCategory(selectedGender) {
+
+    fetch('/app/showAllProductsSeller/getCategories', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ gender: selectedGender }),
+    })
+      .then(response => response.json())
+      .then(data => {
+        // Generate and update the category checkboxes in the second accordion
+        updateCategoryAccordion(data.categories);
+      })
+      .catch(error => {
+        console.error('Error fetching categories:', error);
+      });
+  }
+
+  // Function to dynamically update the second accordion with category checkboxes
+  function updateCategoryAccordion(categories) {
+    const categoryAccordion = document.getElementById('categoryAccordion');
+    
+    // Clear existing content
+    categoryAccordion.innerHTML = '';
+
+    // Add category checkboxes based on the fetched data
+    categories.forEach(category => {
+      const categoryCheckbox = document.createElement('div');
+      categoryCheckbox.classList.add('category-check');
+      categoryCheckbox.innerHTML = `
+        <input class="category-check-input" type="checkbox" value="${category}" id="${category}Checkbox" />
+        <label class="category-check-label" for="${category}Checkbox">${category}</label>
+      `;
+      categoryAccordion.appendChild(categoryCheckbox);
+    });
+
+  
+
+    let categoryCheckboxes = document.querySelectorAll('.category-check-input');
+  categoryCheckboxes.forEach(function (checkbox) {
+  
+    checkbox.addEventListener("change", function () {
+
+      
+      selectedCategories =[];
+      categoryCheckboxes.forEach(function (checkbox) {
+      if (checkbox.checked) {
+        selectedCategories.push(checkbox.value);
+      }
+      
+    });
+
+    
+      getMaterials(selectedGenders, selectedCategories); // Fetch materials based on selected genders and categories
+  });
+})
+
+  }
+
+  function updateMaterialAccordion(materials) {
+    const materialAccordion = document.getElementById('materialAccordion');
+    
+    // Clear existing content
+    materialAccordion.innerHTML = '';
+
+    // Add material checkboxes based on the fetched data
+    materials.forEach(material => {
+      const materialCheckbox = document.createElement('div');
+      materialCheckbox.classList.add('material-check');
+      materialCheckbox.innerHTML = `
+        <input class="material-check-input" type="checkbox" value="${material}" id="${material}Checkbox" />
+        <label class="material-check-label" for="${material}Checkbox">${material}</label>
+      `;
+      materialAccordion.appendChild(materialCheckbox);
+    });
+
+
+
+    let materialCheckboxes = document.querySelectorAll('.material-check-input');
+  materialCheckboxes.forEach(function (checkbox) {
+  
+    checkbox.addEventListener("change", function () {
+
+      
+      selectedMaterials =[];
+      materialCheckboxes.forEach(function (checkbox) {
+      if (checkbox.checked) {
+        selectedMaterials.push(checkbox.value);
+      }
+      
+    });
+
+    
+     
+  });
+})
+  }
+
+
+  const filterButton = document.getElementById('filterLink'); 
+  
+
+filterButton.addEventListener('click', async function (event) {
+  event.preventDefault();
+  let filterResult =[];
+  const filterDataToSend = {
+    genders:selectedGenders,
+    categories:selectedCategories,
+    materials:selectedMaterials
+  }
+  await fetch('/app/showAllProductsSeller/filter', {
+    method: 'POST', // or 'GET' depending on your server setup
+    headers: {
+      'Content-Type': 'application/json',
+    },
+   
+    body: JSON.stringify({ data: filterDataToSend }),
+  })
+    .then(response => response.json())
+    .then(data => {
+      
+
+      filterResult = data.products;
+
+    })
+    .catch(error => {
+      console.error('Error fetching filtered products:', error);
+    });
+
+
+
+   
+   
+    console.log('modified');
+    console.log(filterResult);
+
+    // Encode the JSON string
+    const encodedData = encodeURIComponent(JSON.stringify(filterResult));
+
+    // Create the URL with the encoded query parameter
+    const url = `/app/filter/seller/?data=${encodedData}`;
+
+    // Navigate to the URL
+    window.location.href = url;
+
+
+
+
+});
+
+
+});
+
+  </script>
 
 
     <style>
         
 :root{
-	--input-padding-x: 1.5rem;
-	--input-padding-y: 0.75rem;
+  --input-padding-x: 1.5rem;
+  --input-padding-y: 0.75rem;
 }
 
 
 body,
 html{
-	width: 100%;
-	height: 100%;
+  width: 100%;
+  height: 100%;
 }
 
 .btn{
-	font-family: 'Kanit',sans-serif;
+  font-family: 'Kanit',sans-serif;
 }
 
 .btn-success{
-	background-color: #c0aa83;
-	border-color: #c0aa83;
-	color: #fff;
+  background-color: #c0aa83;
+  border-color: #c0aa83;
+  color: #fff;
 }
 
 .btn-success:hover{
-	background-color: #242424;
-	border-color: #242424;
-	color: #fff;
+  background-color: #242424;
+  border-color: #242424;
+  color: #fff;
 }
 
 .masthead2{
 
-	background-image: url("../img/backgroundimage.jpg");
-	background-position: 50% -26px;
-	background-color:#242424;
+  /* background-image: url("../img/backgroundimage.jpg"); */
+  background-position: 50% -26px;
+  background-color:#242424;
 
 }
 
 a.social-icon{
-	color:#242424;
+  color:#242424;
 }
 
 a.social-icon:hover{
-	color:#c0aa83;
+  color:#c0aa83;
 }
 
 .social-icon{
-	background-color: #ECE4C3;
-	width: 80px;
-	height: 80px;
-	padding:20px;
-	margin: 10px;
+  background-color: #ECE4C3;
+  width: 80px;
+  height: 80px;
+  padding:20px;
+  margin: 10px;
 }
 
 .social-icon a{
-	background-color: #B98C45;
-	width: 50px;
-	height: 50px;
-	padding:10px 16px;
-	margin-right: 6px;
-	position: relative;
-	display: block;
+  background-color: #B98C45;
+  width: 50px;
+  height: 50px;
+  padding:10px 16px;
+  margin-right: 6px;
+  position: relative;
+  display: block;
 
 }
 
 .social-icon a:hover{
-	color:#242424;
+  color:#242424;
 
 }
 
 
 .page-section{
-	padding: 8rem 0;
+  padding: 8rem 0;
 }
 
+
 .main-menu{
-	color: #c0aa83;
-	font-family: 'Kanit',sans-serif;
-	font-size: 20px;
-	font-weight: 900;
+  color: #c0aa83;
+  font-family: 'Kanit',sans-serif;
+  font-size: 20px;
+  font-weight: 900;
 }
 
 a.link-menu{
-	text-decoration: none;
-	color: #c0aa83;
+  text-decoration: none;
+  color: #c0aa83;
 }
 
 .footer-info{
-	background-color: #000;
+  background-color: #000;
 }
 
 .scroll-to-top{
-	position: fixed;
-	right: 15px;
-	bottom: 15px;
-	width: 50px;
-	height: 50px;
-	text-align: center;
-	color:#242424;
-	background: #c0aa83;
-	line-height: 46px;
+  position: fixed;
+  right: 15px;
+  bottom: 15px;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  color:#242424;
+  background: #c0aa83;
+  line-height: 46px;
 } 
 
 .scroll-to-top:focus,.scroll-to-top:hover{
-	color:#242424;
+  color:#242424;
 }
 
 .scroll-to-top:hover{
-	color:#c0aa83;
+  color:#c0aa83;
 }
 
 .rounded {
-	border-radius: 0.25rem !important;
+  border-radius: 0.25rem !important;
 }
 
 .footer-title{
-	color: #fff;
-	font-family: 'Kanit',sans-serif;
-	font-size: 14px;
-	font-weight: 300;
-	line-height: 46px;
+  color: #fff;
+  font-family: 'Kanit',sans-serif;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 46px;
 }
 
 .copyright{
-	color:#c0aa83;
-	font-family: 'Kanit',sans-serif;
-	font-size: 14px;
-	font-weight: 300;
+  color:#c0aa83;
+  font-family: 'Kanit',sans-serif;
+  font-size: 14px;
+  font-weight: 300;
 }
 
 
 #mainNav{
-	-webkit-box-shadow: 0.05rem 1rem rgba(0, 0, 0, 0.15);
-	box-shadow: 0.05rem 1rem rgba(0, 0, 0, 0.15);
-	background-color: #fff;
-	-webkit-transition: background-color 0.2s ease; 
-	transition: background-color 0.2s ease; 
+  -webkit-box-shadow: 0.05rem 1rem rgba(0, 0, 0, 0.15);
+  box-shadow: 0.05rem 1rem rgba(0, 0, 0, 0.15);
+  background-color: #fff;
+  -webkit-transition: background-color 0.2s ease; 
+  transition: background-color 0.2s ease; 
 }
 
 #mainNav .navbar-brand {
 
-	font-family: 'Kanit',sans-serif;
-	font-weight: 700;
+  font-family: 'Kanit',sans-serif;
+  font-weight: 700;
 
 }
 
 #mainNav .navbar-nav .nav-item .nav-link {
-	color:#242424;
-	font-family: 'Kanit',sans-serif;
-	font-size: 0.9rem;
-	font-weight: 700;
-	padding:0.75rem 0;
+  color:#242424;
+  font-family: 'Kanit',sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  padding:0.75rem 0;
 }
 
 .navbar-nav{
-	display: -webkit-box;
-	display: -ms-box;
-	display: flex;
-	-webkit-box-orient:vertical;
-	-webkit-box-direction:normal;
-	-ms-flex-direction:column;
-	flex-direction:column;
-	padding-left: 0;
-	margin-bottom: 0;
-	list-style: none;
+  display: -webkit-box;
+  display: -ms-box;
+  display: flex;
+  -webkit-box-orient:vertical;
+  -webkit-box-direction:normal;
+  -ms-flex-direction:column;
+  flex-direction:column;
+  padding-left: 0;
+  margin-bottom: 0;
+  list-style: none;
 }
 
 .nav-item .nav-link{
-	padding-left: 0; 
-	padding-right: 0; 
+  padding-left: 0; 
+  padding-right: 0; 
 }
 
 #mainNav .navbar-nav .nav-item .nav-link:hover{
@@ -355,180 +709,181 @@ li.nav-item {
 }
 
 .btn-light{
-	background-color: #c0aa83;
-	border-color: #c0aa83;
-	color: #fff;
-	font-family: 'Kanit',sans-serif;
-	font-size: 16px;
-	font-weight: 900;
+  background-color: #c0aa83;
+  border-color: #c0aa83;
+  color: #fff;
+  font-family: 'Kanit',sans-serif;
+  font-size: 16px;
+  font-weight: 900;
 
 }
 
 .btn-light:hover{
-	background-color: #fff;
-	border-color: #c0aa83;
-	color: #c0aa83;
-	font-family: 'Kanit',sans-serif;
-	font-size: 16px;
-	font-weight: 900;
+  background-color: #fff;
+  border-color: #c0aa83;
+  color: #c0aa83;
+  font-family: 'Kanit',sans-serif;
+  font-size: 16px;
+  font-weight: 900;
 
 }
 
 .btn-dark{
-	background-color: #242424;
-	border-color: #242424;
-	color: #fff;
-	font-family: 'Kanit',sans-serif;
-	font-size: 16px;
-	font-weight: 900;
+  background-color: #242424;
+  border-color: #242424;
+  color: #fff;
+  font-family: 'Kanit',sans-serif;
+  font-size: 16px;
+  font-weight: 900;
 
 }
 
 .btn-dark:hover{
-	background-color: #fff;
-	border-color: #242424;
-	color: #242424;
-	font-family: 'Kanit',sans-serif;
-	font-size: 16px;
-	font-weight: 900;
+  background-color: #fff;
+  border-color: #242424;
+  color: #242424;
+  font-family: 'Kanit',sans-serif;
+  font-size: 16px;
+  font-weight: 900;
 
 }
 
 .boxed{
-	background-color: #c0aa83;
-	height: 150px;
-	margin-left: 80px;
-	margin-right: 80px;
-	padding-top: 15px;
-	padding-left: 20px;
+  background-color: #c0aa83;
+  height: 150px;
+  margin-left: 80px;
+  margin-right: 80px;
+  padding-top: 15px;
+  padding-left: 20px;
 }
 
 
 .subscribe-section{
-	background-image: url("../img/footer_map.png");
-	background-color:#242424;
+  background-image: url("../img/footer_map.png");
+  background-color:#242424;
 }
 
 .contact-heading{
-	color: #c0aa83;
-	font-family: 'Kanit',sans-serif;
-	font-size: 30px;
-	font-weight: 300;
+  color: #c0aa83;
+  font-family: 'Kanit',sans-serif;
+  font-size: 30px;
+  font-weight: 300;
 }
 
 .contact-info{
-	color: #fff;
-	font-family: 'Kanit',sans-serif;
-	font-size: 18px;
+  color: #fff;
+  font-family: 'Kanit',sans-serif;
+  font-size: 18px;
 }
 
 a.explore-link{
-	color: #fff;
-	font-family: 'Kanit',sans-serif;
-	font-size: 15px;
-	text-decoration: none;
+  color: #fff;
+  font-family: 'Kanit',sans-serif;
+  font-size: 15px;
+  text-decoration: none;
 }
 
 a.explore-link:hover{
-	color: #c0aa83;
-	font-family: 'Kanit',sans-serif;
-	font-size: 15px;
-	text-decoration: none;
+  color: #c0aa83;
+  font-family: 'Kanit',sans-serif;
+  font-size: 15px;
+  text-decoration: none;
 }
 
 .logo-text-white{
-	color: #fff;
-	font-family: 'Kanit',sans-serif;
-	font-size: 16px;
+  color: #fff;
+  font-family: 'Kanit',sans-serif;
+  font-size: 16px;
 }
 
 /*PRODUCT PAGE STYLING*/
 
 .blog-sidebar-title{
-	color: #242424;
-	font-family: 'Kanit',sans-serif;
-	font-size: 25px;
-	font-weight: 900;
+  color: #242424;
+  font-family: 'Kanit',sans-serif;
+  font-size: 25px;
+  font-weight: 900;
 }
 
 .blog-sidebar-list{
-	color: #242424;
-	font-family: 'Kanit',sans-serif;
-	font-size: 16px;
-	font-weight: 900;
+  color: #242424;
+  font-family: 'Kanit',sans-serif;
+  font-size: 16px;
+  font-weight: 900;
 }
 
 .blog-sidebar-text{
-	color: #242424;
-	font-family: 'Kanit',sans-serif;
-	font-size: 16px;
-	font-weight: 200;
+  color: #242424;
+  font-family: 'Kanit',sans-serif;
+  font-size: 16px;
+  font-weight: 200;
 }
 
 .blog-form{
-	background-color: #F4F4F4; 
-	padding: 50px;
-	height: 1000px;
+  background-color: #F4F4F4; 
+  padding: 50px;
+  height: 1000px;
 }
 
 .list-icon{
 
-	color: #c0aa83;
+  color: #c0aa83;
 
 }
 
 .tags{
-	color: #242424;
-	font-family: 'Kanit',sans-serif;
-	font-size: 20px;
-	font-weight: 200;
+  color: #242424;
+  font-family: 'Kanit',sans-serif;
+  font-size: 20px;
+  font-weight: 200;
 }
 
 .tags{
-	color: #242424;
-	font-family: 'Kanit',sans-serif;
-	font-size: 20px;
-	font-weight: 200;
+  color: #242424;
+  font-family: 'Kanit',sans-serif;
+  font-size: 20px;
+  font-weight: 200;
 }
 
 
 
 .product-sidebar-list{
-	color: #242424;
+  color: #242424;
 }
 
 .product-sidebar-list:hover{
-	color: #c0aa83;
+  color: #c0aa83;
 }
 
 .card-title{
-	color: #c0aa83;
-	font-family: 'Kanit',sans-serif;
-	font-size: 25px;
-	font-weight: 900;
+  color: #c0aa83;
+  font-family: 'Kanit',sans-serif;
+  font-size: 25px;
+  font-weight: 900;
 }
 
+
 .card-text{
-	font-family: 'Kanit',sans-serif;
-	font-size: 13px;
+  font-family: 'Kanit',sans-serif;
+  font-size: 13px;
 }
 
 .price-tag{
-	color: #c0aa83;
-	font-family: 'Kanit',sans-serif;
-	font-size: 25px;
-	font-weight: 900;
+  color: #c0aa83;
+  font-family: 'Kanit',sans-serif;
+  font-size: 25px;
+  font-weight: 900;
 }
 
 .button-text{
-	font-family: 'Kanit',sans-serif;
-	font-size: 14px;
-	font-weight: 900;
+  font-family: 'Kanit',sans-serif;
+  font-size: 14px;
+  font-weight: 900;
 }
 
 .product-image{
-	width: 200px;
-	height: 200px;
+  width: 200px;
+  height: 200px;
 }
 
     </style>
