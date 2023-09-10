@@ -30,7 +30,7 @@ const Shipping_Router=require('./Shipping');
 const filter_Router=require('./filter')
 const filterShops_Router=require('./filterShops')
 const SellerOrders_Router=require('./SellerOrders')
-const SellerProfile_Router=require('./SellerProile')
+const SellerProfile_Router=require('./SellerProfile')
 
 
 
