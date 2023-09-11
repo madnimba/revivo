@@ -60,6 +60,27 @@ async function getAllOrders(){
 
     return resul; 
 }
+async function getProcessedOrders(id){
+    let sql="";
+
+    sql = `
+    SELECT P.NAME,P.GENDER_CATEGORY,P.PRICE,P.TYPE_OF,P.PRODUCT_ID,P.QUANTITY,PO.AMOUNT,O.ORDER_ID,O.ORDER_DATE
+    FROM 
+        ORDERS O JOIN PRODUCT_ORDERS PO
+        ON(O.ORDER_ID=PO.ORDER_ID)
+        JOIN SHOP_OWNS S 
+        ON(PO.PRODUCT_ID=S.PRODUCT_ID)
+				JOIN PRODUCT P 
+				ON (P.PRODUCT_ID=PO.PRODUCT_ID)
+    WHERE S.SHOP_ID= :id AND  O.ORDER_STATUS='shipping' AND MONTHS_BETWEEN(SYSDATE,O.ORDER_DATE)<=1`
+
+    const binds={
+        id:id,
+    }
+    const resul= (await database.execute(sql,binds,database.options));
+
+    return resul; 
+}
 
 
 async function getOrderProductsByShop(id,orderId){
@@ -661,5 +682,7 @@ module.exports={
     getOrderProductsBySeller,
     getProductofSellerBySearchText,
     getReviews,
-    addReview
+    addReview,
+    getProcessedOrders
+  
 }

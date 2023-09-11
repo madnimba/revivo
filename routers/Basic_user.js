@@ -36,7 +36,10 @@ router.get('/',async(req,res)=>{
     
   }
   
-
+  for(let i=0;i<allMen.length;i++)
+  {
+    console.log(allMen[i].IMAGE);
+  }
  
   
       
