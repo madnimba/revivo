@@ -9,7 +9,8 @@ router.get('/shop',async(req,res)=>{
     let results=[];
             let idshop=req.user.id;
             results = await DB_user2.getProductofShopBySearchText(req.query.product_search,idshop);
-           if(results>0) {
+            console.log(results);
+           if(results.length>0) {
            res.render('search_shop.ejs',{product_data:results});
            }
             else{
