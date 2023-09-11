@@ -61,7 +61,7 @@ rel="stylesheet"
                         <button class="btn btn-link px-2" onclick="decrementQuantity(this)">
                           <i class="fas fa-minus"></i>
                         </button>
-                        <input id="quantity_<%= j %>" min="0" max="<%= products[j].QUANTITY%>" name="quantity" value="<%=products[j].AMOUNT%>" type="number" class="form-control form-control-sm" />
+                        <input id="quantity_<%= j %>" min="1" max="<%= products[j].QUANTITY%>" name="quantity" value="<%=products[j].AMOUNT%>" type="number" class="form-control form-control-sm" />
                         <button class="btn btn-link px-2" id="inc_amount" onclick="incrementQuantity(this)">
                           <i class="fas fa-plus"></i>
                         </button>
@@ -82,9 +82,7 @@ rel="stylesheet"
 
                     <hr class="my-4">
 
-                    <div class="pt-5">
-                      <h6 class="mb-0"><a href="#!" class="text-body"><i class="fas fa-long-arrow-alt-left me-2"></i>Back to shop</a></h6>
-                    </div>
+                    
                   </div>
                 </div>
                 <div class="col-lg-4 bg-grey">
@@ -95,13 +93,14 @@ rel="stylesheet"
                       <h5 class="text-uppercase">Total price</h5>
                       <h5 id="totalPrice">€ 0.00</h5>
                     </div>
+                    <hr>
 
                     <!-- <div class="d-flex justify-content-between mb-4">
                       <h5 class="text-uppercase">items 3</h5>
                       <h5>€ 132.00</h5>
                     </div> -->
 
-                    <h5 class="text-uppercase mb-3">Shipping</h5>
+                    <!-- <h5 class="text-uppercase mb-3">Shipping</h5>
 
                     <div class="mb-4 pb-2">
                       <select class="select">
@@ -110,23 +109,25 @@ rel="stylesheet"
                         <option value="3">Three</option>
                         <option value="4">Four</option>
                       </select>
-                    </div>
+                    </div> -->
 
-                    <h5 class="text-uppercase mb-3">Give code</h5>
+                    <h5 class="text-uppercase mb-3">Address</h5>
+                    <h6 class="text-muted"><%=user[0].ADDRESS %></h6>
+                    <hr>
+
+                    <h5 class="text-uppercase mb-3">Phone</h5>
+                    <h6 class="text-muted"><%=user[0].PHONE %></h6>
+                    <hr>
 
                     <div class="mb-5">
-                      <div class="form-outline">
-                        <input type="text" id="form3Examplea2" class="form-control form-control-lg" />
-                        <label class="form-label" for="form3Examplea2">Enter your code</label>
-                      </div>
+                      <form action="/app/myprofile/update" method="GET">
+                        <button class="btn btn-light center-div">Update Address</button>
+                      </form>
                     </div>
 
                     <hr class="my-4">
 
-                    <div class="d-flex justify-content-between mb-5">
-                      <h5 class="text-uppercase">Total price</h5>
-                      <h5>€ 137.00</h5>
-                    </div>
+                    
 
                     <button type="button" id="confirmOrderBtn" class="btn btn-dark btn-block btn-lg" data-mdb-ripple-color="dark">Confirm Order</button>
 
