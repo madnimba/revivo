@@ -27,23 +27,42 @@
         <form action="/app/ShopProfileUpdate" method="GET">
             <button type="submit" class="btn btn-success">Update Profile</button>
         </form>
+        <form action="/app/Shop" method="GET">
+            <button type="submit" class="btn btn-success">Go HOME</button>
+        </form>
 
         <section class="sale-history">
             <h2>Sale History</h2>
             <table>
                 <thead>
                     <tr>
-                        <th>Product</th>
+                        <th>Product NAME</th>
+                        <th>Amount</th>
+                        <th>DATE</th>
                         <th>Price</th>
-                        <th>Date</th>
                     </tr>
                 </thead>
                 <tbody>
+                   
+                    <% product.forEach(function(productItem) { %>
                         <tr>
-                            <td>sale.product</td>
-                            <td>$ sale.price.toFixed</td>
-                            <td>sale.date </td>
-                        </tr>
+                        <td>
+                            <%=productItem.NAME%>
+                            </td>
+                            <td>
+                            <%=productItem.AMOUNT%>
+                        </td>
+                    <td>
+                            <%= productItem.ORDER_DATE %>
+                        </td>
+                        <td>
+                            <%= productItem.PRICE %>
+                        </td>
+                        
+                    </tr>
+                    <% }); %>
+                 
+
                     
                 </tbody>
             </table>
@@ -121,6 +140,17 @@ footer {
     padding: 10px;
     background-color: #333;
     color: #fff;
+}
+.success{
+    padding-top: 5%;
+    font-size: xx-large;
+    font-weight: 400;
+    color: green;
+}
+
+.btn.btn-success{
+    margin-top: 2%;
+    padding: .4em 2em;
 }
 </style>
 </html>

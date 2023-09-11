@@ -100,12 +100,12 @@ rel="stylesheet"
     <div class="col-sm-4">
       <a href="/app/shopUser/gender/?id=<%= shops[i].SHOP_ID %>&role=<%= role[j-1] %>">
         <div class="card">
-          <img src=<%= (
-  (j-1 === 0 && Object.keys(allMen[j-1]).length > 0) ? allMen[j-1].IMAGE :
-  (j-1 === 1 && Object.keys(allWomen[j-1]).length > 0) ? allWomen[j-1].IMAGE :
-  (j-1 === 2 && Object.keys(allChild[j-1]).length > 0) ? allChild[j-1].IMAGE :
-  '/path/to/default-image.png'
-) %> class="card-img-top">
+          <img src="/<%= (
+  (j-1 === 0 && Object.keys(allMen[i]).length > 0) ?allMen[i].IMAGE :
+  (j-1 === 1 && Object.keys(allWomen[i]).length > 0) ? allWomen[i].IMAGE :
+  (j-1 === 2 && Object.keys(allChild[i]).length > 0) ? allChild[i].IMAGE :
+  'images/R.png'
+) %>" class="card-img-top">
 
 
           <div class="card-body">
