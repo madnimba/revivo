@@ -246,7 +246,8 @@ const binds = {
 const resul= (await database.execute(sql,binds,database.options));
 
 
-return resul; 
+
+return resul;
 
 }
 
