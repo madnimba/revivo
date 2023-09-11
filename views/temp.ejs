@@ -1,237 +1,690 @@
-<form action="/app/DeleteProduct/<%= product_data[i].PRODUCT_ID %>" method="POST" id="deleteForm" onsubmit="return confirmDelete();">
-    <button type="submit" class="btn">Delete</button>
-</form>
-
-function confirmDelete() {
-    return Swal.fire({
-        title: 'Are you sure?',
-        text: 'This action cannot be undone.',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonText: 'Delete',
-        cancelButtonText: 'Cancel'
-    }).then((result) => {
-        return result.isConfirmed;
-    });
-}
-
-<select class="form-control">
-    <option value="">Default Sorting</option>
-    <option value="popularity">Sorting by popularity</option>
-    <option value="average">Sorting by average</option>
-    <option value="latest">Sorting by latest</option>
-    <option value="low">Sorting by low</option>
-    <option value="high">Sorting by high</option>
-</select>
+-----------app.js
+const express=require('express');
+const app=express();
+const body_parser=require('body-parser');
+const morgan=require('morgan');
+const cookieParser = require('cookie-parser');
 
 
-<!--Page view for adding a product in the shop-->
+//constant routers
+const indexRouter=require('./routers/indexRouters');
+
+
+//setting the view engine
+app.set('view engine','set');
+app.use(express.static('public'))
+
+
+//middleware
+app.use(body_parser.urlencoded({ extended: true }));
+app.use(body_parser.json());
+app.use(morgan('tiny'));
+app.use(cookieParser());
+app.use('/app',indexRouter);
+
+
+
+
+module.exports = app;
+
+
+<!--shop view of seeing all products of a shop-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Registration</title>
-   
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-    <link rel="stylesheet" href="/style.css">
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, intial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title> Products</title>
+
+      <!-- Font Awesome -->
+<link
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+rel="stylesheet"
+/>
+<!-- Google Fonts -->
+<link
+href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+rel="stylesheet"
+/>
+<!-- MDB -->
+<link
+href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.1/mdb.min.css"
+rel="stylesheet"
+/>
+
+  <!-- Site Icon -->
+  <link rel="shortcut Icon" type="image/png" href="img/favicon.png">
+
+  <!-- Font Awesome Icons -->
+  <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.11.0/mdb.min.css">
+
+  <!-- Custom CSS -->
+  <link href="/style.css" rel="stylesheet">
+
 </head>
-<body>
+<body id="page-top">
+  <%- include('userNav.ejs') %>
+  
 
-    <div class="text-center py-1 success"><%=message%></div>
+  <header class="page-section masthead2">
+    <div class="container h-50">
+      <h1 class="section-header text-white font-weight-bold">Products</h1>
+      <p class="main-menu text-white-75 font-weight-light mb-5"><a class="link-menu" href="home.html">Revivo > <span style="color:white;">Products</span></a></p>
+      
+    </div>
+    
+  </header>
 
-    <div class="text-center center-div" id="login">
+  <section class="page-section">
+    <div class="container">
+      <div class="row">
 
+        <div class="col-lg-3 blog-form">
+          <hr />
+          <div>&nbsp;</div>
 
-        <div class="container w-25 border py-5">
-            <div class="title pb-5">
-            <h2 class="font-weight-bold">
-                Product Information
-            </h2>
-        </div>
-        <form action="/app/addProductinShop" method="POST" class="multipart/form-data">
-           
-                <div class="form-group">
-                    <label for="productImage">Product Image:</label>
-                    <input type="file" id="productImage" name="productImage" accept="image/*">
-                </div>
-                <div class="form-group">
-                <input placeholder="Product Name" class="form-control" name = "name">
-                <input class="form-control" placeholder="Category" name="category">
-                <div class="role">
-                    <input type="radio" class="rd" name="gender" value="male" >Male
-                    <input type="radio" class="rd" name="gender" value="female">Female
-                    <input type="radio" class="rd" name="gender" value="child" >Children
-                       
-                        
-                    </div>
-                <input type="number" class="form-control" placeholder="Price" name="price">
-                <input class="form-control" placeholder="Material" name="material">
-                <input type="number" class="form-control" placeholder="Quantity" name="quantity">
-                <input class="form-control" placeholder="Size" name="size">
-                <input class="form-control" placeholder="Used_status" name="Used_status">
-            
+          <h2 class="blog-sidebar-title"><b>Categories</b></h2>
+          <div>&nbsp;</div>
+          <hr />
 
+          <p class="blog-sidebar-list"><b><span class="list-icon">  </span> <a href="/app/showAllProducts/men">Men</a></b></p>
+          <p class="blog-sidebar-list"><b><span class="list-icon">  </span> <a href="/app/showAllProducts/women">Women</a></b></p>
+          <p class="blog-sidebar-list"><b><span class="list-icon">  </span><a href="/app/showAllProducts/children"> Children</a></b></p>
+          
+
+          <div>&nbsp;</div>
+          <div>&nbsp;</div>
+
+          <h2 class="blog-sidebar-title"><b>Filter by price</b></h2>
+          <hr />
+
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Search" aria-label="Receipient's username" aria-describely="basic-addon2">
+            <div class="input-group-append">
+              <span class="input-group-text" id="basic-addon2"><i class="fa fa-search"></i></span>
             </div>
             
-            <button type="submit" class="btn btn-success rounded-5 ">Add</button>
-            
-        </form>
+          </div>
+          <div>&nbsp;</div>
+          <button type="button" class="btn btn-dark btn-lg">Filter</button>
+          
+
+          <div>&nbsp;</div>
+          <div>&nbsp;</div>
+          <h2 class="blog-sidebar-title"><b></b></h2>
+          <p class="product-sidebar-list"><b></b></p>
+          <p class="product-sidebar-list"><b></b></p>
+          <p class="product-sidebar-list"><b></b></p>
+
+
         </div>
+        <!--END  <div class="col-lg-3 blog-form">-->
+
+				<div class="col-lg-9" style="padding-left: 30px;">
+					<div class="row">
+						<div class="col">
+							Showing all <%= products.length %> results
+						</div>
+
+						<div class="col">
+							<select class="form-control">
+								<option value="">Default Sorting</option>
+								<option value="popularity">Sorting by popularity</option>
+								<option value="average">Sorting by average</option>
+								<option value="latest">Sorting by latest</option>
+								<option value="low">Sorting by low</option>
+								<option value="high">Sorting by high</option>
+							</select>
+						</div>
+
+						<div class="col">
+						</div>
+
+					</div>
+					<!-- Sorting by <div class="row"> -->
+					<div>&nbsp;</div>
+					<div>&nbsp;</div>
+
+
+    <!-- here starts the dynamic -->
+    <div>&nbsp;</div>
+    <div>&nbsp;</div>
+    
+    
+    <div class="row">
+        <% for (let i = 0; i < products.length; i++) { %>
+        <div class="col-sm-3 col-md-6 col-lg-4">
+            <div class="card">
+                <div class="card-body text-center">
+                    <a href="/app/search_result/single/<%= products[i].PRODUCT_ID %>"><img src="/images/dress3.jpg" class="product-image"></a>
+                    <h5 class="card-title"><b><%= products[i].NAME %></b></h5>
+                    <p class="card-text small"><%= products[i].TYPE_OF %></p>
+                    <p class="tags">Price :<%= products[i].PRICE %></p>
+                </div>
+
+            </div>
+        </div>
+        <% if ((i + 1) % 3 === 0 || (i + 1) === products.length) { %>
     </div>
+    <div>&nbsp;</div>
+    <div class="row">
+        <% } %>
+        <% } %>
+    </div>
+    <!-- Sorting by <div class="row"> -->
+        
+
+					</>
+				<!--END  <div class="col-lg-9">-->
+
+			</div>
+		</div>
+	</section>
+  
+  
+	<div>&nbsp;</div>
+	<div>&nbsp;</div>
+	
+   
+  
+  <!-- ends the dynamic-->
+  
+  
+	<footer class="footer-info pt-5 py-4">
+	  <div class="container">
+		<div class="small text-center text-muted">
+		  <span class="footer-title"></span> <span class="copyright">&copy; </span>
+		</div>
+  
+		<a class="scroll-to-top rounded" href="#page-top">
+		  <span class="fa fa-angle-up"><br>TOP</span>
+		</a>
+  
+	  </div>
+	</footer>
+  
+	<script
+	type="text/javascript"
+	src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.1/mdb.min.js"
+	></script>
+  
+	<!-- Bootstrap JavaScript -->
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+	
+  
+  
+  
+	  <style>
+		  
+  :root{
+	--input-padding-x: 1.5rem;
+	--input-padding-y: 0.75rem;
+  }
+  
+  
+  body,
+  html{
+	width: 100%;
+	height: 100%;
+  }
+  
+  .btn{
+	font-family: 'Kanit',sans-serif;
+  }
+  
+  .btn-success{
+	background-color: #c0aa83;
+	border-color: #c0aa83;
+	color: #fff;
+  }
+  
+  .btn-success:hover{
+	background-color: #242424;
+	border-color: #242424;
+	color: #fff;
+  }
+  
+  .masthead2{
+  
+	background-image: url("../img/backgroundimage.jpg");
+	background-position: 50% -26px;
+	background-color:#242424;
+  
+  }
+  
+  a.social-icon{
+	color:#242424;
+  }
+  
+  a.social-icon:hover{
+	color:#c0aa83;
+  }
+  
+  .social-icon{
+	background-color: #ECE4C3;
+	width: 80px;
+	height: 80px;
+	padding:20px;
+	margin: 10px;
+  }
+  
+  .social-icon a{
+	background-color: #B98C45;
+	width: 50px;
+	height: 50px;
+	padding:10px 16px;
+	margin-right: 6px;
+	position: relative;
+	display: block;
+  
+  }
+  
+  .social-icon a:hover{
+	color:#242424;
+  
+  }
+  
+  
+  .page-section{
+	padding: 8rem 0;
+  }
+  
+  .main-menu{
+	color: #c0aa83;
+	font-family: 'Kanit',sans-serif;
+	font-size: 20px;
+	font-weight: 900;
+  }
+  
+  a.link-menu{
+	text-decoration: none;
+	color: #c0aa83;
+  }
+  
+  .footer-info{
+	background-color: #000;
+  }
+  .scroll-to-top{
+  position: fixed;
+  right: 15px;
+  bottom: 15px;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  color:#242424;
+  background: #c0aa83;
+  line-height: 46px;
+} 
+
+.scroll-to-top:focus,.scroll-to-top:hover{
+  color:#242424;
+}
+
+.scroll-to-top:hover{
+  color:#c0aa83;
+}
+
+.rounded {
+  border-radius: 0.25rem !important;
+}
+
+.footer-title{
+  color: #fff;
+  font-family: 'Kanit',sans-serif;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 46px;
+}
+
+.copyright{
+  color:#c0aa83;
+  font-family: 'Kanit',sans-serif;
+  font-size: 14px;
+  font-weight: 300;
+}
 
 
+#mainNav{
+  -webkit-box-shadow: 0.05rem 1rem rgba(0, 0, 0, 0.15);
+  box-shadow: 0.05rem 1rem rgba(0, 0, 0, 0.15);
+  background-color: #fff;
+  -webkit-transition: background-color 0.2s ease; 
+  transition: background-color 0.2s ease; 
+}
+
+#mainNav .navbar-brand {
+
+  font-family: 'Kanit',sans-serif;
+  font-weight: 700;
+
+}
+
+#mainNav .navbar-nav .nav-item .nav-link {
+  color:#242424;
+  font-family: 'Kanit',sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  padding:0.75rem 0;
+}
+
+.navbar-nav{
+  display: -webkit-box;
+  display: -ms-box;
+  display: flex;
+  -webkit-box-orient:vertical;
+  -webkit-box-direction:normal;
+  -ms-flex-direction:column;
+  flex-direction:column;
+  padding-left: 0;
+  margin-bottom: 0;
+  list-style: none;
+}
+
+.nav-item .nav-link{
+  padding-left: 0; 
+  padding-right: 0; 
+}
+
+#mainNav .navbar-nav .nav-item .nav-link:hover{
+  color: #c0aa83 !important;
+}
+
+li.nav-item {
+  display: inline;
+  padding: 10px;
+}
+
+.btn-light{
+  background-color: #c0aa83;
+  border-color: #c0aa83;
+  color: #fff;
+  font-family: 'Kanit',sans-serif;
+  font-size: 16px;
+  font-weight: 900;
+
+}
+
+.btn-light:hover{
+  background-color: #fff;
+  border-color: #c0aa83;
+  color: #c0aa83;
+  font-family: 'Kanit',sans-serif;
+  font-size: 16px;
+  font-weight: 900;
+
+}
+
+.btn-dark{
+  background-color: #242424;
+  border-color: #242424;
+  color: #fff;
+  font-family: 'Kanit',sans-serif;
+  font-size: 16px;
+  font-weight: 900;
+
+}
+
+.btn-dark:hover{
+  background-color: #fff;
+  border-color: #242424;
+  color: #242424;
+  font-family: 'Kanit',sans-serif;
+  font-size: 16px;
+  font-weight: 900;
+
+}
+
+.boxed{
+  background-color: #c0aa83;
+  height: 150px;
+  margin-left: 80px;
+  margin-right: 80px;
+  padding-top: 15px;
+  padding-left: 20px;
+}
+
+
+.subscribe-section{
+  background-image: url("../img/footer_map.png");
+  background-color:#242424;
+}
+
+.contact-heading{
+  color: #c0aa83;
+  font-family: 'Kanit',sans-serif;
+  font-size: 30px;
+  font-weight: 300;
+}
+
+.contact-info{
+  color: #fff;
+  font-family: 'Kanit',sans-serif;
+  font-size: 18px;
+}
+
+a.explore-link{
+  color: #fff;
+  font-family: 'Kanit',sans-serif;
+  font-size: 15px;
+  text-decoration: none;
+}
+
+a.explore-link:hover{
+  color: #c0aa83;
+  font-family: 'Kanit',sans-serif;
+  font-size: 15px;
+  text-decoration: none;
+}
+
+.logo-text-white{
+  color: #fff;
+  font-family: 'Kanit',sans-serif;
+  font-size: 16px;
+}
+
+/*PRODUCT PAGE STYLING*/
+
+.blog-sidebar-title{
+  color: #242424;
+  font-family: 'Kanit',sans-serif;
+  font-size: 25px;
+  font-weight: 900;
+}
+
+.blog-sidebar-list{
+  color: #242424;
+  font-family: 'Kanit',sans-serif;
+  font-size: 16px;
+  font-weight: 900;
+}
+
+.blog-sidebar-text{
+  color: #242424;
+  font-family: 'Kanit',sans-serif;
+  font-size: 16px;
+  font-weight: 200;
+}
+
+.blog-form{
+  background-color: #F4F4F4; 
+  padding: 50px;
+  height: 1000px;
+}
+
+.list-icon{
+
+  color: #c0aa83;
+
+}
+
+.tags{
+  color: #242424;
+  font-family: 'Kanit',sans-serif;
+  font-size: 20px;
+  font-weight: 200;
+}
+
+.tags{
+  color: #242424;
+  font-family: 'Kanit',sans-serif;
+  font-size: 20px;
+  font-weight: 200;
+}
+
+
+
+.product-sidebar-list{
+  color: #242424;
+}
+
+.product-sidebar-list:hover{
+  color: #c0aa83;
+}
+
+.card-title{
+  color: #c0aa83;
+  font-family: 'Kanit',sans-serif;
+  font-size: 25px;
+  font-weight: 900;
+}
+
+.card-text{
+  font-family: 'Kanit',sans-serif;
+  font-size: 13px;
+}
+
+.price-tag{
+  color: #c0aa83;
+  font-family: 'Kanit',sans-serif;
+  font-size: 25px;
+  font-weight: 900;
+}
+
+.button-text{
+  font-family: 'Kanit',sans-serif;
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.product-image{
+  width: 200px;
+  height: 200px;
+}
+
+    </style>
 </body>
 </html>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!--Shows the update page of a product
-parameters: product_data,message
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Update Product Information</title>
-</head>
-<body>
-    <div class="container">
-        <h1>Update Product Information</h1>
-        <form action="/app/UpdateProduct" method="POST" enctype="multipart/form-data">
-          <div class="form-group">
-                <label for="productImage">Product Image:</label>
-                <input type="file" id="productImage" name="productImage" accept="image/*">
-            </div>
-            <div class="form-group">
-                <label for="productName">Product Name:</label>
-                <input type="text" id="productName" name="productName" value="<%= product_data[0].NAME %>">
-                </div>
-            <div class="form-group">
-                <label for="productPrice">Product Price:</label>
-                <input type="number" id="productPrice" name="productPrice" step="0.01" value="<%= product_data[0].PRICE %>">
-            </div>
-            <div class="form-group">
-                <label for="productMaterial">Product Material:</label>
-                <input type="text" id="productMaterial" name="productMaterial" value=" <%= product_data[0].MATERIAL%>">
-            </div>
-            <div class="form-group">
-                <label for="Typeof">Category:</label>
-                <input type="text" id="productCategory" name="productCategory" value=" <%= product_data[0].TYPE_OF %>">
-            </div>
-            <div class="form-group">
-                <label for="size">Size:</label>
-                <input type="number" id="productSize" name="productSize" value="36" step="1" value="<%= product_data[0].SIZE_OF %>">
-            </div>
-            <div class="form-group">
-                <label for="size">Quantity:</label>
-                <input type="number" id="productQuantity" name="productQuantity" step="1" value="<%=product_data[0].QUANTITY %>">
-            </div>
-            <div class="form-group">
-                <label for="Used status">Used Status:</label>
-                <input type="text" id="productUsedStatus" name="productUsedStatus" value=" <%= product_data[0].USED_STATUS %>">
-            </div>
-            <button type="submit" class="btn">Update Product</button>
-        </form>
-        <h2><%=message%></h2>
-    </div>
-</body>
-<style>
-    body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
-    margin: 0;
-    padding: 0;
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  margin: 0;
+  padding: 0;
 }
 
 .container {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  width:50%;
+  margin-top:20px;
+  margin-left:650px;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
+
 .form-group {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
 }
 
 input[type="text"],
 input[type="number"],
 input[type="file"] {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    font-size: 16px;
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  font-size: 16px;
 }
 
 .btn {
-    background-color: #256eff;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 3px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+  background-color: #256eff;
+  color: #fff;
+  border: none;
+  margin-top:20px;
+  margin-left:700px;
+  padding: 10px 20px;
+  border-radius: 3px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .btn:hover {
-    background-color: #1e4caf;
+  background-color: #1e4caf;
 }
 </style>
-</html>
-<!DOCTYPE html>
+
+
+<div class="form-group">
+  <label for="Gender">Gender:</label>
+  <input type="radio" class="rd" name="productGender" value="male" required >Male
+  <input type="radio" class="rd" name="productGender" value="female">Female
+  <input type="radio" class="rd" name="productGender" value="child">Children
+</div>
+<div class="form-group">
+  <label for="productMaterial">Product Material:</label>
+  <input type="text" id="productMaterial" name="productMaterial" value=" <%= product_data[0].MATERIAL%>">
+</div>
+<div class="form-group">
+  <label for="Typeof">Category:</label>
+  <input type="text" id="productCategory" name="productCategory" value=" <%= product_data[0].TYPE_OF %>">
+</div>
+
+
+<!--<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-    <link rel="stylesheet" href="/static/style.css">
+  
 </head>
 
-<body>
-    
+<body class="login_body">
+    <div class="card">
+     
+    <div class="text-center errorM"><%=message%></div>
 
     <div class="text-center center-div" id="login">
-        <div class="container w-25 border py-5">
-            <div class="title pb-5">
-            <h2 class="font-weight-bold">
-                Product Update
-            </h2>
-        </div>
-        <form action="/app/UpdateProduct" method="POST" class="multipart/form-data">
+
+        <div class="container ">
+            <div class="title pb-3">
+                Update Product 
+            </div>
+            <form action="/app/UpdateProduct" method="POST" class="multipart/form-data">
             <div class="form-group">
                 <label for="productImage">Product Image:</label>
                 <input type="file" id="productImage" name="productImage" accept="image/*">
@@ -253,6 +706,12 @@ input[type="file"] {
                     <input type="text" id="productCategory" name="productCategory" value=" <%= product_data[0].TYPE_OF %>">
                 </div>
                 <div class="form-group">
+                    <label for="Gender">Gender:</label>
+                    <input type="radio" class="rd" name="productGender" value="male" required >Male
+                    <input type="radio" class="rd" name="productGender" value="female">Female
+                    <input type="radio" class="rd" name="productGender" value="child">Children
+                </div>
+                <div class="form-group">
                     <label for="size">Size:</label>
                     <input type="number" id="productSize" name="productSize" value="36" step="1" value=" <%= product_data[0].SIZE_OF %>">
                 </div>
@@ -268,62 +727,463 @@ input[type="file"] {
             </div>
             <button type="submit" class="btn">Update Product</button>
             
+            </form>
+            <h2><%=message%></h2>
+        </div>
+    </div>
         </form>
+
+    </div>
+</div>
+
+
+</div>
+
+
+
+ <style>     
+  :root {
+    font-size: 20px;
+    box-sizing: inherit;
+  }
+  
+  *,
+  *:before,
+  *:after {
+    box-sizing: inherit;
+  }
+  
+  p {
+    margin: 0;
+  }
+  
+  p:not(:last-child) {
+    margin-bottom: 1.5em;
+  }
+  
+  .login_body{
+    font: 1em/1.618 Inter, sans-serif;
+  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    min-height: 100vh;
+    padding: 30px;
+    
+    color: #224;
+    background:
+    url("/images/clothes.jpg")
+      center / cover no-repeat fixed;
+  }
+  
+  .form-control
+  {
+    width: 400px;
+    margin-left: 80px;
+    margin-bottom: 20px;
+    
+  }
+  .card {
+    max-width: 600px;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  
+    width: 600px;
+    height: 600px;
+    padding: 35px;
+  
+    border: 1px solid rgba(255, 255, 255, .25);
+    border-radius: 20px;
+    background-color: rgba(255, 255, 255, 0.45);
+    box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.25);
+  
+    backdrop-filter: blur(15px);
+  }
+  
+  /* Increase the size of the radio buttons */
+  .rd {
+    transform: scale(1.5); /* Adjust the scale factor as needed */
+    margin-right: 10px; /* Add some spacing between the radio buttons */
+  }
+  
+  
+  .card-footer {
+    font-size: 0.65em;
+    color: #446;
+  }
+  </style>
+  </body>
+</html>-->
+
+<!--Page view for adding a product in the shop-->
+<!--<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    
+</head>
+<body class="login_body">
+    <div class="card">
+     
+    <div class="text-center errorM"><%=message%></div>
+
+    <div class="text-center center-div" id="login">
+
+        <div class="container ">
+            <div class="title pb-3">
+                Update Product 
+            </div>
+            <form action="/app/UpdateProduct" method="POST" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="productImage">Product Image:</label>
+                    <input type="file" id="productImage" name='productImage' accept="image/*" class="form-control"/>
+                </div>
+                <div class="form-group">
+                    <input  value="<%= product_data[0].NAME %>" class="form-control" name="productName">
+                </div>
+                <div class="form-group role">
+                    <input type="hidden" id="initialGender" value="<%= product_data[0].GENDER_CATEGORY %>">
+                </div>
+
+                <div class="form-group role">
+                    <div class="form-check form-check-inline">
+                        <input type="radio" class="form-check-input" name="productGender" value="male" id="maleRadio">
+                        <label class="form-check-label" for="maleRadio">Male</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input type="radio" class="form-check-input" name="productGender" value="female" id="femaleRadio" >
+                        <label class="form-check-label" for="femaleRadio">Female</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input type="radio" class="form-check-input" name="productGender" value="child" id="childRadio">
+                        <label class="form-check-label" for="childRadio">Children</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <select class="form-control" id="category" name="productCategory" required>
+                        <option value="<%= product_data[0].TYPE_OF %>" disabled selected><%= product_data[0].TYPE_OF %></option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <input type="number" class="form-control" value="<%= product_data[0].PRICE %>" name="productPrice">
+                </div>
+                <div class="form-group">
+                    <select class="form-control" id="material" name="productMaterial">
+                        <option value="<%= product_data[0].MATERIAL%>" disabled selected><%= product_data[0].MATERIAL%></option>
+                        <option value="Cotton">Cotton</option>
+                        <option value="Silk">Silk</option>
+                        <option value="Denim">Denim</option>
+                        <option value="Linen">Linen</option>
+                        <option value="Wool">Wool</option>
+                        <option value="Polyester">Polyester</option>
+                        <option value="Velvet">Velvet</option>
+                        <option value="Leather">Leather</option>
+                        <option value="Chiffon">Chiffon</option>
+                        <option value="Satin">Satin</option>
+                        <option value="Half Silk">Half Silk</option>
+                        <option value="PolyCotton">PolyCotton</option>
+                        
+                    </select>
+                </div>
+                <div class="form-group">
+                    <input type="number" class="form-control" value="<%= product_data[0].QUANTITY %>" name="productQuantity" >
+                </div>
+                <div class="form-group">
+                    <input class="form-control" value="<%= product_data[0].SIZE_OF %>" name="productSize" >
+                </div>
+                <div class="form-group">
+                    <input class="form-control" value="<%= product_data[0].USED_STATUS%>" name="productUsedStatus" >
+                </div>
+                <button type="submit" class="btn btn-success rounded-5">Update</button>
+                </form>
+                <h2><%=message%></h2>
+            </div>
+        </div>
+   
         </div>
     </div>
 
 
+  </div>
+
+      <style>
+        :root {
+  font-size: 20px;
+  box-sizing: inherit;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+p {
+  margin: 0;
+}
+
+p:not(:last-child) {
+  margin-bottom: 1.5em;
+}
+
+.login_body{
+  font: 1em/1.618 Inter, sans-serif;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  min-height: 100vh;
+  padding: 30px;
+  
+  color: #224;
+  background:
+  url("/images/clothes.jpg")
+    center / cover no-repeat fixed;
+}
+
+.form-control
+{
+  width: 400px;
+  margin-left: 80px;
+  margin-bottom: 20px;
+  
+}
+.card {
+  max-width: 600px;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  width: 600px;
+  height: 600px;
+  padding: 35px;
+
+  border: 1px solid rgba(255, 255, 255, .25);
+  border-radius: 20px;
+  background-color: rgba(255, 255, 255, 0.45);
+  box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.25);
+
+  backdrop-filter: blur(15px);
+}
+
+/* Increase the size of the radio buttons */
+.rd {
+  transform: scale(1.5); /* Adjust the scale factor as needed */
+  margin-right: 10px; /* Add some spacing between the radio buttons */
+}
+
+
+.card-footer {
+  font-size: 0.65em;
+  color: #446;
+}
+
+   
+  
+
+
+</style>
+<script>
+    // JavaScript to update the category dropdown based on the selected gender
+    const categorySelect = document.getElementById('category');
+    const genderRadios = document.querySelectorAll('input[name="productGender"]');
+    const initialGender = document.getElementById('initialGender').value;
+
+    for (const radio of genderRadios) {
+        radio.addEventListener('change', updateCategoryOptions);
+    }
+    if (initialGender === 'male') {
+        document.getElementById('maleRadio').checked = true;
+    } else if (initialGender === 'female') {
+        document.getElementById('femaleRadio').checked = true;
+    } else if (initialGender === 'child') {
+        document.getElementById('childRadio').checked = true;
+    }
+    function updateCategoryOptions() {
+        const selectedGender = document.querySelector('input[name="productGender"]:checked').value;
+        categorySelect.innerHTML = ''; // Clear existing options
+
+        // Define category options based on the selected gender
+        const categoryOptions = {
+            male: ['Shirt', "Men's Pants", 'Panjabi','Jacket','Coaty','Lungi'],
+            female: ['Sharee', 'Salwar Kamiz', 'Tops',"Women's Pants",'Skirt','Scarf'],
+            child: ["Kids' Frock", "Kids' Shirt", "Kids' Pants","Kids' Salwar Kamiz","Kids' Panjabi"],
+        };
+
+        // Populate the category dropdown with options
+        for (const category of categoryOptions[selectedGender]) {
+            const option = document.createElement('option');
+            option.value = category;
+            option.textContent = category;
+            categorySelect.appendChild(option);
+        }
+    }
+
+    // Initialize the category options based on the default selected gender
+    updateCategoryOptions();
+</script>
 </body>
-<!-- <style>
-        body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
-    margin: 0;
-    padding: 0;
-}
-
-.container {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.form-group {
-    margin-bottom: 20px;
-}
-
-label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-}
-
-input[type="text"],
-input[type="number"],
-input[type="file"] {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    font-size: 16px;
-}
-
-.btn {
-    background-color: #256eff;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 3px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.btn:hover {
-    background-color: #1e4caf;
-}
-</style> 
 </html>-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Registration</title>
+   
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .center-div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .border {
+            border: 1px solid #e2e2e2;
+            border-radius: 10px;
+        }
+
+        .title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-control {
+            border-radius: 5px;
+            padding: 12px;
+            font-size: 14px;
+        }
+
+        .role {
+            margin-top: 10px;
+        }
+
+        .btn-success {
+            background-color: #28a745;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="text-center py-1 success"><%=message%></div>
+
+    <div class="text-center center-div" id="login">
+        <div class="container w-25 border py-5">
+            <div class="title pb-3">
+                Product Information
+            </div>
+            <form action="/app/addProductinSeller" method="POST" class="multipart/form-data">
+                <div class="form-group">
+                    <label for="productImage">Product Image:</label>
+                    <input type="file" id="productImage" name="productImage" accept="image/*" class="form-control">
+                </div>
+                <div class="form-group">
+                    <input placeholder="Product Name" class="form-control" name="name">
+                </div>
+                <div class="form-group">
+                    <input class="form-control" placeholder="Category" name="category">
+                </div>
+                <div class="form-group role">
+                    <div class="form-check form-check-inline">
+                        <input type="radio" class="form-check-input" name="gender" value="male" id="maleRadio">
+                        <label class="form-check-label" for="maleRadio">Male</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input type="radio" class="form-check-input" name="gender" value="female" id="femaleRadio">
+                        <label class="form-check-label" for="femaleRadio">Female</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input type="radio" class="form-check-input" name="gender" value="child" id="childRadio">
+                        <label class="form-check-label" for="childRadio">Children</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="number" class="form-control" placeholder="Price" name="price">
+                </div>
+                <div class="form-group">
+                    <input class="form-control" placeholder="Material" name="material">
+                </div>
+                <div class="form-group">
+                    <input type="number" class="form-control" placeholder="Quantity" name="quantity">
+                </div>
+                <div class="form-group">
+                    <input class="form-control" placeholder="Size" name="size">
+                </div>
+                <div class="form-group">
+                    <input class="form-control" placeholder="Used Status" name="Used_status">
+                </div>
+                <button type="submit" class="btn btn-success rounded-5">Add</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
+
+const express=require('express');
+const router=express.Router();
+const DB_user = require('../Database/product')
+const DB_user1 = require('../Database/Basic_user')
+
+router.get('/',async(req,res)=>{
+    res.render('addSellerProduct.ejs',{error:"",message:""});
+})
+
+router.post('/', async(req,res)=>{
+    let prod = req.body;
+    let userid=req.user.id;
+    let seller=await DB_user1.getSellerByUser(req.user.id);
+    let sellerId=seller[0].SELLER_ID;
+    console.log(sellerId);
+    await DB_user.addSellerProduct(prod.name, prod.gender, prod.category, prod.material, prod.price, prod.quantity, prod.productImage, prod.size,prod.Used_status, sellerId)
+    res.render('addSellerProduct.ejs',{error:"",message:"New Product Added!"});
+});
+
+
+module.exports=router;
+
+results = await DB_product.getProductbyName(req.query.product_search_seller,id,'user');
+//console.log(results);
+if(results.length==0){
+    results=await DB_product.getProductbyCategory(req.query.product_search_seller,id,'user');
+    if(results.length==0){
+        const userData = await DB_user.readID(id, 'user');
+        res.render('seller.ejs',{userData: userData,message:"No such product/category Found"})
+    }
+    else{
+        res.render('search_seller.ejs',{product_data:results}); 
+    }
+}
+else{
+    res.render('search_seller.ejs',{product_data:results});
+}
+} catch (error) {
+console.error(error);
+}
+
+
+console.log(results);

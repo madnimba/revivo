@@ -8,7 +8,7 @@
 <body>
     <header class="shop-header">
         <div class="shop-logo">
-            <img src="<%= shop[0].IMAGES %>" alt="<%= shop[0].NAME %> Logo">
+            <img src="/<%= shop[0].IMAGES %>" alt="<%= shop[0].NAME %> Logo">
         </div>
         <div class="shop-info">
             <h1><%= shop[0].name %></h1>
@@ -24,6 +24,9 @@
             <p>Phone: <%=shop[0].PHONE %></p>
             <p>E-mail: <%=shop[0].E_MAIL%></p>
         </section>
+        <form action="/app/ShopProfileUpdate" method="GET">
+            <button type="submit" class="btn btn-success">Update Profile</button>
+        </form>
 
         <section class="sale-history">
             <h2>Sale History</h2>

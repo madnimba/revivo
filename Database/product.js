@@ -357,7 +357,7 @@ async function getProductbyID(id){
 
         `;
         
-    
+    console.log(id);
     //console.log(sql);
     const binds = {
         id:id
@@ -368,24 +368,43 @@ async function getProductbyID(id){
     return resul;     
 }
 
+async function updateShop(details){
+    const sql = `
+    UPDATE SHOP
+        SET NAME=:shopName,E_MAIL=:email,PHONE=:phone,IMAGES=:shopImage
+    WHERE SHOP_ID=:shopid
+    ` 
+    const binds = {
+        shopid:details.shopid,
+        shopName:details.shopName,
+        email:details.email,
+        phone: details.phone,
+        shopImage:details.shopImage
+ 
+    }
+    return await database.execute(sql, binds,database.options);
+}
 //Sql for updating details of a product
 
 
 async function updateProduct(details){
+    
     const sql = `
         UPDATE PRODUCT
-            SET NAME=:productName,TYPE_OF=:productCategory,MATERIAL= :productMaterial,PRICE= :productPrice, QUANTITY=:productQuantity,SIZE_OF=:productSize,USED_STATUS=:productUsedStatus
+            SET NAME=:productName,GENDER_CATEGORY=:productGender,TYPE_OF=:productCategory,MATERIAL= :productMaterial,PRICE= :productPrice, QUANTITY=:productQuantity,IMAGE=:productImage,SIZE_OF=:productSize,USED_STATUS=:productUsedStatus
         WHERE PRODUCT_ID=:productid
         `
     const binds = {
         productid:details.productid,
         productName:details.productName,
+        productGender:details.productGender,
         productPrice: details.productPrice,
         productMaterial:details.productMaterial,
         productCategory:details.productCategory,
         productSize: details.productSize,
         productQuantity:details.productQuantity,
-        productUsedStatus:details.productUsedStatus
+        productUsedStatus:details.productUsedStatus,
+        productImage:details.productImage
  
     }
     return await database.execute(sql, binds,database.options);
@@ -420,6 +439,7 @@ async function getCategories(genders){
      
         }
         const result= await database.execute(sql, binds,database.options);
+        console.log(result);
 
         for(let j=0;j<result.length;j++)
         {
@@ -519,6 +539,61 @@ async function getFilteredResult(genders, categories, materials,ownerID) {
     return totalResult;
 }
 
+async function getFilteredResultSeller(genders, categories, materials,ownerID) {
+
+    let gender = '';
+    let category = '';
+    let material = '';
+    let totalResult = [];
+    let sql ='';
+    
+    for (let i = 0; i < genders.length; i++) {
+        for (let k = 0; k < categories.length; k++) {
+            for (let m = 0; m < materials.length; m++) {
+                gender = genders[i];
+                category = categories[k];
+                material = materials[m];
+                console.log(gender);
+                console.log(category);
+                console.log(material);
+                console.log(ownerID);
+
+                if(ownerID===-1)
+                {
+                sql = `
+        SELECT * FROM PRODUCT WHERE GENDER_CATEGORY=:gender AND TYPE_OF=:category AND MATERIAL=:material AND SELLER_TYPE='seller'
+            `
+                }
+                else
+                {
+                    sql = `
+                    SELECT * FROM PRODUCT P JOIN SELLER_OWNS S ON (P.PRODUCT_ID=S.PRODUCT_ID)
+                     WHERE P.GENDER_CATEGORY=:gender AND P.TYPE_OF=:category AND P.MATERIAL=:material
+                    AND S.SELLER_ID=:ownerID
+                        ` 
+                }
+                const binds = {
+                    gender: gender,
+                    category: category,
+                    material: material,
+                    ownerID: ownerID
+
+                }
+                const result = await database.execute(sql, binds, database.options);
+                console.log(result);
+
+                for (let j = 0; j < result.length; j++) {
+                    totalResult.push(result[j]);
+                }
+            }
+
+        }
+
+    }
+    console.log(totalResult);
+    return totalResult;
+}
+
 
  
 
@@ -540,5 +615,7 @@ module.exports={
     getCategories,
     getMaterials,
     getFilteredResult,
-    getAllProductsOfSeller // for open marketplace
+    getAllProductsOfSeller,
+    getFilteredResultSeller,
+    updateShop // for open marketplace
 }
