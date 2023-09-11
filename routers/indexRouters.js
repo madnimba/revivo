@@ -32,6 +32,8 @@ const filterShops_Router=require('./filterShops')
 const SellerOrders_Router=require('./SellerOrders')
 const SellerProfile_Router=require('./SellerProfile')
 const ShopProfileUpdate_Router=require('./ShopProfileUpdate')
+const shopReview_Router = require('./shop_Review')
+const UserOrder_Router= require('./UserOrder.js');
 
 
 
@@ -45,7 +47,7 @@ router.use('/user',verifyAuth, Basic_userRouter);
 router.use('/shop',verifyAuth, Basic_shopRouter);
 router.use('/openplace',open_placeRouter);
 router.use('/seller',verifyAuth,seller_Router);
-router.use('/shopUser',shopUser_Router);
+router.use('/shopUser',verifyAuth,shopUser_Router);
 router.use('/product',verifyAuth,productUser_Router);
 router.use('/search_result',verifyAuth,searchShop_Router);
 router.use('/logout',verifyAuth,logout_Router);
@@ -67,6 +69,9 @@ router.use('/filter_shops',verifyAuth,filterShops_Router);
 router.use('/SellerOrders',verifyAuth,SellerOrders_Router);
 router.use('/SellerProfile',verifyAuth,SellerProfile_Router);
 router.use('/ShopProfileUpdate',verifyAuth,ShopProfileUpdate_Router);
+router.use('/ShopReviews',verifyAuth,shopReview_Router);
+router.use('/myorders',verifyAuth,UserOrder_Router);
+
 
 
 

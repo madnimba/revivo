@@ -170,6 +170,30 @@ async function updateProductStatus(pid,status){
 }
 
 
+async function myOrderedProducts(id){
+    let sql="";
+   
+         sql = `
+         
+         SELECT ORDER_STATUS,ORDER_DATE,P.PRODUCT_ID PRODUCT_ID,
+         AMOUNT,P.NAME NAME , GENDER_CATEGORY, TYPE_OF,MATERIAL,
+         PRICE, IMAGE, S.NAME SHOP_NAME FROM ORDERS O JOIN PRODUCT_ORDERS PO
+          ON (O.ORDER_ID = PO.ORDER_ID)  JOIN CART C ON
+         (O.CART_ID = C.CART_ID) JOIN PRODUCT P ON
+          (P.PRODUCT_ID=PO.PRODUCT_ID) JOIN SHOP_OWNS SO ON 
+          (SO.PRODUCT_ID=P.PRODUCT_ID) JOIN SHOP S ON 
+          (S.SHOP_ID=SO.SHOP_ID) WHERE C.BUYER_ID=:id 
+         
+
+        `;
+    
+ 
+    const binds = {
+        id:id
+    }
+    const resul= (await database.execute(sql, binds, database.options));
+    return resul;     // can access each info by resul[0].PHONE / result[0].PASSWORD
+}
 
 
 
@@ -181,6 +205,7 @@ module.exports={
     createNewOrder,
     addToOrder,
     createPayment,
-    updateProductStatus
+    updateProductStatus,
+    myOrderedProducts
 
 }
