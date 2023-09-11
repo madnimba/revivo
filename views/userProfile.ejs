@@ -85,29 +85,37 @@ rel="stylesheet"
         <!-- Shop Image -->
         <div class="col-md-4">
           <a href="/app/shopUser/all/<%= shops[i].SHOP_ID %>">
-            <img src="/<%= shops[i].IMAGES %>"" alt="Shop <%= i + 1 %>" class="img-fluid">
+            <img src="/<%= shops[i].IMAGES %>" alt="Shop <%= i + 1 %>" class="img-fluid">
             <div class="card-body">
               <h5 class="card-title"> <%= shops[i].NAME%></h5>
             </div>
           </a>
         </div>
 
+        
         <!-- Dress Images -->
         <div class="col-md-8">
-          <div class="row">
-            <% for (let j = 1; j <= 3; j++) { %>
-            <div class="col-sm-4">
-              <a href="/app/shopUser/gender/?id=<%= shops[i].SHOP_ID %>&role=<%= role[j-1] %>">
-                <div class="card">
-                  <img src="/images/dress1.png" class="card-img-top">
-                  <div class="card-body">
-                    <h5 class="card-title"><%= role[j-1] %></h5>
-                  </div>
-                </div>
-              </a>
-            </div>
-            <% } %>
+  <div class="row">
+    <% for (let j = 1; j <= 3; j++) { %>
+    <div class="col-sm-4">
+      <a href="/app/shopUser/gender/?id=<%= shops[i].SHOP_ID %>&role=<%= role[j-1] %>">
+        <div class="card">
+          <img src=<%= (
+  (j-1 === 0 && Object.keys(allMen[j-1]).length > 0) ? allMen[j-1].IMAGE :
+  (j-1 === 1 && Object.keys(allWomen[j-1]).length > 0) ? allWomen[j-1].IMAGE :
+  (j-1 === 2 && Object.keys(allChild[j-1]).length > 0) ? allChild[j-1].IMAGE :
+  '/path/to/default-image.png'
+) %> class="card-img-top">
+
+
+          <div class="card-body">
+            <h5 class="card-title"><%= role[j-1] %></h5>
           </div>
+        </div>
+      </a>
+    </div>
+    <% } %>
+  </div>
         </div>
       </div>
       <hr>
@@ -139,6 +147,8 @@ rel="stylesheet"
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
 
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+
+
 
 
     
