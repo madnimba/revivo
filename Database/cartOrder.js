@@ -114,6 +114,45 @@ async function createNewOrder(cid) {
 
 
 
+async function getTotalSales(id,role) {
+    const sql = `
+        DECLARE
+            sales NUMBER
+        BEGIN
+            IF :role='shop' THEN
+            sales:= TOTAL_SALE(:id);
+            ELSIF :role='seller' THEN
+            sales:= TOTAL_SALE_OF_SELLER(:id);
+            END IF;
+        END;
+    `;
+
+    const bindVars = {
+        id: id,
+        role: role,
+        sales: { type: oracledb.NUMBER, dir: oracledb.BIND_OUT }
+    };
+
+    try {
+        const connection = await oracledb.getConnection();
+        const result = await connection.execute(
+            sql,
+            bindVars,
+            { outFormat: oracledb.OBJECT }
+        );
+        await connection.close();
+        
+        console.log("Result:", result.outBinds.OrderId);
+       
+        
+        return result.outBinds.OrderId;
+    } catch (err) {
+        console.error("Error executing SQL:", err);
+        throw err; // Rethrow the error to handle it at a higher level if needed
+    }
+}
+
+
 async function createPayment(oid,method,price) {
     const sql = `
         DECLARE
