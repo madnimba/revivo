@@ -2,6 +2,7 @@ const express=require('express');
 const DB_user=require('../Database/register') ;
 const {getAllProductsOf, getCategories, getMaterials, getFilteredResult,getProductbyGender} = require('../Database/product')
 const router=express.Router();
+const {getReviews, addReview} = require('../Database/shop')
 
 router.get('/all/:shopID',async(req,res)=>{
 
@@ -13,6 +14,39 @@ router.get('/all/:shopID',async(req,res)=>{
       
       
     res.render('shopUser.ejs', { products: allProducts, ownerID: shopID });
+})
+
+
+router.get('/reviews/:shopID',async(req,res)=>{
+
+  const shopID = req.params.shopID;
+
+  let reviews = await getReviews(shopID);
+  
+      
+    res.render('review.ejs', { reviews: reviews, ownerID: shopID, error:'' });
+})
+
+
+router.post('/leaveReview/:shopID',async(req,res)=>{
+
+  const comment = req.body.comment;
+  const rating = req.body.rating;
+  const id = req.user.id;
+  const shopID = req.params.shopID;
+
+  const result = await addReview(id,shopID,comment,rating);
+  let reviews = await getReviews(shopID);
+  
+      
+
+  let error = '';
+  if(result==undefined)
+  {
+    error = " You didn't buy anything from this shop!";
+}
+    res.render('review.ejs', { reviews: reviews, ownerID: shopID, error:error });
+
 })
 
 

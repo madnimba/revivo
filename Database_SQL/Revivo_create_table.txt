@@ -137,8 +137,9 @@ create table reviews(
 	buyer_id NUMBER ,
 	shop_id NUMBER,
 	star NUMBER,
-	comments VARCHAR2(1024),
-	CONSTRAINT r_key PRIMARY KEY(buyer_id,shop_id),
+	review_date DATE,
+	comments VARCHAR2(2048),
+	CONSTRAINT r_key PRIMARY KEY(buyer_id,shop_id,review_date),
 	CONSTRAINT review_b_fk FOREIGN KEY(buyer_id) REFERENCES buyer(buyer_id),
 	CONSTRAINT review_s_fk FOREIGN KEY(shop_id) REFERENCES shop(shop_id)
 

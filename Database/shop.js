@@ -1,6 +1,7 @@
 const database = require('./main_db');
 
 const Fuse = require('fuse.js');
+const { getBuyerID } = require('./product');
 
 async function getAllShops(){
     let sql="";
@@ -260,11 +261,10 @@ let fuseOptions = {
         sql = ` SELECT * FROM SHOP WHERE SHOP_ID=:shopid`;
 
         let fil = await database.execute(sql, {shopid:shopid}, database.options);
+        
         totalresult.push(fil[0]);
     }
         
-        
-     
         
         
         const uniqueArray = removeDuplicatesByShopID(totalresult);
@@ -305,6 +305,38 @@ async function Set_OrderStatus(order_id,status){
 }
 
 
+async function getReviews(shopID){
+    let sql="";
+    sql=`SELECT (U.FIRST_NAME||' '||U.LAST_NAME) NAME, 
+    R.REVIEW_DATE REVIEW_DATE, R.STAR STAR, 
+    R.COMMENTS COMMENTS from REVIEWS R join BUYER B 
+    ON(R.BUYER_ID=B.BUYER_ID) JOIN BASIC_USER U 
+    ON (U.USER_ID = B.USER_ID) where SHOP_ID=:shopID
+    `;
+    const binds={
+        shopID: shopID
+    }
+    const result = await database.execute(sql,binds,database.options);
+    return result;
+}
+
+async function addReview(id,shopID,comments,ratings){
+    const bid = await getBuyerID(id);
+    
+    let sql="";
+    sql=`
+    INSERT INTO REVIEWS(BUYER_ID,SHOP_ID,COMMENTS,STAR, REVIEW_DATE) VALUES(:bid,:shopID,:comments,TO_NUMBER(TRIM(:ratings)),SYSDATE)
+    `;
+    const binds={
+        bid:bid,
+        shopID: shopID,
+        comments:comments,
+        ratings:ratings
+    }
+    const result = await database.execute(sql,binds,database.options);
+    return result;
+}
+
 module.exports={
     getAllShops,
     getShopByID,
@@ -314,5 +346,7 @@ module.exports={
     getPaymentByOrder,
     Decrease_Product,
     Set_OrderStatus,
-    getShopBySearchText
+    getShopBySearchText,
+    getReviews,
+    addReview
 }

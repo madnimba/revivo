@@ -67,7 +67,7 @@ rel="stylesheet"
           <hr />
           <div>&nbsp;</div>
 
-          <h2 class="blog-sidebar-title"><b>Categories</b></h2>
+          <h2 class="blog-sidebar-title"><b>Filter a Product!</b></h2>
           <div>&nbsp;</div>
           <hr />
         
@@ -196,16 +196,13 @@ rel="stylesheet"
             </div>
 
 
-<div class="col">
-              <select class="form-control">
-                <option value="">Default Sorting</option>
-                <option value="popularity">Sorting by popularity</option>
-                <option value="average">Sorting by average</option>
-                <option value="latest">Sorting by latest</option>
-                <option value="low">Sorting by low</option>
-                <option value="high">Sorting by high</option>
-              </select>
+
+              <div style=" display: flex; align-items: right; justify-content: right;">
+              <form action="/app/shopUser/reviews/<%=ownerID %>" method="GET">
+                <button  type="submit" class="btn btn-light">Reviews</button>
+              </form>
             </div>
+            
 
             <div class="col">
             </div>
