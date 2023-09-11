@@ -31,6 +31,7 @@ const filter_Router=require('./filter')
 const filterShops_Router=require('./filterShops')
 const SellerOrders_Router=require('./SellerOrders')
 const SellerProfile_Router=require('./SellerProfile')
+const ShopProfileUpdate_Router=require('./ShopProfileUpdate')
 
 
 
@@ -65,7 +66,7 @@ router.use('/filter',filter_Router);
 router.use('/filter_shops',verifyAuth,filterShops_Router);
 router.use('/SellerOrders',verifyAuth,SellerOrders_Router);
 router.use('/SellerProfile',verifyAuth,SellerProfile_Router);
-
+router.use('/ShopProfileUpdate',verifyAuth,ShopProfileUpdate_Router);
 
 
 

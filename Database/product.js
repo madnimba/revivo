@@ -368,6 +368,22 @@ async function getProductbyID(id){
     return resul;     
 }
 
+async function updateShop(details){
+    const sql = `
+    UPDATE SHOP
+        SET NAME=:shopName,E_MAIL=:email,PHONE=:phone,IMAGES=:shopImage
+    WHERE SHOP_ID=:shopid
+    ` 
+    const binds = {
+        shopid:details.shopid,
+        shopName:details.shopName,
+        email:details.email,
+        phone: details.phone,
+        shopImage:details.shopImage
+ 
+    }
+    return await database.execute(sql, binds,database.options);
+}
 //Sql for updating details of a product
 
 
@@ -600,5 +616,6 @@ module.exports={
     getMaterials,
     getFilteredResult,
     getAllProductsOfSeller,
-    getFilteredResultSeller // for open marketplace
+    getFilteredResultSeller,
+    updateShop // for open marketplace
 }
