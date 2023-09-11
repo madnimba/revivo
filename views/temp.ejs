@@ -1186,4 +1186,430 @@ console.error(error);
 }
 
 
-console.log(results);
+console.log(results);<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>My Cart</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.11.0/mdb.min.css">
+
+    <!-- Font Awesome -->
+<link
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+rel="stylesheet"
+/>
+<!-- Google Fonts -->
+<link
+href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+rel="stylesheet"
+/>
+<!-- MDB -->
+<link
+href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.1/mdb.min.css"
+rel="stylesheet"
+/>
+</head>
+
+<body style="background-color: #d2c9ff;">
+  <%- include('userNav.ejs') %>
+  <section class="h-100 h-custom" >
+    <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12">
+          <div class="card card-registration card-registration-2" style="border-radius: 15px;">
+            <div class="card-body p-0">
+              <div class="row g-0">
+                <div class="col-lg-8">
+                  <div class="p-5">
+                    <div class="d-flex justify-content-between align-items-center mb-5">
+                      <h1 class="fw-bold mb-0 text-black">My Cart</h1>
+                      <h6 class="mb-0 text-muted"><%=products.length %> items</h6>
+                    </div>
+
+
+                    <!-- Loop through the products and generate dynamic HTML -->
+                    <% for (let j=0;j<products.length;j++) { %>
+                    <hr class="my-4">
+                    <div class="row mb-4 d-flex justify-content-between align-items-center">
+                      <div class="col-md-1 col-lg-1 col-xl-1">
+                        <input type="checkbox" id="checkbox_<%= j %>" <% if (products[j].STATUS === 'check') { %>checked<% } %>>
+                      </div>
+                      <div class="col-md-2 col-lg-2 col-xl-2">
+                        <img src="/<%= products[j].IMAGE%>" class="img-fluid rounded-3" alt="<%= products[j].NAME %>">
+                      </div>
+                      <div class="col-md-3 col-lg-3 col-xl-3">
+                        <h6 class="text-muted"><%=products[j].TYPE_OF %></h6>
+                        <h6 class="text-black mb-0"><%= products[j].NAME %></h6>
+                      </div>
+                      <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
+                        <button class="btn btn-link px-2" onclick="decrementQuantity(this)">
+                          <i class="fas fa-minus"></i>
+                        </button>
+                        <input id="quantity_<%= j %>" min="1" max="<%= products[j].QUANTITY%>" name="quantity" value="<%=products[j].AMOUNT%>" type="number" class="form-control form-control-sm" />
+                        <button class="btn btn-link px-2" id="inc_amount" onclick="incrementQuantity(this)">
+                          <i class="fas fa-plus"></i>
+                        </button>
+                      </div>
+                      <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
+                        <h6 class="mb-0" id="price_<%= j %>"><%= products[j].PRICE * products[j].AMOUNT %></h6>
+                      </div>
+                      <div class="col-md-1 col-lg-1 col-xl-1 text-end">
+                        <!-- <a href="/app/cart/cancelProduct" class="text-muted"><i class="fas fa-times"></i></a> -->
+                        <button class="cancel-product-btn" id="cancel" data-product-id="<%= products[j].PRODUCT_ID %>"><i class="fas fa-times"></i></button>
+                      </div>
+                    </div>
+                    <% } %>
+
+
+
+
+
+                    <hr class="my-4">
+
+                    
+                  </div>
+                </div>
+                <div class="col-lg-4 bg-grey">
+                  <div class="p-5">
+                    <h3 class="fw-bold mb-5 mt-2 pt-1">Summary</h3>
+                    <hr class="my-4">
+                    <div class="d-flex justify-content-between mb-4">
+                      <h5 class="text-uppercase">Total price</h5>
+                      <h5 id="totalPrice">€ 0.00</h5>
+                    </div>
+                    <hr>
+
+                    <!-- <div class="d-flex justify-content-between mb-4">
+                      <h5 class="text-uppercase">items 3</h5>
+                      <h5>€ 132.00</h5>
+                    </div> -->
+
+                    <!-- <h5 class="text-uppercase mb-3">Shipping</h5>
+
+                    <div class="mb-4 pb-2">
+                      <select class="select">
+                        <option value="1">Standard-Delivery- €5.00</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                        <option value="4">Four</option>
+                      </select>
+                    </div> -->
+
+                    <h5 class="text-uppercase mb-3">Address</h5>
+                    <h6 class="text-muted"><%=user[0].ADDRESS %></h6>
+                    <hr>
+
+                    <h5 class="text-uppercase mb-3">Phone</h5>
+                    <h6 class="text-muted"><%=user[0].PHONE %></h6>
+                    <hr>
+
+                    <div class="mb-5">
+                      <form action="/app/myprofile/update" method="GET">
+                        <button class="btn btn-light center-div">Update Address</button>
+                      </form>
+                    </div>
+
+                    <hr class="my-4">
+
+                    
+
+                    <button type="button" id="confirmOrderBtn" class="btn btn-dark btn-block btn-lg" data-mdb-ripple-color="dark">Confirm Order</button>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script
+  type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.1/mdb.min.js"
+></script>
+  <script>
+
+
+// Inside your script tag
+document.addEventListener("DOMContentLoaded", function () {
+  const productArr = decodeHtml('<%= JSON.stringify(products) %>');
+  const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+  checkboxes.forEach(function (checkbox, index) {
+    checkbox.addEventListener("change", async function () {
+      
+      const productId = checkbox.id.split('_')[1];
+      const newStatus = checkbox.checked ? 'check' : 'uncheck';
+      
+      updateStatus(productId,newStatus);
+      // Calculate the new total price
+      updateTotalPrice();
+    });
+  });
+
+  // Initial calculation of the total price
+  updateTotalPrice();
+
+  function updateTotalPrice() {
+    let totalPrice = 0;
+
+    checkboxes.forEach(function (checkbox, index) {
+      if (checkbox.checked) {
+        // Get the corresponding product's price and amount
+        const productId = checkbox.id.split('_')[1];
+        const productPrice = parseFloat(productArr[productId].PRICE);
+        const quantity = parseInt(document.getElementById(`quantity_${productId}`).value);
+        totalPrice += productPrice * quantity;
+      }
+    });
+
+    // Update the total price display
+    const totalPriceElement = document.querySelector("#totalPrice");
+    if (totalPriceElement) {
+      totalPriceElement.textContent = totalPrice.toFixed(2);
+    }
+  }
+
+  async function updateStatus(productId, status)
+  {
+    const dataToSend = {
+    Product: productArr[productId].PRODUCT_ID,
+    status: status
+  };
+
+  await fetch('/app/cart/updateStatus', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(dataToSend),
+    });
+  }
+
+
+
+
+  
+    const confirmOrderButton = document.getElementById("confirmOrderBtn");
+
+    confirmOrderButton.addEventListener("click", async function () {
+      // Collect information about checked products
+      const checkedProducts = [];
+      const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+      checkboxes.forEach(function (checkbox, index) {
+        if (checkbox.checked) {
+          const productId = checkbox.id.split('_')[1];
+          const ID = parseFloat(productArr[productId].PRODUCT_ID);
+          const quantity = parseFloat(productArr[productId].QUANTITY);
+          const amountElement = document.getElementById(`quantity_${productId}`);
+          const amount = parseInt(amountElement.value);
+          checkedProducts.push({ ID, quantity, amount });
+        }
+      });
+
+      console.log(checkedProducts);
+
+      // Calculate the total price
+      const totalPriceElement = document.getElementById("totalPrice");
+      const totalPrice = parseFloat(totalPriceElement.textContent);
+      const cid = '<%=cartID%>'
+
+
+      const dataToSend = {
+  checkedProducts: checkedProducts,
+  totalPrice: totalPrice,
+  cid: cid
+};
+      await fetch('/app/confirmOrder/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(dataToSend),
+    });
+
+   
+    });
+
+    
+    const cancelButtons = document.querySelectorAll('.cancel-product-btn');
+  cancelButtons.forEach(function (cancelButton) {
+    cancelButton.addEventListener("click", async function () {
+
+      const cancelledProducts = [];
+      const productId = cancelButton.getAttribute('data-product-id');
+      
+      cancelledProducts.push(productId);
+
+      console.log("Cancelled Products:", cancelledProducts);
+
+      const cid = '<%=cartID%>'
+
+
+      const dataToSend = {
+  cancelledProducts: cancelledProducts,
+  cid: cid
+};
+      location.reload();
+      await fetch('/app/cart/cancelProduct', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(dataToSend),
+    })
+    .then(response => {
+  if (!response.ok) {
+    throw new Error('Network response was not ok');
+  }
+  return response.json();
+})
+.then(data => {
+  console.log(data); // Handle the response data if needed
+  return fetch('/app/cart', {
+    method: 'GET',
+  });
+})
+.catch(error => {
+  console.error('Error:', error);
+});
+
+    console.log("hocche ki kichu?")
+    
+
+
+
+    });
+  });
+
+});
+
+
+
+function decrementQuantity(button) {
+  const input = button.parentNode.querySelector('input[type=number]');
+  if (input.value > 0) {
+    input.stepDown();
+    updatePrice(input.id.split('_')[1]);
+  }
+}
+
+function incrementQuantity(button) {
+  const input = button.parentNode.querySelector('input[type=number]');
+  input.stepUp();
+  updatePrice(input.id.split('_')[1]);
+}
+function decodeHtml(html) {
+  var txt = document.createElement("textarea");
+  txt.innerHTML = html;
+  return JSON.parse(txt.value);
+}
+
+function updatePrice(productId) {
+  console.log(productId);
+  const productArr = decodeHtml('<%= JSON.stringify(products) %>');
+
+  console.log(productArr);
+  const quantityInput = document.getElementById(`quantity_${productId}`);
+  const priceElement = document.getElementById(`price_${productId}`);
+  const productPrice = parseFloat(productArr[productId].PRICE);
+  console.log(productPrice);
+
+  const quantity = parseInt(quantityInput.value);
+  const totalPrice = productPrice * quantity;
+  priceElement.textContent = totalPrice.toFixed(2);
+
+  updateTotalPrice();
+
+  
+   // Display the updated price with two decimal places
+}
+
+
+function updateTotalPrice() {
+    let totalPrice = 0;
+    const productArr = decodeHtml('<%= JSON.stringify(products) %>');
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    checkboxes.forEach(function (checkbox, index) {
+      if (checkbox.checked) {
+        // Get the corresponding product's price and amount
+        const productId = checkbox.id.split('_')[1];
+        const productPrice = parseFloat(productArr[productId].PRICE);
+        const quantity = parseInt(document.getElementById(`quantity_${productId}`).value);
+        totalPrice += productPrice * quantity;
+      }
+    });
+
+    // Update the total price display
+    const totalPriceElement = document.querySelector("#totalPrice");
+    if (totalPriceElement) {
+      totalPriceElement.textContent = totalPrice.toFixed(2);
+    }
+    console.log("updated");
+  }
+
+
+</script>
+
+
+    <style>
+
+
+@media (min-width: 1025px) {
+.h-custom {
+height: 100vh !important;
+}
+}
+
+.card-registration .select-input.form-control[readonly]:not([disabled]) {
+font-size: 1rem;
+line-height: 2.15;
+padding-left: .75em;
+padding-right: .75em;
+}
+
+.card-registration .select-arrow {
+top: 13px;
+}
+
+.bg-grey {
+background-color: #eae8e8;
+}
+
+@media (min-width: 992px) {
+.card-registration-2 .bg-grey {
+border-top-right-radius: 16px;
+border-bottom-right-radius: 16px;
+}
+}
+
+#cancel {
+  background-color: #b6b6bd; /* Change this to your desired background color */
+  color: rgb(26, 24, 24); /* Text color */
+  border: none; /* Remove the border */
+  border-radius: 20px; /* Rounded corners */
+  padding: 7px 15px; /* Adjust padding as needed */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add a subtle shadow for the lifted effect */
+  cursor: pointer; /* Change cursor on hover */
+}
+
+#cancel:hover {
+  background-color: #bddbd2; /* Change this to the hover background color */
+}
+
+@media (max-width: 991px) {
+.card-registration-2 .bg-grey {
+border-bottom-left-radius: 16px;
+border-bottom-right-radius: 16px;
+}
+}
+        
+
+    </style>
+  </body>
+</html>
