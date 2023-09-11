@@ -34,6 +34,7 @@ const SellerProfile_Router=require('./SellerProfile')
 const ShopProfileUpdate_Router=require('./ShopProfileUpdate')
 const shopReview_Router = require('./shop_Review')
 const UserOrder_Router= require('./UserOrder.js');
+const myProfile_Router = require('./myprofile.js')
 
 
 
@@ -71,6 +72,7 @@ router.use('/SellerProfile',verifyAuth,SellerProfile_Router);
 router.use('/ShopProfileUpdate',verifyAuth,ShopProfileUpdate_Router);
 router.use('/ShopReviews',verifyAuth,shopReview_Router);
 router.use('/myorders',verifyAuth,UserOrder_Router);
+router.use('/myprofile',verifyAuth,myProfile_Router)
 
 
 
