@@ -10,6 +10,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>User Profile</title>
        
+        
+        
     
         <link href="/style.css"  rel="stylesheet" >
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -27,19 +29,13 @@
         </style>
     </head>
     <body>
+        <%- include('sellernav.ejs') %>
+        <div style="margin-top: 30px;">
         <div class="logo">
             <img src="/images/logo.jpg" alt="logo">
         </div>
     
-        <form action="/app/login" method="GET">
-            <button type="submit"  class="btn btn-success logout">Log out</button>
-            </form>
-
-            <div>&nbsp;</div>
-
-            <form action="/app/user" method="GET">
-                <button type="submit"  class="btn btn-success logout">switch to buyer</button>
-                </form>
+        
        
       <div class="container userProfile">
                 <h2 class="font-weight-bold">
@@ -64,9 +60,7 @@
                 <form action="/app/SellerOrders" method="GET">
                     <button type="submit" class="btn btn-success">Show My Orders</button>
                 </form>
-                <form action="/app/SellerProfile" method="GET">
-                    <button type="submit" class="btn btn-success">My Profile</button>
-                </form>
+                
             </div>
     
             <div class="additional-container">
@@ -74,7 +68,11 @@
             </div>
         </div>
      
+    </div>
     
-    
+    <script
+    type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.1/mdb.min.js"
+  ></script>
     </body>
     </html>
