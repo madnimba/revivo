@@ -62,7 +62,7 @@ router.use('/ShopProfile',verifyAuth,shopProfile_Router);
 router.use('/addToCart',addToCart_Router);
 router.use('/removeFromCart',removeFromCart_Router);
 router.use('/cart',verifyAuth,showCart_Router);
-router.use('/confirmOrder',confirmOrder_Router);
+router.use('/confirmOrder',verifyAuth,confirmOrder_Router);
 router.use('/ShopOrders',verifyAuth,ShopOrders_Router);
 router.use('/shipping',verifyAuth,Shipping_Router);
 router.use('/filter',filter_Router);

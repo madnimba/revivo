@@ -58,12 +58,12 @@ async function inCart(pid,cid){
 }
 
 
-
 async function allinCart(cid){
     let sql="";
    
          sql = `
-         SELECT * 
+         SELECT P.PRODUCT_ID, P.NAME,P.GENDER_CATEGORY, P.TYPE_OF, P.MATERIAL,P.PRICE,P.QUANTITY,P.SIZE_OF,
+         P.SELLER_TYPE,P.USED_STATUS, C.CART_ID,C.STATUS, C.AMOUNT
          FROM CART_HAS C JOIN PRODUCT P 
          ON (C.PRODUCT_ID=P.PRODUCT_ID) 
          WHERE C.CART_ID=:cid
@@ -76,6 +76,26 @@ async function allinCart(cid){
     const resul= (await database.execute(sql, binds, database.options));
     return resul;     // can access each info by resul[0].PHONE / result[0].PASSWORD
 }
+
+
+
+
+async function existsInOrder(buyerID,pid) {
+    const sql = `
+    SELECT *
+    FROM ORDERS O JOIN PRODUCT_ORDERS PO ON (O.ORDER_ID = PO.ORDER_ID) JOIN CART C ON (O.CART_ID = C.CART_ID)
+    WHERE PO.PRODUCT_ID=:pid AND O.ORDER_STATUS='processing' AND C.BUYER_ID=:buyerID
+    `;
+
+    const binds = {
+        buyerID:buyerID,
+        pid:pid
+    };
+
+    const resul= (await database.execute(sql, binds, database.options));
+    return resul;
+}
+
 
 
 async function createNewOrder(cid) {
@@ -236,6 +256,26 @@ async function myOrderedProducts(id){
 
 
 
+async function updateAmount(orderId,productId,amount){
+    let sql="";
+   
+         sql = `
+         
+         UPDATE PRODUCT_ORDERS SET AMOUNT = :amount WHERE PRODUCT_ID =:productId
+         AND ORDER_ID =:orderId
+         
+
+        `;
+    
+ 
+    const binds = {
+        orderId:orderId, productId:productId, amount:amount
+    }
+    const resul= (await database.execute(sql, binds, database.options));
+    return resul;     // can access each info by resul[0].PHONE / result[0].PASSWORD
+}
+
+
 module.exports={
     addToCart,
     removeFromCart,
@@ -245,6 +285,8 @@ module.exports={
     addToOrder,
     createPayment,
     updateProductStatus,
-    myOrderedProducts
+    myOrderedProducts,
+    existsInOrder,
+    updateAmount
 
 }

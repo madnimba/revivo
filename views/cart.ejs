@@ -9,7 +9,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.11.0/mdb.min.css">
 
-    <!-- Font Awesome -->
+  
+  <!-- Font Awesome -->
 <link
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
 rel="stylesheet"
@@ -24,9 +25,13 @@ rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.1/mdb.min.css"
 rel="stylesheet"
 />
+  
+
+
 </head>
 
 <body style="background-color: #d2c9ff;">
+  
   <%- include('userNav.ejs') %>
   <section class="h-100 h-custom" >
     <div class="container py-5 h-100">
@@ -50,9 +55,9 @@ rel="stylesheet"
                       <div class="col-md-1 col-lg-1 col-xl-1">
                         <input type="checkbox" id="checkbox_<%= j %>" <% if (products[j].STATUS === 'check') { %>checked<% } %>>
                       </div>
-                      <div class="col-md-2 col-lg-2 col-xl-2">
-                        <img src="/<%=products[j].IMAGE %>" class="img-fluid rounded-3" alt="<%= products[j].NAME %>">
-                      </div>
+                      <!-- <div class="col-md-2 col-lg-2 col-xl-2">
+                        <img src="/<%=products[j].IMAGE%>" class="img-fluid rounded-3" alt="<%= products[j].NAME %>">
+                      </div> -->
                       <div class="col-md-3 col-lg-3 col-xl-3">
                         <h6 class="text-muted"><%=products[j].TYPE_OF %></h6>
                         <h6 class="text-black mb-0"><%= products[j].NAME %></h6>
@@ -145,11 +150,14 @@ rel="stylesheet"
   type="text/javascript"
   src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.1/mdb.min.js"
 ></script>
-  <script>
 
+<script>
+
+console.log("script is runnging");
 
 // Inside your script tag
 document.addEventListener("DOMContentLoaded", function () {
+  
   const productArr = decodeHtml('<%= JSON.stringify(products) %>');
   const checkboxes = document.querySelectorAll('input[type="checkbox"]');
   checkboxes.forEach(function (checkbox, index) {
