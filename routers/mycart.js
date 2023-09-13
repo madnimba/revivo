@@ -11,8 +11,9 @@ router.get('/',async(req,res)=>{
   const cartID = await getCartID(buyerID);
 
   let allProductinCart = await allinCart(cartID);
-  
-      
+  console.log("hi");
+  console.log(allProductinCart);
+  console.log(userinfo);
     
       
     res.render('cart.ejs', { products: allProductinCart,cartID: cartID, user:userinfo });

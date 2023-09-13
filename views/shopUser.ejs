@@ -192,7 +192,7 @@ rel="stylesheet"
           <div class="row">
             <div class="col">
               Showing all <%= products.length %> results
-              Of <%=ownerID%>
+              
             </div>
 
 
@@ -223,7 +223,7 @@ rel="stylesheet"
         <div class="col-sm-3 col-md-6 col-lg-4">
             <div class="card">
                 <div class="card-body text-center">
-                    <a href="/app/product/?shopID=<%=products[i].SHOP_ID%>&prodID=<%= products[i].PRODUCT_ID %>" style="text-decoration: none;"><img src="/images/dress3.jpg" class="product-image">
+                    <a href="/app/product/?shopID=<%=products[i].SHOP_ID%>&prodID=<%= products[i].PRODUCT_ID %>" style="text-decoration: none;"><img src="/<%= products[i].IMAGE%>" class="product-image">
                     <h5 class="card-title"><b><%= products[i].NAME %></b></h5>
                     <p class="card-text small"><%= products[i].TYPE_OF %></p>
                     <p class="tags">Price :<%= products[i].PRICE %></p>
